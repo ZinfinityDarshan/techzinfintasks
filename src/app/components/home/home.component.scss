@@ -1,0 +1,152 @@
+.container {
+  .mainsection {
+    background-image: linear-gradient(0deg,rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('../../../assets/images/img.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    min-height: 350px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    h1 {
+      font-size: 3rem;
+      color: white;
+      font-weight: bold;
+    }
+    
+    p {
+      font-size: 1.2rem;
+      color: white;
+      font-weight: bold;
+      padding-top: 20px;
+    }
+  
+    form {
+      margin-top: 70px;
+      margin-bottom: 50px;
+  
+      .inputbar {
+        display: flex;
+        border: none;
+        background: white;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+  
+        input {
+          padding: 20px;
+          width: 400px;
+          background: transparent;
+          border: none;
+          font-size: 1.1rem;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        button {
+          background: transparent;
+          border: none;
+
+          .searchicon {
+            color: grey;
+            font-size: 1.2rem;
+            padding-right: 20px;
+          }
+        }
+  
+        
+      }
+    }
+  }
+
+  .servicecontent {
+    background: #e0e0e0;
+
+    .services {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+
+      li {
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: gray;
+        cursor: pointer;
+
+        fa-icon {
+          font-size: 2rem;
+          padding-bottom: 10px;
+        }
+
+        p {
+          color: #404040;
+        }
+
+        &:hover {
+          color: #303030;
+
+          p {
+            color: black;
+          }
+        }
+
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .container {
+
+    .mainsection {
+      background-color: black;
+      opacity: 0.9;
+
+      h1 {
+        font-size: 2rem;
+        text-align: center;
+      }
+
+      p {
+        font-size: 0.9rem;
+        text-align: center;
+      }
+
+      form {
+
+        .inputbar{
+
+          input {
+            padding: 10px;
+            width: 200px;
+            font-size: 0.8rem;
+          }
+
+          button {
+
+            .searchicon {
+              color: grey;
+              font-size: 0.8rem;
+              padding-right: 10px;
+            }
+          }
+        }
+      }
+    }
+
+    .servicecontent {
+
+      .services {
+        flex-wrap: wrap;
+      }
+    }
+  }
+}

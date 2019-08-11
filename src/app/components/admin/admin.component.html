@@ -1,0 +1,173 @@
+<div>
+    <mat-toolbar color="primary">
+            <mat-toolbar-row>
+                <span>DashBoard : {{currentUser.name}}</span>
+                <span class="example-spacer"></span>
+                <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">verified_user</mat-icon>
+            </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-tab-group style="margin-top: 30px">
+        <mat-tab label="Register User">     
+            <div class="ceter">
+                <mat-card class="cardion">
+                    <mat-card-title>Register New User</mat-card-title>
+        
+                    <mat-card-content>
+        
+                        <form [formGroup]="userform" #formDirective="ngForm"> 
+                            <mat-form-field appearance="outline">
+                                <mat-label >Username</mat-label>
+                                <input matInput placeholder="Username" formControlName="username">
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Password</mat-label>
+                                <input type="password" matInput placeholder="Password" formControlName = "password">
+                            </mat-form-field> <br>
+                            <mat-form-field appearance="outline">
+                                    <mat-label>Email</mat-label>
+                                    <input  matInput placeholder="Password" formControlName = "email">
+                            </mat-form-field> 
+                            <mat-form-field appearance="outline">
+                                    <mat-label>Status</mat-label>
+                                    <mat-select formControlName="status">
+                                        <mat-option *ngFor = "let status of statuses" [value]="status">
+                                        {{status}}
+                                        </mat-option>
+                                    </mat-select>                            
+                            </mat-form-field> <br>
+                            <mat-form-field appearance="outline">
+                                    <mat-label>Manager</mat-label>
+                                    <mat-select formControlName="manager" multiple>
+                                        <mat-option *ngFor = "let manager of managers" [value]="manager">
+                                        {{manager.name}}
+                                        </mat-option>
+                                    </mat-select>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                    <mat-label>Dept</mat-label>
+                                    <mat-select formControlName="wing">
+                                        <mat-option *ngFor = "let wing of wings" [value]="wing">
+                                        {{wing}}
+                                        </mat-option>
+                                    </mat-select>
+                            </mat-form-field> <br>
+                            <mat-form-field appearance="outline">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput placeholder="Password" formControlName = "name">
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" >
+                                    <mat-label>Role</mat-label>
+                                    <mat-select formControlName="role" multiple>
+                                        <mat-option *ngFor = "let role of roles" [value]="role">
+                                        {{role}}
+                                        </mat-option>
+                                    </mat-select>
+                            </mat-form-field> <br>
+                            <button mat-stroked-button color="primary"(click)="register(userform.value, formDirective)">Register</button>
+                        </form>
+                    </mat-card-content>
+        
+                </mat-card> 
+              </div>
+            </mat-tab>
+        <mat-tab label="Add Project"> 
+            <div class="ceter">
+            <mat-card class="cardion">
+                <mat-card-title>User Project</mat-card-title>
+                <mat-card-content>
+    
+                    <form [formGroup]="projectForm" > 
+                        <mat-form-field appearance="outline">
+                            <mat-label >Name</mat-label>
+                            <input matInput placeholder="Name" formControlName="name">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Cost</mat-label>
+                            <input matInput placeholder="cost" formControlName = "cost">
+                        </mat-form-field> <br>
+                        <mat-form-field appearance="outline">
+                                <mat-label>Client</mat-label>
+                                <input  matInput placeholder="Client" formControlName = "client">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                                <mat-label>Manager</mat-label>
+                                <mat-select formControlName="manager" multiple>
+                                    <mat-option *ngFor = "let manager of managers" [value]="manager">
+                                    {{manager.name}}
+                                    </mat-option>
+                                </mat-select>            
+                        </mat-form-field><br>
+                        <mat-form-field appearance="outline">
+                                <mat-label>Manager</mat-label>
+                                <mat-select formControlName="lead" multiple>
+                                    <mat-option *ngFor = "let tl of TLs" [value]="tl">
+                                    {{tl.name}}
+                                    </mat-option>
+                                </mat-select>            
+                        </mat-form-field><br>
+                        <button mat-stroked-button color="primary"(click)="addProject(projectForm.value)">Register</button>
+                    </form>
+                </mat-card-content>
+    
+            </mat-card> 
+            </div>
+        </mat-tab>
+        <mat-tab label="Add Task">
+                <div class="ceter">
+                        <mat-card class="cardion">
+                            <mat-card-title>User Task</mat-card-title>
+                            <mat-card-content>
+                
+                                <form [formGroup]="taskFrom" > 
+                                    <mat-form-field appearance="outline">
+                                        <mat-label >Name</mat-label>
+                                        <input matInput placeholder="Title" formControlName="title">
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline">
+                                            <mat-label>Owner</mat-label>
+                                            <mat-select formControlName="owner" multiple>
+                                                <mat-option *ngFor = "let user of TLs" [value]="user">
+                                                {{user.name}}
+                                                </mat-option>
+                                            </mat-select>            
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline">
+                                            <mat-label>Project</mat-label>
+                                            <mat-select formControlName="project" multiple>
+                                                <mat-option *ngFor = "let project of projects" [value]="project">
+                                                {{project.name}}
+                                                </mat-option>
+                                            </mat-select>            
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                            <input type="date" matInput [matDatepicker]="picker1" placeholder="Start Date" formControlName="startdate" >
+                                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <input type="date" matInput [matDatepicker]="picker2" placeholder="End Date" formControlName="enddate" >
+                                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker2></mat-datepicker>
+                                    </mat-form-field>
+                                    <mat-form-field class="example-full-width">
+                                            <textarea matInput placeholder="Description" formControlName="descp"></textarea>
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline">
+                                            <mat-label>Assignee</mat-label>
+                                            <mat-select formControlName="assignee" multiple>
+                                                <mat-option *ngFor = "let user of users" [value]="user">
+                                                {{user.name}}
+                                                </mat-option>
+                                            </mat-select>            
+                                    </mat-form-field><br>
+                                    <button mat-stroked-button color="primary"(click)="addTask(taskFrom.value)">Register</button>
+                                </form>
+                            </mat-card-content>
+                
+                        </mat-card> 
+                        </div>
+
+        </mat-tab>
+    </mat-tab-group>
+
+</div>

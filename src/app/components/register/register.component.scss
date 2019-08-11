@@ -1,0 +1,34 @@
+.login{
+    display: flex;
+    justify-content: center;
+}
+.cardion{
+    margin-top: 50px;
+    margin-bottom: 5%;
+}
+.formmod{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+// for smartphone and mobile
+@media screen and (min-width: 320px) and (max-width: 480px){
+    .field{
+        width: 100%; 
+     }
+     .widthcard{
+         width: 100%;
+     }
+     .cardion{
+        margin-top: 90px;
+        margin-bottom: 5%;
+    }
+}
+
+//for laptop
+@media screen and (min-width: 1224px){
+    .field{
+       width: 500px; 
+    }
+}

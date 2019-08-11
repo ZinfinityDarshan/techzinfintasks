@@ -1,0 +1,157 @@
+.container {
+  display: grid;
+  grid-template-areas: 'topbar'
+                        'content';
+  position: relative;
+  overflow: hidden;
+  
+
+  .navbar {
+    grid-area: topbar;
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    background: white;
+    border-bottom: 1px solid lightgray;
+    justify-content: space-between;
+    padding: 15px 100px;
+    align-items: center;
+    position: sticky;
+    height: 10vh;
+    top: 0;
+    
+    .brand {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .nav {
+      display: flex;
+      list-style: none;
+      li {
+        font-size: 0.9rem;
+        
+        &:not(:last-child) {
+          padding-right: 40px;
+        }
+        
+        a {
+          text-decoration: none;
+          color: gray;
+          
+          &:hover {
+            color: black;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .menu {
+      display: none;
+    }
+  }
+
+  .content {
+    grid-area: content;
+    width: 100%;
+    height: 90vh;
+    overflow: scroll;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .container {
+    display: flex;
+    position: relative;
+
+    .navbar {
+      position: absolute;
+      z-index: 100;
+      flex-direction: column;
+      padding: 0 5px;
+      height: 70px;
+      transition: all 0.7s ease;
+      
+      .brand {
+        padding-top: 20px;
+        padding-left: 20px;
+        position: absolute;
+        left: 0;
+      }
+
+      .nav {
+        display: flex;
+        padding-top: 50px;
+        width: 100%;
+        flex-direction: column;
+        
+        li {
+          font-size: 1rem;
+          padding-top: 20px;
+          padding-left: 20px;
+          transform: translateX(-400px);
+          transition: all 0.2s ease;
+          
+          &:not(:last-child) {
+            padding-right: 0;
+          }
+        }
+      }
+  
+      .menu {
+        display: block;
+        position: absolute;
+        right: 0;
+        padding-top: 20px;
+        padding-right: 20px;
+
+        button {
+          background: transparent;
+          border: none;
+          color: black;
+          font-size: 20px;
+          outline: none;
+        }
+      }
+    }
+
+    .activeNavbar {
+      flex-direction: column;
+      height: 250px;
+      transition: all 0.2s ease;
+
+
+      .nav {
+        display: flex;
+        padding-top: 50px;
+        width: 100%;
+        flex-direction: column;
+        
+        li {
+          transform: translateX(0);
+          transition: all 0.7s ease;
+          font-size: 1rem;
+          padding-top: 20px;
+          padding-left: 20px;
+          
+          &:not(:last-child) {
+            padding-right: 0;
+          }
+        }
+      }
+
+      .menu {
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 10;
+      }
+
+    }
+
+    .content {
+      padding-top: 70px;  
+    }
+  }
+}

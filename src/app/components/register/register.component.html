@@ -1,0 +1,61 @@
+<div class="login">
+ 
+    <mat-card class="cardion widthcard">
+        <mat-card-title>Your Task</mat-card-title>
+        <br>
+  
+        <mat-card-content>
+  
+            <form class="formmod" [formGroup]="registrationform">
+                <mat-form-field appearance="outline" class="field">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="name" formControlName="name">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="field">
+                    <mat-label>Mobile No</mat-label>
+                    <input matInput placeholder="mobile" formControlName="mobile">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="field">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="email" formControlName="email">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="field">
+                    <mat-label>Address</mat-label>
+                    <textarea matInput placeholder="address" formControlName="address"></textarea>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="field">
+                    <mat-label>Pincode</mat-label>
+                    <input matInput placeholder="pincode" formControlName="pincode">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="field">
+                    <mat-label>Pancard No</mat-label>
+                    <input matInput placeholder="pancard" formControlName="pancard">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="field">
+                    <mat-label>Service</mat-label>
+                      <mat-select formControlName="service">
+                        <mat-option *ngFor = "let service of services" [value]="service">
+                          {{service}}
+                        </mat-option>
+                      </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="field">
+                    <mat-label>Gender</mat-label>
+                      <mat-select formControlName="gender">
+                        <mat-option *ngFor = "let gender of genders" [value] = "gender">
+                          {{gender}}
+                        </mat-option>
+                      </mat-select>
+                </mat-form-field>
+  
+        <button mat-flat-button color="primary" (click) = "register(registrationform.value)">Register</button>
+      </form>
+    </mat-card-content>
+
+      </mat-card>
+    
+  
+  </div>
+  
+  
+  

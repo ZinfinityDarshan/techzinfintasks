@@ -1,0 +1,26 @@
+<div class="login">
+
+    <mat-card class="cardion">
+    <mat-card-title>Login</mat-card-title>
+
+    <mat-card-content>
+
+        <form [formGroup]="loginform"> 
+            <mat-form-field appearance="outline" >
+                <mat-label >Username</mat-label>
+                <input matInput placeholder="Username" formControlName="username">
+            </mat-form-field><br>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput placeholder="Password" formControlName = "password">
+            </mat-form-field> <br>
+            <button mat-stroked-button (click)="login(loginform.value)">Login</button>
+        </form>
+    </mat-card-content>
+
+</mat-card> 
+
+
+</div>
+
+

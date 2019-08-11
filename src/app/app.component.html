@@ -1,0 +1,21 @@
+<div class="container">
+  <nav class="navbar" [class.activeNavbar]="navVar">
+    <div class="brand" [class.activeBrand]="navVar">
+      TechZinfi <span style="color: red">TE</span>
+    </div>
+    <ul class="nav">
+        <!-- <li> <a href="#"></a></li> -->
+        <!-- <li> <a [routerLink]="['']">Home</a></li> -->
+        <li> <a [routerLink]="['admin']">Admin</a></li>
+        <!-- <li> <a [routerLink]="['login']">Login</a></li> -->
+        <li> <a [routerLink]="['register']">Tasks</a></li>
+        <li><a (click) = "logout()"><i class="material-icons">
+            power_settings_new</i></a></li>
+    </ul>
+    <div class="menu" [class.activeMenu]="navVar"><button id="hamburgermenu" (click) = "togglenav()"><fa-icon [icon]="icon"></fa-icon></button></div>
+  </nav>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
