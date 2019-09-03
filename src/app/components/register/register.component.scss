@@ -27,7 +27,7 @@
 }
 
 //for laptop
-@media screen and (min-width: 1224px){
+@media screen and (min-width: 480px) and (max-width: 1224px){
     .field{
        width: 500px; 
     }

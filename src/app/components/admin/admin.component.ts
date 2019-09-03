@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Vendor } from 'src/app/httpobjects/vendor';
 import { VenodorService } from 'src/app/services/venodor.service';
-import {MatTableDataSource, MatSnackBar} from '@angular/material';
+import {MatTableDataSource, MatSnackBar, MatFormFieldDefaultOptions, SimpleSnackBar} from '@angular/material';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { User } from 'src/app/httpobjects/user';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
@@ -10,28 +10,79 @@ import { FireService } from 'src/app/services/fire.service';
 import { Project } from 'src/app/httpobjects/project';
 import { Task } from 'src/app/httpobjects/task';
 
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import * as _moment from 'moment';
+import { TaskPriority, Roles, Wings, Statuses, TaskType, TaskStatus } from 'src/app/constants/constants';
+import { format } from 'url';
+import { FormHelperService } from 'src/app/utilities/form-helper.service';
+import { Router } from '@angular/router';
+import { IdgeneratorService } from 'src/app/services/idgenerator.service';
+import * as firebase from 'firebase/app';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Contact } from 'src/app/httpobjects/contact';
+import { AddContactComponent } from './addcontact/add-contact-component';
+
+// tslint:disable-next-line:no-duplicate-imports
+// import {default as _rollupMoment} from 'moment';
+// const moment = _rollupMoment || _moment;
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  styleUrls: ['./admin.component.scss'],
+  providers:[
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ]
 })
 export class AdminComponent implements OnInit {
 
+  spinner:boolean=false;
   vendordataob: Observable<any[]>;
   vendordata: Vendor[];
   displaycolumns: string[] = ['name','email','mobile','address','pincode','pancard','service'];
   datasource: any;
   userform: FormGroup; projectForm: FormGroup; taskFrom: FormGroup
 
-  roles: string[] = ['ADMIN','DEV','MANAGEMENT','FINANCE', 'TL'];
-  wings: string[] = ['IT', 'MANAGEMENT', 'BD', 'ADMIN', 'MARKETING'];
-  statuses: string[] = ['active', 'inactive', 'probation', 'internship', 'permanant'];
+  roles: string[] = Roles;
+  wings: string[] = Wings;
+  statuses: string[] = Statuses;
+  priorities: string[] = TaskPriority;
   currentUser: User;
   TLs: User[] = [];
   users: User[] = [];
   projects: Project[] =[];
+  availableusers: User[] =[];
+  managers: User[] = [];
+  viewdataflag: boolean = false;
+  TaskTypes: string[] = TaskType;
+  TaskStatuses: string[] = TaskStatus;
+
+  ngOnInit() {    
+    this.loaddata();
+  }
+
+  loaddata(){
+    this.viewdataflag = false;
+    this.share.getCommonData().subscribe(data =>{
+      if(data.length == 0 || data == null || data === undefined){}
+      else{
+        this.users = data;
+        this.snackBar.open('Data Refreshed Success ..!!', 'close', {duration : 1500});
+        this.TLs = data.filter(res => res.role.includes('TL'));
+        this.managers = data.filter(res => res.role.includes('ADMIN'));        
+      }
+    })
+    this.fireservice.getCollection<Project>('projects').subscribe(res => this.projects = res);
+    this.share.getCurrentUser().subscribe(data => this.currentUser = data);
+  }
+
   constructor(public vservice: VenodorService, private fb: FormBuilder,  private snackBar: MatSnackBar, private share: DataSharingService,
-    private fireservice: FireService) {
+    private fireservice: FireService, private formhelper: FormHelperService, private router: Router, private idgen: IdgeneratorService,
+    public dialog: MatDialog) {
+
+
     this.userform = fb.group({
       'username':[null, Validators.required],
       'password':[null, Validators.required],
@@ -60,27 +111,12 @@ export class AdminComponent implements OnInit {
       'startdate':[null, Validators.required],
       'enddate':[null, Validators.required],
       'extensionDate':[null, Validators.required],
-      'commets':[null, Validators.required]
+      'commets':[null, Validators.required],
+      'priority':[null, Validators.required],
+      'type':[null, Validators.required],
+      'status':[null, Validators.required]
     })
    }
-
-  managers: User[] = [];
-  ngOnInit() {
-    this.fireservice.getCollectionWithCondition<User>('users','role', '==','ADMIN').subscribe(res =>{      
-      res.forEach(data =>{
-        this.managers.push(data);
-      })
-    });
-    this.fireservice.getCollectionWithCondition('users','role', 'array-contains','TL').subscribe(res =>{
-      this.TLs = res;
-    })
-    this.fireservice.getCollection('users').subscribe(res =>{
-      this.users = res;
-    });
-    this.fireservice.getCollection<Project>('projects').subscribe(res => this.projects = res);
-    this.currentUser = JSON.parse(localStorage.getItem('user'));
-    //this.share.currentUser.subscribe(data => this.currentUser=data);
-  }
 
   applyFilter(filterValue: string) {
     this.datasource.filter = filterValue.trim().toLowerCase();
@@ -88,7 +124,9 @@ export class AdminComponent implements OnInit {
 
   register(form: User, formDirective: FormGroupDirective){
 
+    this.spinner = true;
     this.fireservice.saveDocument<User>(form, 'users').subscribe(res =>{
+      this.spinner=false;
       for(const key in this.userform.controls){
         this.userform.get(key).clearValidators();
         this.userform.get(key).updateValueAndValidity();
@@ -102,7 +140,9 @@ export class AdminComponent implements OnInit {
   }
 
   addProject(form: Project){
+    this.spinner =false;
     this.fireservice.saveDocument<Project>(form,'projects').subscribe(data=>{
+      this.spinner = true;
       for(const key in this.projectForm.controls){
         this.projectForm.get(key).clearValidators();
         this.projectForm.get(key).updateValueAndValidity();
@@ -121,22 +161,45 @@ export class AdminComponent implements OnInit {
   }
 
   addTask(form: Task){
-    this.fireservice.saveDocument(form, 'tasks').subscribe(data =>{
-      for(const key in this.projectForm.controls){
-        this.taskFrom.get(key).clearValidators();
-        this.taskFrom.get(key).updateValueAndValidity();
-      }
-      this.taskFrom.reset();
-      this.snackBar.open('Project Added', data.title);
-    },(error: any) =>{
-      console.log(error);
-      
-      for(const key in this.projectForm.controls){
-        this.taskFrom.get(key).clearValidators();
-        this.taskFrom.get(key).updateValueAndValidity();
-      }
-      this.taskFrom.reset();
-      this.snackBar.open('Exception Occured', error);
-    })
+    
+    form.startdate = firebase.firestore.Timestamp.fromDate(form.startdate.toDate());
+    form.enddate = firebase.firestore.Timestamp.fromDate(form.enddate.toDate());
+    form.descp = this.description;
+    this.spinner = true;
+    this.idgen.getNextId('tasks').subscribe(data =>{
+      form.taskid = data;
+      this.fireservice.saveDocument(form, 'tasks').subscribe(data =>{
+        this.spinner = false;
+        this.formhelper.removeValidators(this.taskFrom);
+        this.snackBar.open('Task Added', data.title);
+      },(error: any) =>{
+        this.taskFrom.reset();
+        this.snackBar.open('Exception Occured', error);
+      });
+    },
+    (error: any) =>{
+      console.log('error generating id', error);
+    }
+    );
   }
+
+  loadviewdata(){
+    this.viewdataflag = true;
+    this.router.navigate(['admin/views']);
+  }
+  
+  description: string;
+  onPaste(value){
+    this.description = value;
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////
+
+  openAddContactDialog(): void {
+    const dialogRef = this.dialog.open(AddContactComponent, {
+      width: '800px',
+      data: {name: 'beduk', animal: 'darrav'}
+    });
+  }
+
 }

@@ -1,0 +1,17 @@
+<div>
+
+        <form style="height: 100%; width: 100%" [formGroup] = "addNoteForm">
+                <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label >Title</mat-label>
+                        <input matInput placeholder="Title" formControlName="title">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="example-full-width">
+                        <textarea #myText matInput rows="20" cols="40" placeholder="Note" formControlName="note" (input)="onPaste(myText.value)"></textarea>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" (click)="addNote(addNoteForm.value)">Finish and Submit</button>
+                <button mat-raised-button color="warn" style="float: right" (click)="formhelper.removeValidators(this.addNoteForm)">Reset</button>
+                <button mat-raised-button  style="float: right" (click)="closedialog()">Cancel</button>
+
+        </form>
+</div>

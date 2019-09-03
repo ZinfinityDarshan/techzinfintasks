@@ -1,0 +1,14 @@
+.container{
+    height: 100%;
+    width: 100%;
+}
+.fixwidth{
+    width: 200px;
+}
+.verticalNav{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 15px 100px;
+    margin-bottom: 20px;
+}

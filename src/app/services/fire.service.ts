@@ -80,10 +80,10 @@ export class FireService {
 
   getCollectionWithCondition <T extends Document> (collection:string, match: string, operator: any, matcher: string): Observable<T[]>{
     return new Observable((observer) =>{
-      let res =  this.db.collection<T>(collection, ref => ref.where(match, operator, matcher)).valueChanges();
-      res.subscribe(data => {
+      this.db.collection<T>(collection, ref => ref.where(match, operator, matcher)).valueChanges()
+      .subscribe(data => {
         if(data.length!=0){
-          observer.next(data);
+          observer.next(data);          
           observer.complete();
         }else{
           observer.error('No Element Found');

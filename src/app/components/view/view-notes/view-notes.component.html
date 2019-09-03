@@ -1,0 +1,16 @@
+
+<div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around;">
+        <div *ngFor = "let note of myNotes" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around;">
+
+                <mat-card class="card" style="margin-top: 10px">
+                        <h3 style="color: blue">{{note.title}}</h3>
+                        <mat-divider></mat-divider>
+                        <mat-card-content style="margin-top: 9px">
+                                <p style="font-size: 17px">
+                                    {{note.note}}
+                                </p>
+                        </mat-card-content>
+                    
+                </mat-card>
+        </div>
+</div>

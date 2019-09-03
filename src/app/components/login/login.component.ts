@@ -46,13 +46,13 @@ export class LoginComponent implements OnInit {
     }
     users.forEach((user: User) =>{
       if(user.token!=null){
-        console.log('User Object on',JSON.stringify(user));
         localStorage.setItem('user',JSON.stringify(user));
         this.share.changeUser(user);
+        this.share.setLoggedIn(true);
         this.loginform.reset();
         this.openSnackBar('Login Successfull',user.username);
         localStorage.setItem('beduk',user.token);
-        this.router.navigate(['admin']);
+        this.router.navigate(['dash/mytask']);
       } 
     })
    });

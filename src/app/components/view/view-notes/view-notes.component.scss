@@ -1,0 +1,15 @@
+
+//for mobile
+@media screen and (min-width: 320px) and (max-width: 480px){
+
+} 
+// for laptop
+@media screen and (min-width: 500px){
+    .bar{
+      display: flex; flex-direction: row
+    }
+    .card{
+      max-width: 600px; margin-right: 20px
+    }
+    
+}

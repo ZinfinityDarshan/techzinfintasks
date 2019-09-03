@@ -2,10 +2,22 @@
 @media screen and (min-width: 320px) and (max-width: 480px){
     .cardion{
         margin-top: 100px;
+        width: 100%;
+        margin-bottom: 10%;
     }
     .mat-form-field {
         width: 90%;
     }
+    .app-toolbar {
+        position: sticky;
+        position: -webkit-sticky; /* For macOS/iOS Safari */
+        top: 0; /* Sets the sticky toolbar to be on top */
+        z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+    }
+    .cardwidth{
+        width: 100%;
+    }
+    
 }   
 
 //for laptop
@@ -33,8 +45,16 @@
           width: 90%;
     }
       .cardion{
+        width: 50%;
         margin-top: 5%;
     }
+    .width32{
+        width: 32%;
+    }
+    .width48{
+        width: 48%;
+    }
+
 }
 
 .example-icon {
@@ -46,4 +66,7 @@
 }
 .example-full-width {
     width: 100%;
-  }
+}
+.matHeight{
+    height: 30px;
+}

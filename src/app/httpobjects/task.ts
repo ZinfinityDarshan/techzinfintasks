@@ -5,6 +5,7 @@ import { Comment } from './comment';
 
 export interface Task extends Document{
     id ?: string,
+    taskid?:string;
     title ?: string,
     assignee ?: User,
     completed ?: boolean,
@@ -12,8 +13,11 @@ export interface Task extends Document{
     owner?: User,
     project?: Project,
     references?: string[],
-    startdate?: Date,
-    enddate?: Date,
-    extensionDate?: Date,
-    commets?: Comment[]
+    startdate?: any,
+    enddate?: any,
+    priority: string,
+    extensionDate?: any,
+    commets?: Comment[],
+    type: string,
+    status: string;
 }
