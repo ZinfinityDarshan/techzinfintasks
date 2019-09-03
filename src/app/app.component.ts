@@ -32,11 +32,6 @@ export class AppComponent implements OnChanges, OnInit{
       if(data)
       this.loggedin = data;
     });
-    this.share.getCurrentUser().subscribe(data =>{
-      if(data!=null || data!=undefined){
-        this.currentuser = data;
-      }
-    })
   }
 
   togglenav() {
@@ -52,6 +47,11 @@ export class AppComponent implements OnChanges, OnInit{
     if(localStorage.getItem('beduk')!=null){
       this.loggedin = true;
     }
+    this.share.getCurrentUser().subscribe(data =>{
+      if(data!=null || data!=undefined){
+        this.currentuser = data;
+      }
+    })
   }
   logout(){
     this.router.navigate([''])
