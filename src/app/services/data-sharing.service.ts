@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../httpobjects/user';
 import { FireService } from './fire.service';
+import { Task } from '../httpobjects/task';
 
 @Injectable({
   providedIn: 'root'
@@ -125,6 +126,25 @@ export class DataSharingService implements OnInit{
 
   getViewDataTables(){
     // users, projects, tasks
+  }
+
+  getTasksPerProject(projectname: string) : Observable<Task[]>{
+    return new Observable((observer)=>{
+      this.db.getCollectionWithCondition<Task>('tasks', 'project.name', '==', projectname).subscribe(data =>{
+
+          if (data != null || data != undefined){
+            observer.next(data);
+            observer.complete();
+          }else{
+            observer.error('No Documents found');
+            observer.complete();
+          }
+
+      },(error)=>{
+        observer.error(error);
+        observer.complete();
+      });
+    })
   }
 }
 

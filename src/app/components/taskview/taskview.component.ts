@@ -1,19 +1,88 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'src/app/httpobjects/task';
+import { DataSharingService } from 'src/app/services/data-sharing.service';
+import { FireService } from 'src/app/services/fire.service';
+import { MatSnackBar } from '@angular/material';
+import { User } from 'src/app/httpobjects/user';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import * as firebase from 'firebase/app';
+import { Comment } from 'src/app/httpobjects/comment';
+import { FormHelperService } from 'src/app/utilities/form-helper.service';
+
 
 @Component({
   selector: 'app-taskview',
   templateUrl: './taskview.component.html',
   styleUrls: ['./taskview.component.scss']
 })
-export class TaskviewComponent implements OnInit {
+export class TaskviewComponent implements OnInit, OnChanges {
 
   something: Task[];
-  constructor(private route: ActivatedRoute, private router: Router,) { }
+  currentuser: User;
+  task: Task;
+  commentForm: FormGroup;
+  spinnerFlag: boolean;
+  comment: Comment;
+  commentList: Comment[] = [];
+
+  constructor(private route: ActivatedRoute, private router: Router,
+    private share: DataSharingService, private db: FireService, private snackBar: MatSnackBar, private fb: FormBuilder,
+    private formhelper: FormHelperService) { 
+      this.spinnerFlag = true;
+      let id = this.route.snapshot.params['id'];
+        this.share.getCurrentUser().subscribe(data =>{
+          this.currentuser = data;
+        });
+        this.getTasks(id);
+
+      this.commentForm = this.fb.group({
+        'comment':[null, Validators.required]
+      })
+    }
+
+  ngOnChanges(){
+    
+  }
 
   ngOnInit() {
-    let id = this.route.snapshot.params['id'];
+    
+  }
+
+  getTasks(id: string){    
+    this.db.getSingleDocumentById<Task>(id, 'tasks').subscribe(data =>{
+
+      this.task = data;
+      this.db.getCollectionWithCondition<Comment>('comments','taskid','==',this.task.taskid).subscribe(data =>{
+        this.commentList = data;
+      })
+      this.spinnerFlag = false;
+
+    })
+  }
+
+  commentstring: any;
+  onPaste(value: any){
+    console.log(value);
+    
+    this.commentstring = value;
+  }
+
+  
+  addComment(form: Comment){
+    form.comment = this.commentstring;
+    form.user = this.currentuser;
+    form.taskid = this.task.taskid;
+    form.ondate = firebase.firestore.Timestamp.fromDate(new Date())
+
+    this.db.saveDocument(form,'comments').subscribe(data =>{
+      this.commentList.push(data);
+      console.log(data)
+      this.formhelper.removeValidators(this.commentForm);
+      this.snackBar.open('comment added !', 'close', {
+        duration: 1500
+      })
+    })
   }
 
 }

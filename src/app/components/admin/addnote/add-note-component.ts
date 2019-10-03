@@ -17,10 +17,11 @@ import { DataSharingService } from 'src/app/services/data-sharing.service';
 
     addNoteForm: FormGroup;
     currentuser: User;
+    data1: any;
   
     constructor(
       public dialogRef: MatDialogRef<AddNoteComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: Note, private db: FireService, private formHelper: FormHelperService,
+      @Inject(MAT_DIALOG_DATA) public data: any, private db: FireService, private formHelper: FormHelperService,
       private fb: FormBuilder, private snackbar: MatSnackBar, private share: DataSharingService) {
             this.addNoteForm = this.fb.group({
                 'title':[null, Validators.required],
@@ -30,11 +31,17 @@ import { DataSharingService } from 'src/app/services/data-sharing.service';
       this.share.getCurrentUser().subscribe(data =>{
         this.currentuser = data;
       })
+
+      this.data1 = data;
+      console.log(data);
+      
         
       }
   
     closedialog(): void {
       this.dialogRef.close('imp');
+      console.log(this.data1);
+      
     }
 
     description: string;

@@ -29,6 +29,18 @@ import { AddExpenseComponent } from './components/admin/addexpense/add-expense-c
 import { AddNoteComponent } from './components/admin/addnote/add-note-component';
 import { ViewNotesComponent } from './components/view/view-notes/view-notes.component';
 import { ViewContactComponent } from './components/view/view-contact/view-contact.component';
+import { QuillModule } from "ngx-quill";
+import { AddBlogComponent } from './components/add/add-blog/add-blog.component';
+import { ViewBlogComponent } from './components/view/view-blog/view-blog.component';
+import { HighlightModule } from 'ngx-highlightjs';
+import { hljsLanguages } from './constants/constants';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { MeetingsComponent } from './components/meetings/meetings.component';
+import { TaskboardComponent } from './components/taskboard/taskboard.component';
+import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
+import { AddLeaveComponent } from './components/add/add-leave/add-leave.component';
+import { ProjectViewComponent } from './components/view/project-view/project-view.component'; 
+// for FullCalendar!
 
 
 @NgModule({
@@ -49,7 +61,14 @@ import { ViewContactComponent } from './components/view/view-contact/view-contac
     AddExpenseComponent,
     AddNoteComponent,
     ViewNotesComponent,
-    ViewContactComponent
+    ViewContactComponent,
+    AddBlogComponent,
+    ViewBlogComponent,
+    MeetingsComponent,
+    TaskboardComponent,
+    SanitizeHtmlPipe,
+    AddLeaveComponent,
+    ProjectViewComponent
     ],
   imports: [
     BrowserModule,
@@ -59,6 +78,38 @@ import { ViewContactComponent } from './components/view/view-contact/view-contac
     MaterialModule,FormsModule, ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
+    HighlightModule.forRoot({
+      languages: hljsLanguages
+    }),
+    QuillModule.forRoot({
+      modules:{
+        syntax: true,
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+          ['code-block'],
+      
+          //[{ 'header': 1 }, { 'header': 2 }],               // custom button values
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          //[{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+          //[{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+          //[{ 'direction': 'rtl' }],                         // text direction
+      
+          [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+          //[{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      
+          [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+          [{ 'font': [] }],
+          //[{ 'align': [] }],
+      
+          ['clean'],                                         // remove formatting button
+      
+          ['link', 'image', 'video']                         // link and image, video
+        ],
+        theme: 'snow'
+      }
+    }),
+    FullCalendarModule,
+    
   ],
   providers: [
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
@@ -68,8 +119,9 @@ import { ViewContactComponent } from './components/view/view-contact/view-contac
   entryComponents:[
     AddContactComponent,
     AddExpenseComponent,
-    AddNoteComponent
-    
+    AddNoteComponent,
+    AddBlogComponent,
+    AddLeaveComponent
   ],
   bootstrap: [AppComponent]
 })

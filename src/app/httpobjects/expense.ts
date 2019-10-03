@@ -5,7 +5,10 @@ export interface Expense {
     title?: string;
     amt?: string;
     currency?:string;
-    ondate?: string;
+    ondate?: any;
     whopaid?: User;
     status?: string;
+    recievingentity?: string;
+    transactionid?: string;
+    transactiontype?: string;
 }

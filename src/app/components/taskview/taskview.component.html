@@ -1,1 +1,87 @@
-<p>taskview works!</p>
+
+<div *ngIf="spinnerFlag">
+
+        <mat-spinner></mat-spinner>
+</div>
+<div *ngIf = "!spinnerFlag" >
+
+
+                <mat-progress-bar mode="indeterminate" *ngIf="spinner"></mat-progress-bar>
+
+                <mat-card style="border-left: 8px solid green; margin: 10px">
+
+                        <mat-card-header>
+                            <mat-card-title><mat-chip color="warn" selected [routerLink]="['/admin']">{{task.taskid}}</mat-chip><strong> &nbsp;  : &nbsp; {{task.title}}</strong></mat-card-title>
+                        </mat-card-header>
+                        
+                        <mat-card-content>
+    
+                            <span style="float: right; font-size: 17px; margin-top: 20px"> Owner : <strong><span style="color: green">{{task.owner.name}}</span></strong></span>
+                            <mat-divider></mat-divider>
+                            <br>
+                            <strong style="font-size: 17px">Descp :</strong>
+                            <br><br><br>
+                            <p class="line-breaker">                                                    
+                                {{task.descp}}
+                            </p>
+                            <br>
+                            <mat-divider></mat-divider>
+                            <br>
+                            Start Date:  
+                            <a mat-stroked-button routerLink="." color="primary">{{task.startdate.toDate() | date}}</a>
+                            &nbsp; &nbsp; 
+                            End Date:
+                            <a mat-stroked-button routerLink="." color="primary">{{task.enddate.toDate() | date}}</a>
+                            &nbsp; &nbsp;
+                            Type:
+                            <a mat-stroked-button routerLink="." color="warn">{{task.type}}</a>
+                        </mat-card-content>
+                        <mat-divider></mat-divider>
+                        <br>
+                        <button mat-raised-button color="primary" style="float: right" *ngIf="task.status === 'OPEN'" (click)="startTask(task)">Start</button>
+                        <button mat-raised-button color="primary" style="float: right" *ngIf="task.status === 'INPROGRESS'">Complete</button>
+                        <br>
+                        <br>
+                </mat-card>
+
+
+                <mat-card style="margin: 10px">
+                        
+                        <mat-card-content >
+                            <form [formGroup]="commentForm">
+                                <mat-form-field appearance="outline" style="width: 100%">
+                                        <textarea  #myText matInput rows="7" cols="7" placeholder="Comment" formControlName="comment" (input)="onPaste(myText.value)"></textarea>
+                                </mat-form-field>
+                            </form>
+
+                        </mat-card-content>
+                        <button mat-raised-button color="accent" style="float: right" (click) = "addComment(commentForm.value)">Comment</button>
+                        <br>
+                        <br>
+                </mat-card>
+
+                <mat-card style="margin: 10px">
+                    
+                        <mat-list role="list" *ngFor="let comment of commentList">
+                            <mat-list-item role="listitem" style=" margin-top: 5px">
+                                <div style="display: flex; flex-direction: row;">
+                                    <div style="display: flex; flex-direction: column;">
+                                            <img  style="float: left;" mat-card-avatar style="background-size: cover"  src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                                            <span style="padding-top: 10px; font-size: 10px">{{comment.user.name}}</span>
+
+                                    </div>
+                                    <div style="margin-left: 20px">
+                                            <span>{{comment.comment}}</span>
+
+                                    </div>
+                                </div>
+                            </mat-list-item>
+                            <br> 
+                            <mat-divider></mat-divider>
+                        </mat-list>
+
+
+                </mat-card>
+
+
+</div>

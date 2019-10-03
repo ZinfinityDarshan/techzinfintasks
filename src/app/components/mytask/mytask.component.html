@@ -1,6 +1,51 @@
+<div class="example-container mat-elevation-z8">
+        <mat-form-field appearance="outline" class="example-full-width">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+        <table mat-table [dataSource]="dataSource">
+      
+          <!-- Position Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let element"> <a [routerLink]="['/task/',element.id]">{{element.taskid}}</a> </td>
+          </ng-container>
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>Title</th>
+            <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+          </ng-container>
+      
+          <!-- Weight Column -->
+          <ng-container matColumnDef="assignee">
+            <th mat-header-cell *matHeaderCellDef>assignee</th>
+            <td mat-cell *matCellDef="let element"> {{element.assignee.name}} </td>
+          </ng-container>
+      
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="owner">
+            <th mat-header-cell *matHeaderCellDef>owner</th>
+            <td mat-cell *matCellDef="let element"> {{element.owner.name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+          </ng-container>
+          <ng-container matColumnDef="enddate">
+                <th mat-header-cell *matHeaderCellDef>End Date</th>
+                <td mat-cell *matCellDef="let element"> {{element.enddate.toDate() | date}} </td>
+         </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+</div>
+
+
 
 <mat-accordion>
-        <mat-expansion-panel [expanded]="true" style="background-color: gainsboro">
+        <mat-expansion-panel [expanded]="true" style="background-color: gainsboro; max-height: 600px">
 
                 <mat-expansion-panel-header>
                         <mat-panel-title>
@@ -14,7 +59,7 @@
 
         </mat-expansion-panel>
 
-        <mat-expansion-panel>
+        <!-- <mat-expansion-panel>
 
                 <mat-expansion-panel-header>
                         <mat-panel-title>
@@ -23,12 +68,13 @@
                         
                 </mat-expansion-panel-header>
 
-                <view-notes></view-notes>
-                
+                <ng-template matExpansionPanelContent collapsedHeight="100px" expandedHeight="100px">
+                        <view-notes></view-notes>
+                </ng-template>                
 
-        </mat-expansion-panel>
+        </mat-expansion-panel> -->
 
-        <mat-expansion-panel>
+         <!-- <mat-expansion-panel>
 
                 <mat-expansion-panel-header>
                         <mat-panel-title>
@@ -37,7 +83,7 @@
                         <mat-chip-list class="menu">
                             </mat-chip-list>
                             <span class="example-spacer"></span>
-                            <mat-chip color="primary" selected [matMenuTriggerFor]="menu" >Types
+                            <mat-chip color="primary" selected [matMenuTriggerFor]="menu" >T
                                     <mat-icon aria-hidden="false" aria-label="Example user verified icon">arrow_drop_down</mat-icon>
                             </mat-chip>
                             <mat-menu #menu="matMenu" class="menulaptop">
@@ -51,7 +97,7 @@
                     
                             </mat-menu>
                             &nbsp;
-                            <mat-chip color="warn" selected [matMenuTriggerFor]="menu2" >Priority
+                            <mat-chip color="warn" selected [matMenuTriggerFor]="menu2" >P
                                     <mat-icon aria-hidden="false" aria-label="Example user verified icon">arrow_drop_down</mat-icon>
                             </mat-chip>
                             &nbsp;
@@ -63,89 +109,10 @@
                             <mat-chip (click) = "changeStatus()" style="margin-right: 10px">C</mat-chip>
                 </mat-expansion-panel-header>
 
-                <div>
-                        <div *ngIf="!statusFlag && mytasks != null; else notask">
-                            <div *ngFor="let task of filtertasks" class="containerformytask">
-                
-                                    <mat-progress-bar mode="indeterminate" *ngIf="spinner"></mat-progress-bar>
-                
-                                <mat-card style="border-left: 5px solid red">
-                
-                                        <mat-card-header>
-                                            <!-- <div mat-card-avatar class="example-header-image"></div> -->
-                                            <mat-card-title><mat-chip color="warn" selected [routerLink]="['/admin']">{{task.taskid}}</mat-chip><strong> &nbsp;  : &nbsp; {{task.title}}</strong></mat-card-title>
-                                            <!-- <mat-card-subtitle style="color: blue"></mat-card-subtitle> -->
-                                        </mat-card-header>
-                                        
-                                        <mat-card-content>
-                    
-                                            <span style="float: right; font-size: 17px; margin-top: 20px"> Owner : <strong><span style="color: green">{{task.owner.name}}</span></strong></span>
-                                            <mat-divider></mat-divider>
-                                            <br>
-                                            <strong style="font-size: 17px">Descp :</strong>
-                                            <br><br><br>
-                                            <p class="line-breaker">                                                    
-                                                {{task.descp}}
-                                            </p>
-                                        </mat-card-content>
-                                        <mat-divider></mat-divider>
-                                        <br>
-                                        <mat-card-actions>
-                                            Start Date:  
-                                            <a mat-stroked-button routerLink="." color="primary">{{task.startdate.toDate() | date}}</a>
-                                            &nbsp; &nbsp; 
-                                            End Date:
-                                            <a mat-stroked-button routerLink="." color="primary">{{task.enddate.toDate() | date}}</a>
-                                            &nbsp; &nbsp;
-                                            Type:
-                                            <a mat-stroked-button routerLink="." color="warn">{{task.type}}</a>
-                                            <button mat-raised-button color="primary" style="float: right" *ngIf="task.status === 'OPEN'" (click)="startTask(task)">Start</button>
-                                            <button mat-raised-button color="primary" style="float: right" *ngIf="task.status === 'INPROGRESS'">Complete</button>
-                                        </mat-card-actions>
-                                </mat-card>
-                            </div>
-                        </div>
-                        <div *ngIf="statusFlag && mytasks != null; else notask">
-                            <div *ngFor="let task of completedTasks" class="containerformytask">
-                
-                                <mat-progress-bar mode="indeterminate" *ngIf="spinner"></mat-progress-bar>
-                
-                                <mat-card style="border-left: 5px solid red">
-                
-                                        <mat-card-header>
-                                            <mat-card-title><mat-chip color="warn" selected [routerLink]="['/admin']">{{task.taskid}}</mat-chip><strong> &nbsp;  : &nbsp; {{task.title}}</strong></mat-card-title>
-                                        </mat-card-header>
-                                        
-                                        <mat-card-content>
-                    
-                                            <span style="float: right; font-size: 17px; margin-top: 20px"> Owner : <strong><span style="color: green">{{task.owner.name}}</span></strong></span>
-                                            <mat-divider></mat-divider>
-                                            <br>
-                                            <strong style="font-size: 17px">Descp :</strong>
-                                            <br><br><br>
-                                            <p class="line-breaker">                                                    
-                                                {{task.descp}}
-                                            </p>
-                                        </mat-card-content>
-                                        <mat-divider></mat-divider>
-                                        <br>
-                                        <mat-card-actions>
-                                            Start Date:  
-                                            <a mat-stroked-button routerLink="." color="primary">{{task.startdate.toDate() | date}}</a>
-                                            &nbsp; &nbsp; 
-                                            End Date:
-                                            <a mat-stroked-button routerLink="." color="primary">{{task.enddate.toDate() | date}}</a>
-                                            &nbsp; &nbsp;
-                                            Type:
-                                            <a mat-stroked-button routerLink="." color="warn">{{task.type}}</a>
-                                            <button mat-raised-button color="primary" style="float: right" *ngIf="task.status === 'OPEN'" (click)="startTask(task)">Start</button>
-                                            <button mat-raised-button color="primary" style="float: right" *ngIf="task.status === 'INPROGRESS'">Complete</button>
-                                        </mat-card-actions>
-                                </mat-card>
-                            </div>
-                        </div>
-                </div>
+                <ng-template matExpansionPanelContent>
 
-        </mat-expansion-panel>
+                </ng-template>
+        </mat-expansion-panel> -->
 </mat-accordion>
+
 

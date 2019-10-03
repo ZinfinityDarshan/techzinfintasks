@@ -54,18 +54,17 @@ export class FireService {
   }
 
   getSingleDocumentById <T extends Document> (id: string, collection: string) : Observable<T>{
-    return new Observable((observer)=>{
-     let doc : AngularFirestoreDocument<T> =  this.db.doc(collection+'/'+id);
-     doc.valueChanges().subscribe(res =>{
-      console.log('{{ getSingleDocumentById }}',res);
-      observer.next(res);
-      observer.complete();
-     }),
-     (error:any) =>{
-       console.log(error)
-       observer.error(error);
-       observer.complete();
-     } 
+    
+    return new Observable((observer) =>{
+      let doc : AngularFirestoreDocument<T> =  this.db.doc<T>(collection+'/'+id);
+
+      doc.snapshotChanges().subscribe(info =>{
+        observer.next(info.payload.data({serverTimestamps:"estimate"}))
+        observer.complete();
+      }, (error) =>{
+        observer.error(error)
+        observer.complete();
+      })
     });
   }
 

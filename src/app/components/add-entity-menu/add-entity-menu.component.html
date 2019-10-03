@@ -1,22 +1,13 @@
-<!-- <span>
-    <mat-chip-list>
-            <mat-chip selected color="primary" style="margin-right: 10px;" ><mat-icon class="example-icon"
-                [matMenuTriggerFor]="menu">add_box</mat-icon></mat-chip>
-                <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="openAddContactDialog()">Contact</button>
-                    <button mat-menu-item (click) = "openAddNoteDialog()">Note</button>
-                    <button mat-menu-item (click)="openAddExpenseDialog()">Expense</button>
-                </mat-menu>
-    </mat-chip-list>
-</span> -->
 <div matRipple [matRippleCentered]="centered">
 
         <mat-icon class="example-icon" style="cursor: pointer;"
         [matMenuTriggerFor]="menu">add_box</mat-icon>
         <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="openAddContactDialog()">Contact</button>
-                <button mat-menu-item (click) = "openAddNoteDialog()">Note</button>
+                <button mat-menu-item (click)="openAddNoteDialog()">Note</button>
                 <button mat-menu-item (click)="openAddExpenseDialog()">Expense</button>
+                <button mat-menu-item (click)="openAddBlogDialog()">Blog</button>
+                <button mat-menu-item (click)="openAddLeavegDialog()">Leave</button>
         </mat-menu>
 
 </div>

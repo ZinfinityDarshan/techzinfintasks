@@ -1,3 +1,6 @@
+<button mat-raised-button  style="float: right" (click)="closedialog()">  
+                <mat-icon matSuffix style="cursor: pointer;">close</mat-icon>
+</button>
 <div>
 
         <form style="height: 100%; width: 100%" [formGroup] = "addNoteForm">
@@ -11,7 +14,6 @@
 
                 <button mat-raised-button color="primary" (click)="addNote(addNoteForm.value)">Finish and Submit</button>
                 <button mat-raised-button color="warn" style="float: right" (click)="formhelper.removeValidators(this.addNoteForm)">Reset</button>
-                <button mat-raised-button  style="float: right" (click)="closedialog()">Cancel</button>
 
         </form>
 </div>

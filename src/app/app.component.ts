@@ -47,11 +47,11 @@ export class AppComponent implements OnChanges, OnInit{
     if(localStorage.getItem('beduk')!=null){
       this.loggedin = true;
     }
-    this.share.getCurrentUser().subscribe(data =>{
-      if(data!=null || data!=undefined){
-        this.currentuser = data;
-      }
-    })
+    // this.share.getCurrentUser().subscribe(data =>{
+    //   if(data!=null || data!=undefined){
+    //     this.currentuser = data;
+    //   }
+    // })
   }
   logout(){
     this.router.navigate([''])

@@ -1,12 +1,3 @@
-<!-- <mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <button mat-button> <mat-icon aria-hidden="false" aria-label="Example user verified icon" (click)="drawer.toggle()">keyboard_tab</mat-icon></button>
-        <span>DashBoard : {{currentUser.name}}</span>
-        <span class="example-spacer"></span>
-        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">verified_user</mat-icon>
-        <app-add-entity-menu></app-add-entity-menu>
-    </mat-toolbar-row>
-</mat-toolbar> -->
 <mat-drawer-container class="container">
         <mat-drawer #drawer mode="side" opened>
             <mat-list>
@@ -15,7 +6,10 @@
                     <mat-list-item style="margin-top: 20px; margin-bottom: 20px" [routerLink]="['mytask']" [matTooltipPosition]="position" matTooltip="My Tasks" >
                         <mat-icon style="color: blue">assignment</mat-icon>
                     </mat-list-item>
-                    <mat-list-item style="margin-top: 20px; margin-bottom: 20px" [routerLink]="['timesheet']" [matTooltipPosition]="position" matTooltip="Time Sheet" > 
+                    <mat-list-item style="margin-top: 20px; margin-bottom: 20px" [routerLink]="['projects']" [matTooltipPosition]="position" matTooltip="Projects" >
+                        <mat-icon style="color: gold">work</mat-icon>
+                    </mat-list-item>
+                    <mat-list-item style="margin-top: 20px; margin-bottom: 20px" [routerLink]="['meetings']" [matTooltipPosition]="position" matTooltip="Time Sheet" > 
                             <mat-icon style="color: goldenrod">access_time</mat-icon>
                     </mat-list-item>
                     <mat-list-item style="margin-top: 20px; margin-bottom: 20px" [routerLink]="['#']" [matTooltipPosition]="position" matTooltip="Leaves" >
@@ -27,6 +21,8 @@
                     <mat-list-item style="margin-top: 20px; margin-bottom: 20px" [routerLink]="['#']" [matTooltipPosition]="position" matTooltip="Leaves" >
                             <mat-icon style="color: gold">monetization_on</mat-icon>
                     </mat-list-item>
+
+                    
                     
             </mat-list>
 

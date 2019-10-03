@@ -12,6 +12,10 @@ import { TimesheetComponent } from './components/timesheet/timesheet.component';
 import { TaskviewComponent } from './components/taskview/taskview.component';
 import { ViewdataComponent } from './components/viewdata/viewdata.component';
 import { BlogsComponent } from './components/dashboard/blogs/blogs.component';
+import { MeetingsComponent } from './components/meetings/meetings.component';
+import { ViewBlogComponent } from './components/view/view-blog/view-blog.component';
+import { TaskboardComponent } from './components/taskboard/taskboard.component';
+import { ProjectViewComponent } from './components/view/project-view/project-view.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -38,16 +42,25 @@ const routes: Routes = [
         ]
       },
       {
-        path: "timesheet",
-        component:TimesheetComponent
+        path: "meetings",
+        component:MeetingsComponent
       },
       {
         path: 'blogs',
-        component: BlogsComponent
+        component: ViewBlogComponent
+      },
+      {
+        path:"projects",
+        component: ProjectViewComponent
       }
     ]
   },
-  // {path: 'blogs', component: BlogsComponent, canActivate:[AuthGuard]}
+  {path: 'board/:project', component: TaskboardComponent, canActivate:[AuthGuard]},
+  {
+    path:"task/:id",
+    component: TaskviewComponent
+  },
+
 ];
 
 @NgModule({

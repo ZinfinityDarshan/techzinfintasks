@@ -1,0 +1,23 @@
+<div *ngFor="let blog of blogs">
+        
+    <mat-card style="border-left: 5px solid red">
+
+            <mat-card-header>
+                    <mat-card-title><mat-chip color="warn" selected [routerLink]="['/admin']">{{blog.id}}</mat-chip><strong> &nbsp;  : &nbsp; {{blog.title}}</strong></mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+
+                <span [innerHTML]="blog.blog | sanitizeHtml">
+
+
+                </span>
+
+            </mat-card-content>
+    </mat-card>    
+
+</div>
+<div>
+
+        
+</div>

@@ -1,0 +1,32 @@
+<button mat-raised-button  style="float: right" (click)="closedialog()">  
+        <mat-icon matSuffix style="cursor: pointer;">close</mat-icon>
+</button>
+<br>
+<br>
+<div>
+
+    <form [formGroup]="addLeavesForm">
+
+        <mat-form-field style="width: 100%" appearance="outline">
+                <input matInput [matDatepicker]="picker1" placeholder="Start Date" formControlName="startdate" >
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field style="width: 100%" appearance="outline">
+                <input matInput [matDatepicker]="picker2" placeholder="End Date" formControlName="enddate" >
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="type">
+                    <mat-option *ngFor = "let type of leavesType" [value]="type">
+                    {{type}}
+                    </mat-option>
+            </mat-select>            
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addLeave(addLeavesForm.value)">Add Leave</button>
+
+    </form>
+</div>

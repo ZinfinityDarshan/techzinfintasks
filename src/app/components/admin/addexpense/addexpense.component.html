@@ -1,3 +1,6 @@
+<button mat-raised-button  style="float: right" (click)="closedialog()">  
+                <mat-icon matSuffix style="cursor: pointer;">close</mat-icon>
+</button>
 <div>
 Add Expense : <br><br>
     <form style="height: 100%; width: 100%" [formGroup]="addExpenseForm">
@@ -28,17 +31,32 @@ Add Expense : <br><br>
                 </mat-select>            
             </mat-form-field>&nbsp;&nbsp;
             <mat-form-field appearance="outline" class="width48">
-                        <mat-label>Status</mat-label>
-                        <mat-select formControlName="whopaid">
-                                <mat-option *ngFor = "let status of expenseStatus" [value]="status">
-                                {{status}}
-                                </mat-option>
-                        </mat-select>            
-                    </mat-form-field>
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="whopaid">
+                        <mat-option *ngFor = "let status of expenseStatus" [value]="status">
+                        {{status}}
+                        </mat-option>
+                </mat-select>            
+             </mat-form-field>
+             <mat-form-field appearance="outline" class="width48">
+                <mat-label >Recieving Entity</mat-label>
+                <input matInput placeholder="Recieving Entity" formControlName="recievingentity">
+             </mat-form-field>&nbsp;&nbsp;
+             <mat-form-field appearance="outline" class="width48">
+                <mat-label >Transaction Id</mat-label>
+                <input matInput placeholder="Name" formControlName="transactionid">
+             </mat-form-field>
+             <mat-form-field appearance="outline" style="width: 100%">
+                <mat-label>Transaction Type</mat-label>
+                <mat-select formControlName="transactiontype">
+                        <mat-option *ngFor = "let status of transactionType" [value]="status">
+                        {{status}}
+                        </mat-option>
+                </mat-select>            
+             </mat-form-field>
 
-            <button mat-raised-button color="primary">Finish and Submit</button>
+            <button mat-raised-button color="primary" (click)="addExpense(addExpenseForm.value)">Finish and Submit</button>
             <button mat-raised-button color="warn" style="float: right" (click)="formhelper.removeValidators(this.addExpenseForm);">Reset</button>
-            <button mat-raised-button  style="float: right" (click)="closedialog()">Cancel</button>
     </form>
 
 

@@ -4,6 +4,9 @@ import { FireService, FBWhere } from 'src/app/services/fire.service';
 import { Task } from 'src/app/httpobjects/task';
 import { User } from 'src/app/httpobjects/user';
 import { MatSnackBar } from '@angular/material';
+import {MatTableDataSource} from '@angular/material/table';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-mytask',
@@ -19,7 +22,10 @@ export class MytaskComponent implements OnInit {
   completedTasks: Task[] = [];
   completedTaskLabel: string;
 
-  constructor(private share: DataSharingService, private db: FireService, private snackBar: MatSnackBar) { 
+  displayedColumns = ['id', 'title', 'assignee', 'owner', 'status', 'enddate'];
+  dataSource: any;
+
+  constructor(private share: DataSharingService, private db: FireService, private snackBar: MatSnackBar, private route: Router) { 
     this.completedTaskLabel = 'commpleted'
   }
 
@@ -32,11 +38,14 @@ export class MytaskComponent implements OnInit {
 
   getTasks(){
     this.db.getCollectionWithCondition<Task>('tasks','assignee.id','==',this.currentuser.id ).subscribe(data =>{
+      this.dataSource = new MatTableDataSource(data);
       this.completedTasks = data.filter(res => res.status == 'COMPLETED');
       this.mytasks = data.filter(res => res.status !== 'COMPLETED').filter(res => res. status !== 'CLOSED');
       this.filtertasks = this.mytasks;      
     });
   }
+
+
   filterOption(option:string){
     switch (option) {
       case 'TASK':
@@ -63,6 +72,14 @@ export class MytaskComponent implements OnInit {
     }
   }
 
+  opneTask(id: string){
+    this.route.navigate([''])
+  }
+  applyFilter(filterValue: string) {
+    console.log('filterValue', filterValue);
+    
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   // filterPriority(option:string){
   //   switch (option) {
   //     case 'HIGH':

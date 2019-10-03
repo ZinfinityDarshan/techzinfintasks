@@ -1,0 +1,19 @@
+<button mat-raised-button  style="float: right" (click)="closedialog()">  
+        <mat-icon matSuffix style="cursor: pointer;">close</mat-icon>
+</button>
+<div>
+        <form [formGroup] = "addBlogForm">
+
+                <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label >Title</mat-label>
+                        <input matInput placeholder="Title" formControlName="title">
+                </mat-form-field>
+
+                <quill-editor [styles] = "editorConfig" formControlName="blog"></quill-editor>
+                
+                <button mat-raised-button color="primary" (click)="addBlog(addBlogForm.value)">Finish and Submit</button>
+                <button mat-raised-button color="warn" style="float: right" (click)="formhelper.removeValidators(this.addNoteForm)">Reset</button>
+
+        </form>
+
+</div>

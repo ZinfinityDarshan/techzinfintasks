@@ -10,10 +10,11 @@ export class IdgeneratorService {
 
   constructor(private db: FireService) { }
 
-  getNextId(doc: string): Observable<string>{
+  getNextId(collection: string): Observable<string>{
     return new Observable((observer) =>{
-      this.db.getCollectionWithCondition<IDCONFIG>('IDCONFIG','doc','==',doc).subscribe((data:IDCONFIG[]) =>{
+      this.db.getCollectionWithCondition<IDCONFIG>('IDCONFIG','doc','==',collection).subscribe((data:IDCONFIG[]) =>{
         let res = data[0];
+        console.log('data from idconfig',data);
         
         let id = res.code.concat(res.pre.toString());
         res.pre = res.pre + 1;
