@@ -1,0 +1,9 @@
+<mat-card class="shorttaskcard">
+        
+        <mat-chip style="font-size: 8; width: 40%" color="{{color}}" 
+        selected [routerLink]="['/task/',task.taskid]">{{task.taskid}}</mat-chip>
+        <span style="margin-top: 10%">{{task.title}}</span>
+        <button mat-stroked-button style="margin-top: 10%" color="accent">Assignee: {{task.assignee.name}}</button>
+</mat-card>
+
+<mat-chip-list></mat-chip-list>

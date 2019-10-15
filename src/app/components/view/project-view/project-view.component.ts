@@ -11,15 +11,21 @@ import { MatTableDataSource } from '@angular/material';
 export class ProjectViewComponent implements OnInit {
 
   projects: Project[] = [];
+  displayedColumns: string[] = ['name', 'client', 'lead', 'manager', 'viewtask'];
+  dataSource: MatTableDataSource<Project>;
+
   constructor(private db: FireService) { 
     this.db.getCollection<Project>('projects').subscribe(data =>{
       this.projects = data;
-      new MatTableDataSource(this.projects);
+      console.log(data)
+      this.dataSource = new MatTableDataSource(data);
     })
   }
 
   ngOnInit() {
 
   }
-
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

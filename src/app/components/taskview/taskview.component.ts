@@ -34,7 +34,7 @@ export class TaskviewComponent implements OnInit, OnChanges {
         this.share.getCurrentUser().subscribe(data =>{
           this.currentuser = data;
         });
-        this.getTasks(id);
+        this.getTask(id);
 
       this.commentForm = this.fb.group({
         'comment':[null, Validators.required]
@@ -59,6 +59,17 @@ export class TaskviewComponent implements OnInit, OnChanges {
       this.spinnerFlag = false;
 
     })
+  }
+  getTask(id: string){
+    this.db.getCollectionWithCondition<Task>('tasks', 'taskid', '==', id).subscribe(value =>{
+      this.task = value[0];
+
+      this.db.getCollectionWithCondition<Comment>('comments','taskid','==',this.task.taskid).subscribe(data =>{
+        this.commentList = data;
+      })
+      this.spinnerFlag = false;
+
+    });
   }
 
   commentstring: any;

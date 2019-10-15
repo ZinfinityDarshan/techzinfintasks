@@ -8,10 +8,16 @@
         <li > <a [routerLink]="['admin']" >Admin</a></li>
         <!-- <li> <a [routerLink]="['register']">Tasks</a></li> -->
         <li > <a [routerLink]="['dash/mytask/']" >Dashboard</a></li>
-        <li *ngIf="loggedin"><a (click) = "logout()"><i class="material-icons" style="color: red">
-            power_settings_new</i></a></li>
-        <li > </li>
+        <li *ngIf="loggedin"> 
+          <mat-icon [matMenuTriggerFor]="menu" style="cursor: pointer">face</mat-icon>
+        </li>
 
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item color="primary" [routerLink]="['/profile']"> {{currentuser.name}} </button>
+            <button mat-menu-item (click)="logout()" style="align-content: center">
+              <mat-icon color="warn">power_settings_new</mat-icon>
+            </button>
+        </mat-menu>
             
     </ul>
     <div class="menu" [class.activeMenu]="navVar">
@@ -21,5 +27,6 @@
   <div class="content">
     <router-outlet></router-outlet>
   </div>
+  <mat-chip-list></mat-chip-list>
 </div>
 

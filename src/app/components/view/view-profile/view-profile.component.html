@@ -1,0 +1,30 @@
+<mat-progress-bar mode="indeterminate" *ngIf="spinnerboolean"></mat-progress-bar>
+<div style="display: flex; justify-content: center; height: 100%; width: 100%">
+
+    <mat-card style=" display:flex; align-content:center; justify-content: center;  
+    height:85%; width: 60%; margin-top: 2%" [class.mat-elevation-z8]="true">
+    <img mat-card-avatar style="height: 200px; width: 200px;" [src]="trustedUrl" alt="">
+    <mat-icon #uploadicon (click)="openBottomSheet()" style="cursor: pointer" >insert_photo</mat-icon>
+    <mat-card-content style="display: flex; justify-content: space-around; flex-direction: column; height: 100%; width: 100%">
+
+        <div style="display: flex; justify-content: space-around; flex-direction: row; height: 100%; width: 100%;">
+            <div>
+                <mat-card style="width: 100%; height: 100%;">
+
+                    something
+                </mat-card>
+            </div>
+        </div>
+
+        <div>
+            <mat-card>
+
+                something
+            </mat-card>
+        </div>
+        
+    </mat-card-content>
+
+    </mat-card>
+
+</div>

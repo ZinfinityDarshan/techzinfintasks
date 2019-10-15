@@ -16,6 +16,7 @@ import { MeetingsComponent } from './components/meetings/meetings.component';
 import { ViewBlogComponent } from './components/view/view-blog/view-blog.component';
 import { TaskboardComponent } from './components/taskboard/taskboard.component';
 import { ProjectViewComponent } from './components/view/project-view/project-view.component';
+import { ViewProfileComponent } from './components/view/view-profile/view-profile.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -60,6 +61,10 @@ const routes: Routes = [
     path:"task/:id",
     component: TaskviewComponent
   },
+  {
+    path:'profile',
+    component: ViewProfileComponent
+  }
 
 ];
 

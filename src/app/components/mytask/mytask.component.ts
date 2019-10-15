@@ -6,6 +6,7 @@ import { User } from 'src/app/httpobjects/user';
 import { MatSnackBar } from '@angular/material';
 import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -21,11 +22,13 @@ export class MytaskComponent implements OnInit {
   spinner: boolean=false;
   completedTasks: Task[] = [];
   completedTaskLabel: string;
+  taskId = new FormControl();
 
   displayedColumns = ['id', 'title', 'assignee', 'owner', 'status', 'enddate'];
   dataSource: any;
 
-  constructor(private share: DataSharingService, private db: FireService, private snackBar: MatSnackBar, private route: Router) { 
+  constructor(private share: DataSharingService, private db: FireService, 
+    private snackBar: MatSnackBar, private route: Router) { 
     this.completedTaskLabel = 'commpleted'
   }
 
@@ -71,31 +74,16 @@ export class MytaskComponent implements OnInit {
         break;
     }
   }
-
-  opneTask(id: string){
-    this.route.navigate([''])
-  }
-  applyFilter(filterValue: string) {
-    console.log('filterValue', filterValue);
-    
+  
+  applyFilter(filterValue: string) {    
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  // filterPriority(option:string){
-  //   switch (option) {
-  //     case 'HIGH':
-  //       this.filtertasks = this.mytasks.filter(data => data.priority.includes('HIGH'))
-  //       break;
-  //     case 'MEDIUM':
-  //       this.filtertasks = this.mytasks.filter(data => data.priority.includes('MEDIUM'))
-  //         break;
-  //     case 'LOW':
-  //       this.filtertasks = this.mytasks.filter(data => data.priority.includes('LOW'))
-  //         break;
+
+  navigateToTask(value: any){
+    value = value.toUpperCase();
+    this.route.navigate(['/task/', value]);
     
-  //     default:
-  //       break;
-  //   }
-  // }
+  }
 
   startTask(task: Task){
     this.spinner = true;

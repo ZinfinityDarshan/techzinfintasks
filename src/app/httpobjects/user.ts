@@ -10,4 +10,5 @@ export interface User extends Document{
     wing ?: string,
     role ?: string[],
     name ?: string,
+    profilepicurl ?: string
 }

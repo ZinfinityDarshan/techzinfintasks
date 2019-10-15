@@ -23,10 +23,13 @@ export class TaskboardComponent implements OnInit {
   pending: Task[] = [];
   completed: Task[] = [];
 
+  warn: string = "warn";
+  primary : string = "primary";
+  accent : string = "accent";
+
   ngOnInit() {
 
       this.projectname = this.route.snapshot.params['project'];
-      console.log('routersnapshot',this.projectname);
       
       this.share.getTasksPerProject(this.projectname).subscribe(data =>{
 
@@ -47,7 +50,8 @@ export class TaskboardComponent implements OnInit {
 
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      console.log('data in out ',status);
+
+      console.log('data in out ',data);
 
       transferArrayItem(event.previousContainer.data,
                         event.container.data,

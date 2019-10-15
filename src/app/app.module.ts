@@ -39,8 +39,14 @@ import { MeetingsComponent } from './components/meetings/meetings.component';
 import { TaskboardComponent } from './components/taskboard/taskboard.component';
 import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
 import { AddLeaveComponent } from './components/add/add-leave/add-leave.component';
-import { ProjectViewComponent } from './components/view/project-view/project-view.component'; 
+import { ProjectViewComponent } from './components/view/project-view/project-view.component';
+import { ShortCardComponent } from './components/taskboard/short-card/short-card.component';
+import { ViewProfileComponent } from './components/view/view-profile/view-profile.component'; 
+import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
+import { UpdateprofilepicbottomsheetComponent } from './components/view/view-profile/updateprofilepicbottomsheet/updateprofilepicbottomsheet.component';
+
 // for FullCalendar!
+
 
 
 @NgModule({
@@ -68,7 +74,10 @@ import { ProjectViewComponent } from './components/view/project-view/project-vie
     TaskboardComponent,
     SanitizeHtmlPipe,
     AddLeaveComponent,
-    ProjectViewComponent
+    ProjectViewComponent,
+    ShortCardComponent,
+    ViewProfileComponent,
+    UpdateprofilepicbottomsheetComponent
     ],
   imports: [
     BrowserModule,
@@ -109,19 +118,22 @@ import { ProjectViewComponent } from './components/view/project-view/project-vie
       }
     }),
     FullCalendarModule,
+    AngularFireStorageModule,
     
   ],
   providers: [
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
     {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true }},
+    // {provide: StorageBucket, useValue: '/profile' }
   ],
   entryComponents:[
     AddContactComponent,
     AddExpenseComponent,
     AddNoteComponent,
     AddBlogComponent,
-    AddLeaveComponent
+    AddLeaveComponent,
+    UpdateprofilepicbottomsheetComponent
   ],
   bootstrap: [AppComponent]
 })

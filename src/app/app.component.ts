@@ -32,6 +32,9 @@ export class AppComponent implements OnChanges, OnInit{
       if(data)
       this.loggedin = data;
     });
+    this.share.getCurrentUser().subscribe(data =>{
+      this.currentuser = data;
+    })
   }
 
   togglenav() {
@@ -47,15 +50,14 @@ export class AppComponent implements OnChanges, OnInit{
     if(localStorage.getItem('beduk')!=null){
       this.loggedin = true;
     }
-    // this.share.getCurrentUser().subscribe(data =>{
-    //   if(data!=null || data!=undefined){
-    //     this.currentuser = data;
-    //   }
-    // })
   }
+  
   logout(){
     this.router.navigate([''])
+    localStorage.setItem('beduk', '');
+    this.share.changeUser(null);
     this.loggedin = false;
+    this.currentuser = null;
     console.log("logging out");
     localStorage.clear();
   }

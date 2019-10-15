@@ -1,13 +1,22 @@
 <div class="example-container mat-elevation-z8">
-        <mat-form-field appearance="outline" class="example-full-width">
+        <mat-form-field appearance="outline" style="width: 70%">
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 20%; margin-left: 10%">
+                <input matInput placeholder="Filter" [formControl]="taskId">
+                <mat-icon matSuffix style="cursor: pointer" matRipple [matRippleCentered]="centered" (click)="navigateToTask(taskId.value)">
+                        search
+                </mat-icon>
         </mat-form-field>
         <table mat-table [dataSource]="dataSource">
       
           <!-- Position Column -->
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>ID</th>
-            <td mat-cell *matCellDef="let element"> <a [routerLink]="['/task/',element.id]">{{element.taskid}}</a> </td>
+            <td mat-cell *matCellDef="let element">         
+                    <mat-chip style="font-size: 8; width: 40%" color="primary" 
+                selected [routerLink]="['/task/',element.taskid]">{{element.taskid}}</mat-chip> 
+             </td>
           </ng-container>
       
           <!-- Name Column -->
@@ -41,7 +50,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
 </div>
-
+<mat-chip-list></mat-chip-list>
 
 
 <mat-accordion>

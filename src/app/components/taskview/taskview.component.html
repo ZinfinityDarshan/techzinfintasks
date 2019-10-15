@@ -70,9 +70,13 @@
                                             <span style="padding-top: 10px; font-size: 10px">{{comment.user.name}}</span>
 
                                     </div>
-                                    <div style="margin-left: 20px">
-                                            <span>{{comment.comment}}</span>
+                                    <div style="margin-left: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+                                        
+                                        <span style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 4">{{comment.ondate.toDate() | date}}</span>
+                                        <span>{{comment.comment}}</span>
 
+                                    </div>
+                                    <div style="float: right">
                                     </div>
                                 </div>
                             </mat-list-item>
@@ -82,6 +86,6 @@
 
 
                 </mat-card>
-
+                <mat-chip-list></mat-chip-list>
 
 </div>

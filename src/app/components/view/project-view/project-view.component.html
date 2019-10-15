@@ -1,0 +1,36 @@
+    <mat-form-field style="width: 100%;" appearance="outline">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+      
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
+    
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="client">
+        <th mat-header-cell *matHeaderCellDef> Client </th>
+        <td mat-cell *matCellDef="let element"> {{element.client}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lead">
+        <th mat-header-cell *matHeaderCellDef> Lead </th>
+        <td mat-cell *matCellDef="let element"> {{element.lead[0].name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="manager">
+        <th mat-header-cell *matHeaderCellDef> Manager </th>
+        <td mat-cell *matCellDef="let element"> {{element.manager[0].name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="viewtask">
+        <th mat-header-cell *matHeaderCellDef> View Task </th>
+        <td mat-cell *matCellDef="let element" > 
+          <a [routerLink]="['/board/',element.name]"><mat-icon matRipple style="color: blue; cursor: pointer;">pageview</mat-icon> </a>
+        </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>

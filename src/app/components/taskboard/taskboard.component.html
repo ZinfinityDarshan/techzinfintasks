@@ -9,7 +9,9 @@
                 [cdkDropListConnectedTo]="[doneList, inprogressList, pendingList, completedList, colsedList]"
                 class="example-list"
                 (cdkDropListDropped)="drop($event, 'OPEN', 'open')">
-                <div class="example-box" *ngFor="let item of open" cdkDrag>{{item.title}}</div> 
+                <div class="example-box" *ngFor="let item of open" cdkDrag>
+                    <short-card [task] = item style="width: 100%" ></short-card>
+                </div> 
             </div>
         </div>
 
@@ -23,7 +25,9 @@
                     [cdkDropListConnectedTo]="[todoList, completedList, colsedList, doneList, pendingList]"
                     class="example-list"
                     (cdkDropListDropped)="drop($event, 'INPROGRESS', 'inprogress')">
-                    <div class="example-box" *ngFor="let item of inprogress" cdkDrag>{{item.title}}</div>
+                    <div class="example-box" *ngFor="let item of inprogress" cdkDrag>
+                            <short-card [task] = item style="width: 100%"></short-card>
+                    </div>
                 </div>
         </div>
 
@@ -37,7 +41,9 @@
                 [cdkDropListConnectedTo]="[todoList, completedList, colsedList, doneList, inprogressList]"
                 class="example-list"
                 (cdkDropListDropped)="drop($event, 'PENDING', 'pending')">
-                <div class="example-box" *ngFor="let item of pending" cdkDrag>{{item.title}}</div>
+                <div class="example-box" *ngFor="let item of pending" cdkDrag>
+                        <short-card [task] = item [color] = "warn" style="width: 100%"></short-card>
+                </div>
             </div>
         </div>
 
@@ -51,7 +57,9 @@
                 [cdkDropListConnectedTo]="[todoList, pendingList, colsedList, doneList, inprogressList]"
                 class="example-list"
                 (cdkDropListDropped)="drop($event, 'COMPLETED', 'completed')">
-                <div class="example-box" *ngFor="let item of completed" cdkDrag>{{item.title}}</div>
+                <div class="example-box" *ngFor="let item of completed" cdkDrag>
+                        <short-card [task] = item [color] = "accent" style="width: 100%"></short-card>
+                </div>
             </div>
         </div>
 
@@ -65,7 +73,9 @@
                 [cdkDropListConnectedTo]="[todoList, doneList, inprogressList, pendingList, completedList]"
                 class="example-list"
                 (cdkDropListDropped)="drop($event, 'CLOSED', 'closed')">
-                <div class="example-box" *ngFor="let item of closed" cdkDrag>{{item.title}}</div>
+                <div class="example-box" *ngFor="let item of closed" cdkDrag>
+                        <short-card [task] = item [color] = "accent" style="width: 100%"></short-card>
+                </div>
             </div>
         </div>
 

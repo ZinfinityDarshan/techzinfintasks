@@ -5,7 +5,7 @@ import {MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule,
    MatToolbarModule, MatIconModule, MatDatepickerModule, MatSidenavModule, MatListModule, 
    MatProgressSpinnerModule, MatProgressBarModule, MatChipsModule, MatGridListModule, 
    MatMenuModule, MatAutocompleteModule, MatButtonToggleModule, MatStepperModule, 
-   MatTooltipModule, MatExpansionModule, MatRippleModule} from '@angular/material';
+   MatTooltipModule, MatExpansionModule, MatRippleModule, MatBadgeModule, MatBottomSheetModule} from '@angular/material';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import { OverlayModule } from '@angular/cdk/overlay';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -19,7 +19,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatButtonModule, MatFormFieldModule, MatInputModule,MatMenuModule,MatAutocompleteModule,OverlayModule,MatButtonToggleModule,
     MatSelectModule, MatRadioModule, MatTabsModule, MatTableModule, MatSnackBarModule, MatToolbarModule, MatIconModule,MatChipsModule,
     MatDatepickerModule, MatMomentDateModule, MatSidenavModule, MatListModule, MatProgressSpinnerModule, MatProgressBarModule,MatGridListModule,
-    MatStepperModule, MatTooltipModule, MatExpansionModule, MatRippleModule, DragDropModule
+    MatStepperModule, MatTooltipModule, MatExpansionModule, MatRippleModule, DragDropModule, MatBadgeModule, MatBottomSheetModule
 
   ],
   exports: [
@@ -27,7 +27,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatButtonModule,MatFormFieldModule, MatInputModule,MatMenuModule,MatAutocompleteModule,OverlayModule,MatButtonToggleModule,
     MatSelectModule, MatRadioModule, MatTabsModule, MatTableModule, MatSnackBarModule, MatToolbarModule, MatIconModule, MatChipsModule
     ,MatDatepickerModule, MatMomentDateModule, MatSidenavModule, MatListModule, MatProgressSpinnerModule, MatProgressBarModule, MatGridListModule,
-    MatStepperModule, MatTooltipModule, MatExpansionModule, MatRippleModule, DragDropModule
+    MatStepperModule, MatTooltipModule, MatExpansionModule, MatRippleModule, DragDropModule, MatBadgeModule, MatBottomSheetModule
   ]
 })
 export class MaterialModule { }
