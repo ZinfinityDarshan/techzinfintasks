@@ -12,8 +12,8 @@
           <mat-icon [matMenuTriggerFor]="menu" style="cursor: pointer">face</mat-icon>
         </li>
 
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item color="primary" [routerLink]="['/profile']"> {{currentuser.name}} </button>
+        <mat-menu #menu="matMenu" >
+            <button mat-menu-item color="primary" [routerLink]="['/profile']"> {{(userObservable | async).name}} </button>
             <button mat-menu-item (click)="logout()" style="align-content: center">
               <mat-icon color="warn">power_settings_new</mat-icon>
             </button>

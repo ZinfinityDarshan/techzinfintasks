@@ -3,6 +3,7 @@ import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { DataSharingService } from './services/data-sharing.service';
 import { User } from './httpobjects/user';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,11 @@ import { User } from './httpobjects/user';
 })
 export class AppComponent implements OnChanges, OnInit{
 
-  constructor(public router: Router, public share: DataSharingService){}
+  constructor(public router: Router, public share: DataSharingService){
+    if(localStorage.getItem('user') !== null || undefined){      
+      this.share.changeUser(JSON.parse(localStorage.getItem('user')));
+    }
+  }
 
 
   title = 'taskzinfi';
@@ -20,6 +25,7 @@ export class AppComponent implements OnChanges, OnInit{
   public icon = faBars;
   loggedin:boolean = false;
   currentuser: User;
+  userObservable: Observable<User> = this.share.currentUser;
 
   ngOnInit(){
     this.share.getUsersFromDatabase().subscribe(data =>{
@@ -32,9 +38,6 @@ export class AppComponent implements OnChanges, OnInit{
       if(data)
       this.loggedin = data;
     });
-    this.share.getCurrentUser().subscribe(data =>{
-      this.currentuser = data;
-    })
   }
 
   togglenav() {
@@ -50,6 +53,7 @@ export class AppComponent implements OnChanges, OnInit{
     if(localStorage.getItem('beduk')!=null){
       this.loggedin = true;
     }
+    this.userObservable.subscribe(data => this.currentuser = data);
   }
   
   logout(){

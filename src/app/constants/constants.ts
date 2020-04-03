@@ -30,3 +30,11 @@ export const TaskPriority: string[] = [
   export const ExpenseStatus: string[] = ['PENDING', 'PAID', 'PARTIALLYPAID'];
   export const TransactionType: string[] = ['INBOUND', 'OUTBOUND'];
   export const LeavesType: string[] = ['SICK', 'CASUAL', 'VACATION'];
+  // export const IMGType: string[] = ['PROFILEPIC', 'TASK', 'ATTACHEMENT'];
+  export enum IMGType {
+    PROFILEPIC = 'PROFILEPIC', TASK = 'TASK', ATTACHEMENT= 'ATTACHEMENT'
+  }
+  export enum DBTableNames{
+    users='users', blog='blog', tasks='tasks', leaves='leaves', contacts='contacts',
+    notes='notes'
+  }

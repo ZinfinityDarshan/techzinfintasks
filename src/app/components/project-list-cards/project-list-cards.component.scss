@@ -1,0 +1,58 @@
+.hs {
+    display: grid;
+    grid-gap: calc(var(--gutter) / 2);
+    grid-template-columns: 10px;
+    grid-template-rows: minmax(150px, 1fr);
+    grid-auto-flow: column;
+    grid-auto-columns: calc(50% - var(--gutter) * 2);
+  
+    overflow-x: scroll;
+    scroll-snap-type: x proximity;
+    padding-bottom: calc(.75 * var(--gutter));
+    margin-bottom: calc(-.25 * var(--gutter));
+  }
+  
+.no-scrollbar {
+scrollbar-width: none;
+margin-bottom: 0;
+padding-bottom: 0;
+}
+.no-scrollbar::-webkit-scrollbar {
+display: none;
+}
+.hs:before,
+.hs:after {
+    content: '';
+    width: 10px;
+}
+:root {
+    --gutter: 20px;
+  }
+  
+  .app {
+    padding: var(--gutter) 0;
+    display: grid;
+    grid-gap: var(--gutter) 0;
+    grid-template-columns: var(--gutter) 1fr var(--gutter);
+    align-content: start;
+  }
+  
+  .app > * {
+    grid-column: 2 / -2;
+  }
+  
+  .app > .full {
+    grid-column: 1 / -1;
+  }
+
+.cardList{
+    background-color: blue; color: white;
+    height: 100px;
+    width: 200px;
+}
+.marginList{
+    margin-left: 5%; margin-right: 5%;
+}
+ul {
+    list-style-type: none;
+}

@@ -11,4 +11,5 @@ export interface User extends Document{
     role ?: string[],
     name ?: string,
     profilepicurl ?: string
+    firestoreURL?: string
 }

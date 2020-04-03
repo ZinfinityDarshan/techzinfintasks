@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/httpobjects/user';
@@ -21,6 +21,9 @@ export class LoginComponent implements OnInit {
   user: Observable<User[]>;
   loginfailbool: boolean;
   currentUser: User;
+
+  @Output() currentUserEvent = new  EventEmitter();
+
   constructor( public fb: FormBuilder, public router: Router,
      public vservice: VenodorService, private snackBar: MatSnackBar, private share: DataSharingService) { 
     this.loginform = fb.group({
@@ -30,8 +33,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-   console.log(btoa("adminadmin"));
    this.share.currentUser.subscribe(data =>{
+    data != null ? this.currentUserEvent.emit(data) : console.log('not logged in');
     this.currentUser = data;
    });
   }
@@ -47,9 +50,12 @@ export class LoginComponent implements OnInit {
     users.forEach((user: User) =>{
       if(user.token!=null){
         localStorage.setItem('user',JSON.stringify(user));
+        console.log(user);
+        
         this.share.changeUser(user);
         this.share.setLoggedIn(true);
         this.loginform.reset();
+        this.currentUserEvent.emit(user)
         this.openSnackBar('Login Successfull',user.username);
         localStorage.setItem('beduk',user.token);
         this.router.navigate(['dash/mytask']);

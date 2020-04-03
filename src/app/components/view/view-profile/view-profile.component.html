@@ -2,25 +2,59 @@
 <div style="display: flex; justify-content: center; height: 100%; width: 100%">
 
     <mat-card style=" display:flex; align-content:center; justify-content: center;  
-    height:85%; width: 60%; margin-top: 2%" [class.mat-elevation-z8]="true">
-    <img mat-card-avatar style="height: 200px; width: 200px;" [src]="trustedUrl" alt="">
-    <mat-icon #uploadicon (click)="openBottomSheet()" style="cursor: pointer" >insert_photo</mat-icon>
+    height:85%; width: 60%; margin-top: 2%; flex-direction: column;" [class.mat-elevation-z8]="true">
+    <span style="display: flex; justify-content: space-evenly; align-content: center; margin: 10px;">
+        <span>  
+            <img mat-card-avatar style="height: 200px; width: 200px; border-style: solid; 
+            border-width: 4px;" [src]="trustedUrl" alt="No Profile pic added ..!!">
+            <mat-icon #uploadicon (click)="openBottomSheet()" style="cursor: pointer" >add_a_photo</mat-icon>        
+        </span>
+        <span style="display: flex; justify-content: space-evenly; flex-direction: column;">
+            <button mat-raised-button color="primary">change profile picture</button>
+            <button mat-stroked-button color="accent">edit profile</button>
+        </span>
+    </span>
     <mat-card-content style="display: flex; justify-content: space-around; flex-direction: column; height: 100%; width: 100%">
 
         <div style="display: flex; justify-content: space-around; flex-direction: row; height: 100%; width: 100%;">
-            <div>
-                <mat-card style="width: 100%; height: 100%;">
+            <!-- <div> -->
+                <mat-card style="width: 100%; height: 80%; font-size: 20px; padding-left: 20px; padding-top: 5%;" [class.mat-elevation-z8]="true" >
 
-                    something
+                    <div class="padding" style="display: flex; justify-content: space-between;">
+                        Name &nbsp; : &nbsp;
+                        <strong>{{currentuser.name}}</strong><br>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="padding" style="display: flex; justify-content: space-between;">
+                        UserName &nbsp; : &nbsp;<strong>{{currentuser.username}}</strong><br>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="padding" style="display: flex; justify-content: space-between;">
+                        Email &nbsp; : &nbsp;<strong>{{currentuser.email}}</strong><br>
+                    </div>    
+                    <mat-divider></mat-divider>                 
+                    <div class="padding" style="display: flex; justify-content: space-between;">
+                        Wing &nbsp; : &nbsp;<strong>{{currentuser.wing}}</strong><br>
+                    </div>
+                    <mat-divider></mat-divider>
+
+                    <div class="padding" style="display: flex; justify-content:space-between;">
+                        Role &nbsp; : &nbsp;<strong>{{currentuser.role}}</strong><br>
+                    </div>
+                    <mat-divider></mat-divider>
+
+                    <div class="padding" *ngFor="let m of currentuser.manager" style="display: flex; justify-content: space-between;">
+                        Manager &nbsp; : &nbsp;<strong>{{m.name}}</strong><br>
+                    </div>
+                    <mat-divider></mat-divider>
+
+                    <div class="padding" style="display: flex; justify-content: space-between;">
+                        Status &nbsp; : &nbsp;<strong>{{currentuser.status}}</strong><br>
+                    </div>
+                    <mat-divider></mat-divider>
+
                 </mat-card>
-            </div>
-        </div>
-
-        <div>
-            <mat-card>
-
-                something
-            </mat-card>
+            <!-- </div> -->
         </div>
         
     </mat-card-content>

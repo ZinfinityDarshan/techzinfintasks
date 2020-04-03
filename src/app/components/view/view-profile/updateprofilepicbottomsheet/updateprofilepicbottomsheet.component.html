@@ -1,13 +1,18 @@
 <div style="display: flex; justify-content: space-around; flex-direction: row;">
 
-    <img mat-card-avatar style="height: 200px; width: 200px;" [src]="trustedUrl" alt="">
+    <!-- <img mat-card-avatar style="height: 200px; width: 200px; border-style: solid; 
+    border-width: 4px; border-color: red;" [src]="trustedUrl"> -->
+
+    <img style="height: 200px; width: 200px; border-style: solid; 
+    border-width: 4px; border-color: red;" [src]="trustedUrl">
 
     <div style="display: flex; justify-content: space-around; flex-direction: column">
 
-        <button mat-stroked-button color="primary">
+        <button mat-stroked-button color="primary" (click)="file.click()">
             select
         </button>
-        <button mat-raised-button color="primary">
+        <input type="file" #file hidden (change)=addImg($event)>
+        <button mat-raised-button color="primary" (click)="uploadProfilePic()">
             upload
         </button>
     </div>

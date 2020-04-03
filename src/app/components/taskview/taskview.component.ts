@@ -1,3 +1,5 @@
+import { DBTableNames } from './../../constants/constants';
+import { TaskStatus } from 'src/app/constants/constants';
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Task } from 'src/app/httpobjects/task';
@@ -9,6 +11,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as firebase from 'firebase/app';
 import { Comment } from 'src/app/httpobjects/comment';
 import { FormHelperService } from 'src/app/utilities/form-helper.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 
 @Component({
@@ -22,13 +25,15 @@ export class TaskviewComponent implements OnInit, OnChanges {
   currentuser: User;
   task: Task;
   commentForm: FormGroup;
-  spinnerFlag: boolean;
+  spinnerFlag: boolean = false;
   comment: Comment;
   commentList: Comment[] = [];
+  taskStatus: string[] = TaskStatus;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private share: DataSharingService, private db: FireService, private snackBar: MatSnackBar, private fb: FormBuilder,
-    private formhelper: FormHelperService) { 
+    private formhelper: FormHelperService, 
+    private spinner: SpinnerService, private snackbar: MatSnackBar) { 
       this.spinnerFlag = true;
       let id = this.route.snapshot.params['id'];
         this.share.getCurrentUser().subscribe(data =>{
@@ -94,6 +99,24 @@ export class TaskviewComponent implements OnInit, OnChanges {
         duration: 1500
       })
     })
+  }
+
+  status: string;
+  statusChanged(status: any){ 
+    this.status = status;   
+    console.log(status);
+  }
+
+  save(){
+    let ref = this.spinner.open();
+    this.task.status = this.status;
+    this.db.updateDocument(this.task, DBTableNames.tasks).subscribe(data =>{
+      this.task = data;
+      ref.close();
+      this.snackBar.open('Document Updated Successfully','close', {duration:2000})
+    }, err =>{
+
+    });
   }
 
 }

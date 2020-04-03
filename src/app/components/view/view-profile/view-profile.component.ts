@@ -9,6 +9,7 @@ import { finalize, tap } from 'rxjs/operators';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import { UpdateprofilepicbottomsheetComponent } from './updateprofilepicbottomsheet/updateprofilepicbottomsheet.component';
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
+import { FireStorageService } from 'src/app/services/fire-storage.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class ViewProfileComponent implements OnInit {
   selectedFile: File = null;
   constructor(private afstorage: AngularFireStorage, private db: FireService, 
     private snackbar: MatSnackBar, private share: DataSharingService, private bottomsheet: MatBottomSheet,
-    private sanitizer: DomSanitizer) { }
+    private sanitizer: DomSanitizer,
+    private storage: FireStorageService) { }
   done: string;
   currentuser: User;
   spinnerboolean: boolean = false;
@@ -30,7 +32,9 @@ export class ViewProfileComponent implements OnInit {
   ngOnInit() {
     this.share.getCurrentUser().subscribe(data =>{
       this.currentuser = data;
-      this.trustedUrl = this.sanitizer.bypassSecurityTrustUrl(this.currentuser.profilepicurl);
+      this.storage.getPics(this.currentuser.profilepicurl).subscribe(data =>{
+        this.trustedUrl = this.sanitizer.bypassSecurityTrustUrl(data);
+      });
     })
   }
 
@@ -89,10 +93,18 @@ export class ViewProfileComponent implements OnInit {
   }
 
   openBottomSheet(){
-    this.bottomsheet.open(UpdateprofilepicbottomsheetComponent, {
+    let ref = this.bottomsheet.open(UpdateprofilepicbottomsheetComponent, {
       autoFocus:true,
       data: this.currentuser,
-      
+    });
+    ref.afterDismissed().subscribe((data:User) =>{
+      this.storage.getPics(data.profilepicurl).subscribe(data =>{
+        this.trustedUrl = data;
+      },err =>{
+        this.snackbar.open('cannot fetch profile pic from storage', 'close', {duration: 2000})
+      });      
+    }, err=>{
+      this.snackbar.open('DataSheet is crached', 'close', {duration: 2000})
     })
   }
 }

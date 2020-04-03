@@ -44,6 +44,10 @@ import { ShortCardComponent } from './components/taskboard/short-card/short-card
 import { ViewProfileComponent } from './components/view/view-profile/view-profile.component'; 
 import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
 import { UpdateprofilepicbottomsheetComponent } from './components/view/view-profile/updateprofilepicbottomsheet/updateprofilepicbottomsheet.component';
+import { ApprovalScreenComponent } from './components/approval-screen/approval-screen.component';
+import { ProjectListCardsComponent } from './components/project-list-cards/project-list-cards.component';
+import { TaskListForApprovalComponent } from './components/task-list-for-approval/task-list-for-approval.component';
+import { SpinnerComponent } from './components/common/spinner/spinner.component';
 
 // for FullCalendar!
 
@@ -77,7 +81,11 @@ import { UpdateprofilepicbottomsheetComponent } from './components/view/view-pro
     ProjectViewComponent,
     ShortCardComponent,
     ViewProfileComponent,
-    UpdateprofilepicbottomsheetComponent
+    UpdateprofilepicbottomsheetComponent,
+    ApprovalScreenComponent,
+    ProjectListCardsComponent,
+    TaskListForApprovalComponent,
+    SpinnerComponent,
     ],
   imports: [
     BrowserModule,
@@ -119,7 +127,6 @@ import { UpdateprofilepicbottomsheetComponent } from './components/view/view-pro
     }),
     FullCalendarModule,
     AngularFireStorageModule,
-    
   ],
   providers: [
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
@@ -133,6 +140,7 @@ import { UpdateprofilepicbottomsheetComponent } from './components/view/view-pro
     AddNoteComponent,
     AddBlogComponent,
     AddLeaveComponent,
+    SpinnerComponent,
     UpdateprofilepicbottomsheetComponent
   ],
   bootstrap: [AppComponent]

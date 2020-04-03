@@ -15,10 +15,10 @@ export class DataSharingService implements OnInit{
 
   }
   
-  private initialuser: User;
+  private initialuser: User = {};
   private userSource = new BehaviorSubject<User>(this.initialuser);
 
-  currentUser = this.userSource.asObservable();
+  public currentUser = this.userSource.asObservable();
 
   getCurrentUser(): Observable<User>{
     return new Observable((observer) =>{
@@ -41,7 +41,7 @@ export class DataSharingService implements OnInit{
 
   }
 
-  changeUser(user: User){
+  changeUser(user: User){    
     this.userSource.next(user);
   }
 

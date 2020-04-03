@@ -1,0 +1,13 @@
+mat-spinner {
+    zoom: 0.7
+    
+  }
+
+  ::ng-deep  .mat-spinner
+  {
+    circle {
+        stroke: black;
+    }
+ 
+    
+  }

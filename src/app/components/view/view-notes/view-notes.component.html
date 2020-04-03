@@ -3,7 +3,18 @@
         <div *ngFor = "let note of myNotes" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around;">
 
                 <mat-card class="card" style="margin-top: 10px">
-                        <h3 style="color: blue; background-color: aliceblue">{{note.title}}</h3>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                                <h3 style="color: blue; background-color: aliceblue">{{note.title}}</h3>
+                                <div>
+                                        <button mat-icon-button>
+                                                <mat-icon style="color: red;">delete</mat-icon>
+                                        </button>
+                                        <button mat-icon-button>
+                                                <mat-icon style="color: black;">edit</mat-icon>
+                                        </button>
+                                </div>
+
+                        </div>
                         <mat-divider></mat-divider>
                         <mat-card-content style="margin-top: 9px">
                                 <p style="font-size: 17px">

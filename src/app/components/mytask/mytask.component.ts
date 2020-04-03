@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { FireService, FBWhere } from 'src/app/services/fire.service';
 import { Task } from 'src/app/httpobjects/task';
 import { User } from 'src/app/httpobjects/user';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatSort } from '@angular/material';
 import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
+import * as moment from 'moment';
 
 
 @Component({
@@ -23,10 +24,14 @@ export class MytaskComponent implements OnInit {
   completedTasks: Task[] = [];
   completedTaskLabel: string;
   taskId = new FormControl();
+  taskBool: boolean = true;
+  displayedColumns = ['id', 'title', 'assignee', 'owner', 'status', 'enddate', 'edit', 'delete'];
+  dataSource = new MatTableDataSource<Task>([{id:'TASK-01',title:'some', assignee:{name:'darshan'}, owner:{name:'redkar'},status:'prog',enddate:moment(), priority:'HIGH' }]);
 
-  displayedColumns = ['id', 'title', 'assignee', 'owner', 'status', 'enddate'];
-  dataSource: any;
-
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  // @ViewChild(MatSort, {static: false}) set content(sort: MatSort) {
+  //   this.dataSource.sort = sort;
+  // }
   constructor(private share: DataSharingService, private db: FireService, 
     private snackBar: MatSnackBar, private route: Router) { 
     this.completedTaskLabel = 'commpleted'
@@ -42,6 +47,7 @@ export class MytaskComponent implements OnInit {
   getTasks(){
     this.db.getCollectionWithCondition<Task>('tasks','assignee.id','==',this.currentuser.id ).subscribe(data =>{
       this.dataSource = new MatTableDataSource(data);
+      this.dataSource.sort = this.sort;
       this.completedTasks = data.filter(res => res.status == 'COMPLETED');
       this.mytasks = data.filter(res => res.status !== 'COMPLETED').filter(res => res. status !== 'CLOSED');
       this.filtertasks = this.mytasks;      
@@ -103,5 +109,9 @@ export class MytaskComponent implements OnInit {
     if(this.statusFlag == true){this.completedTaskLabel ==='Revert'}else{this.completedTaskLabel === 'completed'}
     console.log(this.statusFlag);
     
+  }
+
+  changeTaskBool(value: boolean){
+    this.taskBool = value
   }
 }

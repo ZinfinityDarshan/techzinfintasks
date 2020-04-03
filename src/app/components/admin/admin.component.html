@@ -7,7 +7,7 @@
     </mat-progress-bar>
     <mat-toolbar color="primary">
             <mat-toolbar-row >
-                <span>DashBoard : {{currentUser.name}}</span>
+                <span>DashBoard : {{(currentUser | async).name}}</span>
                 <span class="example-spacer"></span>
                 <span>
                     <mat-chip-list>
@@ -21,7 +21,7 @@
                     </mat-chip-list>
                 </span>
                 <mat-chip-list>
-                    <mat-chip selected color="warn" style="margin-right: 10px;" *ngIf="this.currentUser.role.includes('DIRECTOR')"><mat-icon class="example-icon"
+                    <mat-chip selected color="warn" style="margin-right: 10px;" *ngIf="(this.currentUser | async).role.includes('DIRECTOR')"><mat-icon class="example-icon"
                         (click)="loadviewdata()">view_list</mat-icon></mat-chip>
                     <mat-chip selected color="primary"><mat-icon class="example-icon"
                         (click)="loaddata()">refresh</mat-icon></mat-chip>

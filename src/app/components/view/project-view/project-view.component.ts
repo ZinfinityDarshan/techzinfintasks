@@ -19,7 +19,7 @@ export class ProjectViewComponent implements OnInit {
       this.projects = data;
       console.log(data)
       this.dataSource = new MatTableDataSource(data);
-    })
+    });
   }
 
   ngOnInit() {

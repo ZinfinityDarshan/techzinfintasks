@@ -18,6 +18,7 @@ export interface Task extends Document{
     priority: string,
     extensionDate?: any,
     commets?: Comment[],
-    type: string,
-    status: string;
+    type?: string,
+    status?: string,
+    attachments?:string[]
 }

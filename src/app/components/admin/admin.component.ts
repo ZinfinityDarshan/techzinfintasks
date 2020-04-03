@@ -49,7 +49,7 @@ export class AdminComponent implements OnInit {
   wings: string[] = Wings;
   statuses: string[] = Statuses;
   priorities: string[] = TaskPriority;
-  currentUser: User;
+  currentUser = this.share.currentUser;
   TLs: User[] = [];
   users: User[] = [];
   projects: Project[] =[];
@@ -75,7 +75,7 @@ export class AdminComponent implements OnInit {
       }
     })
     this.fireservice.getCollection<Project>('projects').subscribe(res => this.projects = res);
-    this.share.getCurrentUser().subscribe(data => this.currentUser = data);
+    //this.share.getCurrentUser().subscribe(data => this.currentUser = data);
   }
 
   constructor(public vservice: VenodorService, private fb: FormBuilder,  private snackBar: MatSnackBar, private share: DataSharingService,
