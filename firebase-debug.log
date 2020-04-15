@@ -1,0 +1,137 @@
+[debug] [2020-04-09T17:43:50.708Z] ----------------------------------------------------------------------
+[debug] [2020-04-09T17:43:50.710Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Darshan\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2020-04-09T17:43:50.711Z] CLI Version:   8.0.2
+[debug] [2020-04-09T17:43:50.711Z] Platform:      win32
+[debug] [2020-04-09T17:43:50.711Z] Node Version:  v10.16.2
+[debug] [2020-04-09T17:43:50.712Z] Time:          Thu Apr 09 2020 23:13:50 GMT+0530 (India Standard Time)
+[debug] [2020-04-09T17:43:50.712Z] ----------------------------------------------------------------------
+[debug] [2020-04-09T17:43:50.712Z] 
+[debug] [2020-04-09T17:43:50.723Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-04-09T17:43:50.723Z] > authorizing via signed-in user
+[debug] [2020-04-09T17:43:50.723Z] [iam] checking project taskzinfi for permissions ["firebase.projects.get"]
+[debug] [2020-04-09T17:43:50.726Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-04-09T17:43:50.726Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-04-09T17:43:50.934Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 09 Apr 2020 17:43:50 GMT","server":"scaffolding on HTTPServer2","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-04-09T17:43:50.947Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/taskzinfi:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2020-04-09T17:45:43.531Z] ----------------------------------------------------------------------
+[debug] [2020-04-09T17:45:43.533Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Darshan\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2020-04-09T17:45:43.534Z] CLI Version:   8.0.2
+[debug] [2020-04-09T17:45:43.534Z] Platform:      win32
+[debug] [2020-04-09T17:45:43.534Z] Node Version:  v10.16.2
+[debug] [2020-04-09T17:45:43.547Z] Time:          Thu Apr 09 2020 23:15:43 GMT+0530 (India Standard Time)
+[debug] [2020-04-09T17:45:43.547Z] ----------------------------------------------------------------------
+[debug] [2020-04-09T17:45:43.547Z] 
+[debug] [2020-04-09T17:45:43.558Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-04-09T17:45:43.558Z] > authorizing via signed-in user
+[debug] [2020-04-09T17:45:43.559Z] [iam] checking project taskzinfi for permissions ["firebase.projects.get"]
+[debug] [2020-04-09T17:45:43.561Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/taskzinfi:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2020-04-09T17:45:45.263Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 09 Apr 2020 17:45:44 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1507","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-04-09T17:45:45.265Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/taskzinfi  
+ 
+[debug] [2020-04-09T17:45:45.775Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 09 Apr 2020 17:45:45 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] === Serving from 'D:\code\tasks\front2\techzinfintasks'...
+[info] 
+[debug] [2020-04-09T17:45:45.782Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/taskzinfi/webApps/-/config  
+ 
+[debug] [2020-04-09T17:45:46.861Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 09 Apr 2020 17:45:46 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  hosting: Serving hosting files from: dist/taskzinfi
+[info] +  hosting: Local server: http://localhost:5000
+[warn] !  Your requested "node" version "8" doesn't match your global version "10"
+[info] +  functions: functions emulator started at http://localhost:5001
+[info] i  functions: Watching "D:\code\tasks\front2\techzinfintasks\functions" for Cloud Functions...
+[debug] [2020-04-09T17:45:47.864Z] [worker-pool] addWorker(~diagnostic~) 
+[debug] [2020-04-09T17:45:47.864Z] [worker-pool] Adding worker with key ~diagnostic~, total=1 
+[debug] [2020-04-09T17:45:47.864Z] [worker-pool] submitWork(triggerId=) 
+[debug] [2020-04-09T17:45:47.865Z] [worker-~diagnostic~-4b73a72a-1a4e-460e-aa06-383042ee4219]: Assigning socketPath: \\?\pipe\D:\code\tasks\front2\techzinfintasks\functions\17968 
+[debug] [2020-04-09T17:45:47.865Z] [worker-~diagnostic~-4b73a72a-1a4e-460e-aa06-383042ee4219]: BUSY 
+[debug] [2020-04-09T17:45:48.357Z] [runtime-status] [17968] Functions runtime initialized. {"cwd":"D:\\code\\tasks\\front2\\techzinfintasks\\functions","node_version":"10.16.2"} 
+[debug] [2020-04-09T17:45:48.359Z] [runtime-status] [17968] Disabled runtime features: undefined 
+[debug] [2020-04-09T17:45:48.373Z] [runtime-status] [17968] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.2.0","resolution":"D:\\code\\tasks\\front2\\techzinfintasks\\functions\\node_modules\\firebase-admin\\lib\\index.js"} 
+[warn] !  The Cloud Functions emulator requires the module "firebase-admin" to be version >8.9.0 so your version is too old. You can probably fix this by running "npm install firebase-admin@latest" in your functions directory.
+[info] i  functions: Your functions could not be parsed due to an issue with your node_modules (see above)
+[debug] [2020-04-09T17:45:48.391Z] [worker-~diagnostic~-4b73a72a-1a4e-460e-aa06-383042ee4219]: exited 
+[debug] [2020-04-09T17:45:48.392Z] [worker-~diagnostic~-4b73a72a-1a4e-460e-aa06-383042ee4219]: FINISHED 
+[debug] [2020-04-09T18:09:10.064Z] ----------------------------------------------------------------------
+[debug] [2020-04-09T18:09:10.065Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Darshan\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2020-04-09T18:09:10.066Z] CLI Version:   8.0.2
+[debug] [2020-04-09T18:09:10.066Z] Platform:      win32
+[debug] [2020-04-09T18:09:10.066Z] Node Version:  v10.16.2
+[debug] [2020-04-09T18:09:10.081Z] Time:          Thu Apr 09 2020 23:39:10 GMT+0530 (India Standard Time)
+[debug] [2020-04-09T18:09:10.081Z] ----------------------------------------------------------------------
+[debug] [2020-04-09T18:09:10.081Z] 
+[debug] [2020-04-09T18:09:10.094Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-04-09T18:09:10.094Z] > authorizing via signed-in user
+[debug] [2020-04-09T18:09:10.095Z] [iam] checking project taskzinfi for permissions ["firebase.projects.get"]
+[debug] [2020-04-09T18:09:10.098Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/taskzinfi:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2020-04-09T18:09:11.961Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 09 Apr 2020 18:09:11 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1508","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-04-09T18:09:11.962Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/taskzinfi  
+ 
+[debug] [2020-04-09T18:09:12.382Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 09 Apr 2020 18:09:11 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] === Serving from 'D:\code\tasks\front2\techzinfintasks'...
+[info] 
+[debug] [2020-04-09T18:09:12.391Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/taskzinfi/webApps/-/config  
+ 
+[debug] [2020-04-09T18:09:13.903Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 09 Apr 2020 18:09:13 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  hosting: Serving hosting files from: dist/taskzinfi
+[info] +  hosting: Local server: http://localhost:5000
+[warn] !  Your requested "node" version "8" doesn't match your global version "10"
+[info] +  functions: functions emulator started at http://localhost:5001
+[info] i  functions: Watching "D:\code\tasks\front2\techzinfintasks\functions" for Cloud Functions...
+[debug] [2020-04-09T18:09:14.454Z] [worker-pool] addWorker(~diagnostic~) 
+[debug] [2020-04-09T18:09:14.455Z] [worker-pool] Adding worker with key ~diagnostic~, total=1 
+[debug] [2020-04-09T18:09:14.455Z] [worker-pool] submitWork(triggerId=) 
+[debug] [2020-04-09T18:09:14.455Z] [worker-~diagnostic~-36802d05-0f74-4a0b-9c8d-f531ebeb048a]: Assigning socketPath: \\?\pipe\D:\code\tasks\front2\techzinfintasks\functions\20212 
+[debug] [2020-04-09T18:09:14.455Z] [worker-~diagnostic~-36802d05-0f74-4a0b-9c8d-f531ebeb048a]: BUSY 
+[debug] [2020-04-09T18:09:15.052Z] [runtime-status] [20212] Functions runtime initialized. {"cwd":"D:\\code\\tasks\\front2\\techzinfintasks\\functions","node_version":"10.16.2"} 
+[debug] [2020-04-09T18:09:15.053Z] [runtime-status] [20212] Disabled runtime features: undefined 
+[debug] [2020-04-09T18:09:15.090Z] [runtime-status] [20212] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.2.0","resolution":"D:\\code\\tasks\\front2\\techzinfintasks\\functions\\node_modules\\firebase-admin\\lib\\index.js"} 
+[warn] !  The Cloud Functions emulator requires the module "firebase-admin" to be version >8.9.0 so your version is too old. You can probably fix this by running "npm install firebase-admin@latest" in your functions directory.
+[info] i  functions: Your functions could not be parsed due to an issue with your node_modules (see above)
+[debug] [2020-04-09T18:09:15.117Z] [worker-~diagnostic~-36802d05-0f74-4a0b-9c8d-f531ebeb048a]: exited 
+[debug] [2020-04-09T18:09:15.117Z] [worker-~diagnostic~-36802d05-0f74-4a0b-9c8d-f531ebeb048a]: FINISHED 
+[debug] [2020-04-09T18:17:11.113Z] ----------------------------------------------------------------------
+[debug] [2020-04-09T18:17:11.115Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Darshan\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2020-04-09T18:17:11.116Z] CLI Version:   8.0.2
+[debug] [2020-04-09T18:17:11.116Z] Platform:      win32
+[debug] [2020-04-09T18:17:11.116Z] Node Version:  v10.16.2
+[debug] [2020-04-09T18:17:11.124Z] Time:          Thu Apr 09 2020 23:47:11 GMT+0530 (India Standard Time)
+[debug] [2020-04-09T18:17:11.124Z] ----------------------------------------------------------------------
+[debug] [2020-04-09T18:17:11.124Z] 
+[debug] [2020-04-09T18:17:11.150Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-04-09T18:17:11.150Z] > authorizing via signed-in user
+[debug] [2020-04-09T18:17:11.151Z] [iam] checking project taskzinfi for permissions ["firebase.projects.get"]
+[debug] [2020-04-09T18:17:11.154Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/taskzinfi:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2020-04-09T18:17:12.869Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 09 Apr 2020 18:17:12 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1509","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-04-09T18:17:12.872Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/taskzinfi  
+ 
+[debug] [2020-04-09T18:17:13.336Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 09 Apr 2020 18:17:12 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] === Serving from 'D:\code\tasks\front2\techzinfintasks'...
+[info] 
+[debug] [2020-04-09T18:17:13.346Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/taskzinfi/webApps/-/config  
+ 
+[debug] [2020-04-09T18:17:14.575Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 09 Apr 2020 18:17:13 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  hosting: Serving hosting files from: dist/taskzinfi
+[info] +  hosting: Local server: http://localhost:5000
+[warn] !  Your requested "node" version "8" doesn't match your global version "10"
+[info] +  functions: functions emulator started at http://localhost:5001
+[info] i  functions: Watching "D:\code\tasks\front2\techzinfintasks\functions" for Cloud Functions...
+[debug] [2020-04-09T18:17:15.419Z] [worker-pool] addWorker(~diagnostic~) 
+[debug] [2020-04-09T18:17:15.420Z] [worker-pool] Adding worker with key ~diagnostic~, total=1 
+[debug] [2020-04-09T18:17:15.420Z] [worker-pool] submitWork(triggerId=) 
+[debug] [2020-04-09T18:17:15.420Z] [worker-~diagnostic~-f5fca7a9-b268-4d27-b865-735d52c98fdd]: Assigning socketPath: \\?\pipe\D:\code\tasks\front2\techzinfintasks\functions\6272 
+[debug] [2020-04-09T18:17:15.420Z] [worker-~diagnostic~-f5fca7a9-b268-4d27-b865-735d52c98fdd]: BUSY 
+[debug] [2020-04-09T18:17:16.090Z] [runtime-status] [6272] Functions runtime initialized. {"cwd":"D:\\code\\tasks\\front2\\techzinfintasks\\functions","node_version":"10.16.2"} 
+[debug] [2020-04-09T18:17:16.091Z] [runtime-status] [6272] Disabled runtime features: undefined 
+[debug] [2020-04-09T18:17:16.116Z] [runtime-status] [6272] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.2.0","resolution":"D:\\code\\tasks\\front2\\techzinfintasks\\functions\\node_modules\\firebase-admin\\lib\\index.js"} 
+[warn] !  The Cloud Functions emulator requires the module "firebase-admin" to be version >8.9.0 so your version is too old. You can probably fix this by running "npm install firebase-admin@latest" in your functions directory.
+[info] i  functions: Your functions could not be parsed due to an issue with your node_modules (see above)
+[debug] [2020-04-09T18:17:16.145Z] [worker-~diagnostic~-f5fca7a9-b268-4d27-b865-735d52c98fdd]: exited 
+[debug] [2020-04-09T18:17:16.145Z] [worker-~diagnostic~-f5fca7a9-b268-4d27-b865-735d52c98fdd]: FINISHED 

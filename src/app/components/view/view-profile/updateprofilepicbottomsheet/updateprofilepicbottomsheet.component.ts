@@ -14,7 +14,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class UpdateprofilepicbottomsheetComponent implements OnInit {
 
-  trustedUrl: SafeUrl;
+  trustedUrl: any;
 
   constructor(private sheetref: MatBottomSheetRef<UpdateprofilepicbottomsheetComponent>, 
     @Inject(MAT_BOTTOM_SHEET_DATA) public user: User,private sanitizer: DomSanitizer,
@@ -22,11 +22,16 @@ export class UpdateprofilepicbottomsheetComponent implements OnInit {
     private spinner: SpinnerService,
     private db: FireService,
     private snackbar : MatSnackBar) { 
-      this.trustedUrl = sanitizer.bypassSecurityTrustUrl(this.user.profilepicurl);
+      // console.log(this.user.profilepicurl);
+      // this.storage.getPics(this.user.profilepicurl).subscribe(data =>{
+      //   console.log(data);
+        
+      //    this.trustedUrl = this.sanitizer.bypassSecurityTrustUrl(data);
+      // });
     }
 
   ngOnInit() {
-    console.log(this.user);
+    // console.log(this.user);
   }
 
   file: File | null = null;
@@ -37,13 +42,11 @@ export class UpdateprofilepicbottomsheetComponent implements OnInit {
   addImg(event: any){
     this.file = event.target.files[0];    
     this.imgName = this.file.name;
-    console.log(event);
     var reader = new FileReader()
     reader.readAsDataURL(this.file);
     reader.onload = (event) => {
       // this.img = event.target.result;
       // this.trustedUrl = event.target.result;
-      console.log(this.img);
     }
   }
 
@@ -53,9 +56,7 @@ export class UpdateprofilepicbottomsheetComponent implements OnInit {
       object =>{
         this.user.profilepicurl = object.metadata.fullPath;
         this.user.firestoreURL = object.metadata.name;
-        console.log(this.user);
         this.storage.getPics(this.user.profilepicurl).subscribe(data =>{
-          console.log(data);                  
           this.spinner.close(ref);
           this.db.updateDocument(this.user,DBTableNames.users).subscribe(data =>{
             this.spinner.close(ref);

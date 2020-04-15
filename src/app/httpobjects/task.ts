@@ -1,3 +1,4 @@
+import { Attachment } from './attachment';
 import { Document } from '../services/fire.service';
 import { User } from './user';
 import { Project } from './project';
@@ -20,5 +21,5 @@ export interface Task extends Document{
     commets?: Comment[],
     type?: string,
     status?: string,
-    attachments?:string[]
+    attachments?:Attachment[];
 }

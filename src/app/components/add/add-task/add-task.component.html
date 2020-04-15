@@ -1,0 +1,90 @@
+<mat-card >
+    <!-- <mat-card-title style="margin-bottom: 4%"> User Task
+            <button mat-raised-button color="warn" (click)="this.formhelper.removeValidators(this.taskFrom);" style="float: right">Reset</button>
+    </mat-card-title> -->
+    <mat-card-content>
+
+        <form [formGroup]="taskFrom" > 
+            <mat-form-field appearance="outline" style="width: 100%">
+                <mat-label >Title</mat-label>
+                <input matInput placeholder="Title" formControlName="title">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="outline" class="width32">
+                    <mat-label>Owner</mat-label>
+                    <mat-select formControlName="owner">
+                        <mat-option *ngFor = "let user of TLs" [value]="user">
+                        {{user.name}}
+                        </mat-option>
+                    </mat-select>            
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field appearance="outline" class="width32">
+                    <mat-label>Project</mat-label>
+                    <mat-select formControlName="project">
+                        <mat-option *ngFor = "let project of projects" [value]="project">
+                        {{project.name}}
+                        </mat-option>
+                    </mat-select>            
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field appearance="outline" class="width32">
+                    <mat-label>Assignee</mat-label>
+                    <mat-select formControlName="assignee">
+                        <mat-option *ngFor = "let user of users" [value]="user">
+                        {{user.name}}
+                        </mat-option>
+                    </mat-select>            
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field class="width32" appearance="outline">
+                    <input matInput [matDatepicker]="picker1" placeholder="Start Date" formControlName="startdate" >
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field appearance="outline" class="width32">
+                    <mat-label>Priority</mat-label>
+                    <mat-select formControlName="priority">
+                        <mat-option *ngFor = "let priority of priorities" [value]="priority">
+                        {{priority}}
+                        </mat-option>
+                    </mat-select>            
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field class="width32" appearance="outline">
+                    <input matInput [matDatepicker]="picker2" placeholder="End Date" formControlName="enddate" >
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field><br>
+
+            <mat-form-field appearance="outline" class="width48">
+                    <mat-label>Type</mat-label>
+                    <mat-select formControlName="type">
+                        <mat-option *ngFor = "let TaskType of TaskTypes" [value]="TaskType">
+                        {{TaskType}}
+                        </mat-option>
+                    </mat-select>            
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field appearance="outline" class="width48">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status">
+                        <mat-option *ngFor = "let TaskStatuse of TaskStatuses" [value]="TaskStatuse">
+                        {{TaskStatuse}}
+                        </mat-option>
+                    </mat-select>            
+            </mat-form-field>
+
+            <br>
+            <mat-form-field appearance="outline" class="example-full-width">
+                    <textarea #myText matInput rows="15" cols="40" placeholder="Description" formControlName="descp" (input)="onPaste(myText.value)"></textarea>
+            </mat-form-field>
+            &nbsp;
+            
+            <button mat-raised-button color="primary" (click)="addTask(taskFrom.value)" style="margin-right: 8px;">Add Task</button>
+            <button mat-raised-button color="warn" (click)="this.formhelper.removeValidators(this.taskFrom);" style="float: right">Reset</button>
+        </form>
+    </mat-card-content>
+
+</mat-card> 

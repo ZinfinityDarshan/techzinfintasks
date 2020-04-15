@@ -12,7 +12,7 @@
                 <quill-editor [styles] = "editorConfig" formControlName="blog"></quill-editor>
                 
                 <button mat-raised-button color="primary" (click)="addBlog(addBlogForm.value)">Finish and Submit</button>
-                <button mat-raised-button color="warn" style="float: right" (click)="formhelper.removeValidators(this.addNoteForm)">Reset</button>
+                <button mat-raised-button color="warn" style="float: right" (click)="formHelper.removeValidators(this.addBlogForm)">Reset</button>
 
         </form>
 

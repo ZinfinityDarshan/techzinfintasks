@@ -5,6 +5,7 @@ import { AddExpenseComponent } from '../admin/addexpense/add-expense-component';
 import { AddNoteComponent } from '../admin/addnote/add-note-component';
 import { AddBlogComponent } from '../add/add-blog/add-blog.component';
 import { AddLeaveComponent } from '../add/add-leave/add-leave.component';
+import { AddTaskComponent } from '../add/add-task/add-task.component';
 
 @Component({
   selector: 'app-add-entity-menu',
@@ -47,6 +48,15 @@ export class AddEntityMenuComponent implements OnInit {
       width: '800px',
       data: {name: 'beduk', animal: 'darrav'},
       disableClose: true
+    });
+  }
+
+  openAddTaskDialog(): void {
+    this.dialog.open(AddTaskComponent, {
+      width: '900px',
+      height: '95%',
+      data: {name: 'beduk', animal: 'darrav'},
+      disableClose: false
     });
   }
 

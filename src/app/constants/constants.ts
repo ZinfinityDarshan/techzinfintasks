@@ -36,5 +36,12 @@ export const TaskPriority: string[] = [
   }
   export enum DBTableNames{
     users='users', blog='blog', tasks='tasks', leaves='leaves', contacts='contacts',
-    notes='notes'
+    notes='notes', comments='comments', notifications="notifications", projects="projects"
+  }
+  export enum TaskTypeEnum{
+    TASK= 'TASK', DEV= 'DEV', SUPPORT='SUPPORT', PRODUCTION='PRODUCTION', ISSUE= 'ISSUE', CHANGE='CHANGE'
+  }
+  export enum TaskStatusEnum{
+    OPEN = 'OPEN', INPROGRESS = 'INPROGRESS', COMPLETED = 'COMPLETED', 
+    CLOSED = 'CLOSED', PAID = 'PAID', PENDING = 'PENDING', BACKLOG = 'BACKLOG'
   }

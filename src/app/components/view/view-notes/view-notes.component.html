@@ -6,7 +6,7 @@
                         <div style="display: flex; flex-direction: row; justify-content: space-between;">
                                 <h3 style="color: blue; background-color: aliceblue">{{note.title}}</h3>
                                 <div>
-                                        <button mat-icon-button>
+                                        <button mat-icon-button (click)="deleteNote(note)">
                                                 <mat-icon style="color: red;">delete</mat-icon>
                                         </button>
                                         <button mat-icon-button>

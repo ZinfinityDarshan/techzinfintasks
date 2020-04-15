@@ -1,27 +1,37 @@
 <div class="container">
-  <nav class="navbar" [class.activeNavbar]="navVar">
-    <div class="brand" [class.activeBrand]="navVar">
-      TechZinfi <span style="color: red">TE</span><br>
+  <nav class="navbar" [class.activeNavbar]="navVar" style="background-color: black; color: white;">
+    <div class="brand" [class.activeBrand]="navVar"
+      style="display: flex; flex-direction: row; justify-content: space-between; font-size: 36px;">
+      <img src="../assets/images/favicon.png" style="height: 50px; width: 50px;" alt=""> &nbsp;
+      <span style="color: aqua;">TechZinfi</span>  <span style="color: red">TE</span><br>
       <!-- <span style="font-size: 10px; color: gray">Current User : {{currentuser.name}}</span> -->
     </div>
-    <ul class="nav">
-        <li > <a [routerLink]="['admin']" >Admin</a></li>
-        <!-- <li> <a [routerLink]="['register']">Tasks</a></li> -->
-        <li > <a [routerLink]="['dash/mytask/']" >Dashboard</a></li>
-        <li *ngIf="loggedin"> 
-          <mat-icon [matMenuTriggerFor]="menu" style="cursor: pointer">face</mat-icon>
-        </li>
+    <ul class="nav" *ngIf="(userObservable | async)!==null">
+      <li style="font-size: large;"> <a [routerLink]="['admin']"><strong>Admin</strong> </a></li>
+      <!-- <li> <a [routerLink]="['register']">Tasks</a></li> -->
+      <li style="font-size: large;"> <a [routerLink]="['dash/mytask/']"><strong>Dashboard</strong> </a></li>
+      <li *ngIf="loggedin">
+          <mat-icon [matMenuTriggerFor]="menu" style="cursor: pointer; font-size: 30px; color: rgb(82, 255, 47)">portrait</mat-icon>
+          <!-- {{(userObservable | async).name}} -->
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item color="primary" [routerLink]="['/profile']"> 
+            <mat-icon style="color: rgb(6, 182, 6);">face</mat-icon>&nbsp;
+             profile </button>
+          <button mat-menu-item [routerLink]="['/dash/notification']" style="align-content: center">
+              <mat-icon color="accent">notification_important</mat-icon>&nbsp;Notification
+          </button>
+          <button mat-menu-item (click)="logout()" style="align-content: center">
+             <mat-icon color="warn">power_settings_new</mat-icon>&nbsp;Logout
+          </button>
 
-        <mat-menu #menu="matMenu" >
-            <button mat-menu-item color="primary" [routerLink]="['/profile']"> {{(userObservable | async).name}} </button>
-            <button mat-menu-item (click)="logout()" style="align-content: center">
-              <mat-icon color="warn">power_settings_new</mat-icon>
-            </button>
         </mat-menu>
-            
+      </li>
+
     </ul>
     <div class="menu" [class.activeMenu]="navVar">
-      <button id="hamburgermenu" (click) = "togglenav()"><fa-icon [icon]="icon"></fa-icon></button>
+      <button id="hamburgermenu" (click)="togglenav()">
+        <fa-icon [icon]="icon" style="color: white;"></fa-icon>
+      </button>
     </div>
   </nav>
   <div class="content">
@@ -29,4 +39,3 @@
   </div>
   <mat-chip-list></mat-chip-list>
 </div>
-

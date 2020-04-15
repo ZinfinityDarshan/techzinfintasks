@@ -48,7 +48,6 @@ export class RegisterComponent implements OnInit {
         this.registrationform.reset();
         this.openSnackBar('Vendor is Registered Successfully','Admin Action')
         this.router.navigate(['admin'])
-        console.log(res.path);
       }
       
     );

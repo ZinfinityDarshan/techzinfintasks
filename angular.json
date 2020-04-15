@@ -140,5 +140,8 @@
       }
     }
   },
-  "defaultProject": "taskzinfi"
+  "defaultProject": "taskzinfi",
+  "cli": {
+    "analytics": false
+  }
 }

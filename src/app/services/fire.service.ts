@@ -45,7 +45,7 @@ export class FireService {
     return new Observable((observer)=>{
       let collectionref = this.db.collection<T>(collection);
       collectionref.doc(document.id).delete().then(res =>{
-        console.log('Deleted response',res)
+        observer.next(true);
         observer.complete();
       }).catch(error =>{
         console.log(error)
@@ -77,11 +77,11 @@ export class FireService {
     });
   }
 
-  getCollectionWithCondition <T extends Document> (collection:string, match: string, operator: any, matcher: string): Observable<T[]>{
+  getCollectionWithCondition <T extends Document> (collection:string, match: string, operator: any, matcher: any): Observable<T[]>{
     return new Observable((observer) =>{
       this.db.collection<T>(collection, ref => ref.where(match, operator, matcher)).valueChanges()
       .subscribe(data => {
-        if(data.length!=0){
+        if(data.length!=0){          
           observer.next(data);          
           observer.complete();
         }else{

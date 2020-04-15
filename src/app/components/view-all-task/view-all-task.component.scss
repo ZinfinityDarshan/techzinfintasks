@@ -1,0 +1,46 @@
+.example-card {
+    max-width: 300px;
+  }
+
+  .containerformytask{
+    margin-left: 4%;
+    margin-top: 3%;
+    margin-right: 4%;
+  }
+
+  .line-breaker {
+    white-space: pre-line;
+  }
+//for mobile
+@media screen and (min-width: 320px) and (max-width: 480px){
+    .menu{
+      visibility: hidden;
+      display: none;
+    }
+} 
+// for laptop
+@media screen and (min-width: 500px){
+    .menulaptop{
+      visibility: hidden;
+      display: none;
+    }
+}
+
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+md-expansion-panel-header[collapsedHeight="auto"]:not(.mat-expanded) { padding:10px; }
+
+.example-container {
+  // height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}

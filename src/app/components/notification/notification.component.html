@@ -1,0 +1,16 @@
+<mat-card style=" background-color: black; color: aqua;
+height: 50px; margin: 0; display: flex; justify-content: space-between; 
+flex-direction: row; align-items: center; cursor: pointer;">
+    <div>
+        <mat-icon style="color: #f7f730;
+        background-color: rgba(209, 207, 207, 0.912); border-radius: 25px; 
+        padding: 10px;" >notifications_active</mat-icon>
+    </div>
+    <div style="margin: 5px;">
+        <strong>{{data}}</strong>
+    </div>
+    <div>
+        <button matRipple [matRippleColor]="color" mat-icon-button (click)="thisRef.dismiss()"><mat-icon style="margin-right: 2px;
+            font-size: 250%; color: #f7000e;">close</mat-icon></button>
+    </div>
+</mat-card>

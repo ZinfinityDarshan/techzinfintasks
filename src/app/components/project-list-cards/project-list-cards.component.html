@@ -1,45 +1,10 @@
-<div class="app">
-
+<div class="app" style="margin-top: 10px; margin-bottom: 5px;">
     <ul class="hs full no-scrollbar">
-
-        <li class="marginList">
-            <mat-card class="cardList">
-                something
-            </mat-card>
-        </li>
-        <li class="marginList">
-            <mat-card class="cardList">
-                something
-            </mat-card>
-        </li>
-        <li class="marginList">
-            <mat-card class="cardList">
-                something
-            </mat-card>
-        </li>
-        <li class="marginList">
-            <mat-card class="cardList">
-                something
-            </mat-card>
-        </li>
-        <li class="marginList">
-            <mat-card class="cardList">
-                something
-            </mat-card>
-        </li>
-        <li class="marginList">
-            <mat-card class="cardList">
-                something
-            </mat-card>
-        </li>
-        <li class="marginList">
-            <mat-card class="cardList">
-                something
-            </mat-card>
-        </li>
-        <li class="marginList">
-            <mat-card class="cardList">
-                something
+        <li class="marginList" *ngFor="let project of projects">
+            <mat-card class="cardList" [class.mat-elevation-z5]="true"
+             matRipple style="cursor: pointer; background-color: rgba(255, 192, 203, 0.231);"
+             [routerLink]="['/board', project.name]">
+                {{project.name}}
             </mat-card>
         </li>
     </ul>

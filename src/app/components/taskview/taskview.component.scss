@@ -1,3 +1,27 @@
 ::ng-deep .mat-card-header-text {
     width: 100%;
 }
+@media (min-width: 480px) {
+    .imageplacement{
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        margin: 10px; border-top: 8px solid black; 
+        justify-content: start; cursor: pointer;
+    }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+    .imageplacement{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        margin: 10px; border-top: 8px solid black; 
+        justify-content: start; cursor: pointer;
+    }
+}
+@media (min-width: 481px) and (max-width: 767px) {
+    .imageplacement{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        margin: 10px; border-top: 8px solid black; 
+        justify-content: start; cursor: pointer;
+    }
+}

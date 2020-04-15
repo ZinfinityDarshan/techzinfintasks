@@ -34,7 +34,6 @@ export class VenodorService {
   }
 
   addUser(form: User){
-    console.log(JSON.stringify(form));
     
     // return this.db.collection('users').add({
     //   username: form.username,

@@ -1,3 +1,7 @@
+<mat-toolbar color="primary" style="display: flex; flex-direction: row; justify-content: space-between;">
+    <button mat-icon-button (click)="back()"> <mat-icon>arrow_back_ios</mat-icon> </button>
+    <button mat-icon-button (click)="ngOnInit()"> <mat-icon>refresh</mat-icon> </button>
+</mat-toolbar>
 <div class="container">        
         <div class="example-container">
             <h2>Open</h2>
@@ -6,7 +10,7 @@
                 cdkDropList
                 #todoList="cdkDropList"
                 [cdkDropListData]="open"
-                [cdkDropListConnectedTo]="[doneList, inprogressList, pendingList, completedList, colsedList]"
+                [cdkDropListConnectedTo]="[inprogressList, pendingList, completedList, colsedList]"
                 class="example-list"
                 (cdkDropListDropped)="drop($event, 'OPEN', 'open')">
                 <div class="example-box" *ngFor="let item of open" cdkDrag>
@@ -22,7 +26,7 @@
                     cdkDropList
                     #inprogressList="cdkDropList"
                     [cdkDropListData]="inprogress"
-                    [cdkDropListConnectedTo]="[todoList, completedList, colsedList, doneList, pendingList]"
+                    [cdkDropListConnectedTo]="[todoList, completedList, colsedList, pendingList]"
                     class="example-list"
                     (cdkDropListDropped)="drop($event, 'INPROGRESS', 'inprogress')">
                     <div class="example-box" *ngFor="let item of inprogress" cdkDrag>
@@ -38,7 +42,7 @@
                 cdkDropList
                 #pendingList="cdkDropList"
                 [cdkDropListData]="pending"
-                [cdkDropListConnectedTo]="[todoList, completedList, colsedList, doneList, inprogressList]"
+                [cdkDropListConnectedTo]="[todoList, completedList, colsedList, inprogressList]"
                 class="example-list"
                 (cdkDropListDropped)="drop($event, 'PENDING', 'pending')">
                 <div class="example-box" *ngFor="let item of pending" cdkDrag>
@@ -54,7 +58,7 @@
                 cdkDropList
                 #completedList="cdkDropList"
                 [cdkDropListData]="completed"
-                [cdkDropListConnectedTo]="[todoList, pendingList, colsedList, doneList, inprogressList]"
+                [cdkDropListConnectedTo]="[todoList, pendingList, colsedList, inprogressList]"
                 class="example-list"
                 (cdkDropListDropped)="drop($event, 'COMPLETED', 'completed')">
                 <div class="example-box" *ngFor="let item of completed" cdkDrag>
@@ -70,7 +74,7 @@
                 cdkDropList
                 #colsedList="cdkDropList"
                 [cdkDropListData]="closed"
-                [cdkDropListConnectedTo]="[todoList, doneList, inprogressList, pendingList, completedList]"
+                [cdkDropListConnectedTo]="[todoList, inprogressList, pendingList, completedList]"
                 class="example-list"
                 (cdkDropListDropped)="drop($event, 'CLOSED', 'closed')">
                 <div class="example-box" *ngFor="let item of closed" cdkDrag>

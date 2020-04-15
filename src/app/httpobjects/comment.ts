@@ -7,4 +7,5 @@ export interface Comment extends Document{
     ondate:any;
     user: User;
     taskid:string;
+    tempProfilePic?: any;
 }

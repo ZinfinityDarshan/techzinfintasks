@@ -31,13 +31,13 @@
                             <mat-form-field appearance="outline" class="width48">
                                     <mat-label>Business</mat-label>
                                     <input matInput placeholder="Business" formControlName="business" (keyup)="addBusinessKeyUp($event)">
-                                    <mat-icon matSuffix (click)="addBusiness(addContactForm.business)" style="cursor: pointer;">add</mat-icon>
+                                    <mat-icon matSuffix (click)="addBusiness()" style="cursor: pointer;">add</mat-icon>
                                     
                             </mat-form-field>
                             <mat-form-field appearance="outline" style="width: 100%">
                                     <mat-label>Tags</mat-label>
                                     <input matInput placeholder="Tag" formControlName="tags" (keyup)="addBusinessKeyUp2($event)">
-                                    <mat-icon matSuffix (click)="addTags(addContactForm.tags)" style="cursor: pointer;">add</mat-icon>
+                                    <mat-icon matSuffix (click)="addTags()" style="cursor: pointer;">add</mat-icon>
                                     
                             </mat-form-field>
                             <br>

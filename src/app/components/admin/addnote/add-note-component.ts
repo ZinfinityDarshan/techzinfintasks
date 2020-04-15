@@ -21,7 +21,7 @@ import { DataSharingService } from 'src/app/services/data-sharing.service';
   
     constructor(
       public dialogRef: MatDialogRef<AddNoteComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: any, private db: FireService, private formHelper: FormHelperService,
+      @Inject(MAT_DIALOG_DATA) public data: any, private db: FireService, public formHelper: FormHelperService,
       private fb: FormBuilder, private snackbar: MatSnackBar, private share: DataSharingService) {
             this.addNoteForm = this.fb.group({
                 'title':[null, Validators.required],
@@ -33,14 +33,14 @@ import { DataSharingService } from 'src/app/services/data-sharing.service';
       })
 
       this.data1 = data;
-      console.log(data);
+      // console.log(data);
       
         
       }
   
     closedialog(): void {
       this.dialogRef.close('imp');
-      console.log(this.data1);
+      // console.log(this.data1);
       
     }
 

@@ -1,0 +1,59 @@
+@media screen and (min-width: 320px) and (max-width: 480px){
+    .notification-container{
+        margin-left: 10%; 
+        margin-right: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+} 
+// for laptop
+@media screen and (min-width: 500px){
+    .notification-container{
+        margin-left: 20%; 
+        margin-right: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+}
+@media screen and (min-width: 320px) and (max-width: 480px){
+    .notification-card{
+        background-color: black; color: aqua;
+        height: 100px; width: 300px;
+        margin: 0; display: flex; justify-content: space-between; 
+        flex-direction: row; align-items: center; cursor: pointer;
+        margin-bottom: 20px;
+    }
+    .notification-card:active{
+        height: 90px;
+        width: 280px;
+    }
+} 
+// for laptop
+@media screen and (min-width: 500px){
+    .notification-card{
+        background-color: black; color: cyan;
+        height: auto; width: 600px;
+        margin: 0; display: flex; justify-content: space-between; 
+        flex-direction: row; align-items: center; cursor: pointer;
+        font-size: 18px;
+        // margin-bottom: 8px;
+
+    }
+    .notification-card:hover{
+        width: 620px;
+        background-color: rgba(0, 0, 0, 0.816);
+    }
+    .notification-card:active{
+        width: 620px;
+        background-color: black;
+        width: 600px;
+    }
+}

@@ -62,7 +62,6 @@ export class AppComponent implements OnChanges, OnInit{
     this.share.changeUser(null);
     this.loggedin = false;
     this.currentuser = null;
-    console.log("logging out");
     localStorage.clear();
   }
 

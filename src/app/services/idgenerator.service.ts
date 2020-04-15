@@ -13,9 +13,7 @@ export class IdgeneratorService {
   getNextId(collection: string): Observable<string>{
     return new Observable((observer) =>{
       this.db.getCollectionWithCondition<IDCONFIG>('IDCONFIG','doc','==',collection).subscribe((data:IDCONFIG[]) =>{
-        let res = data[0];
-        console.log('data from idconfig',data);
-        
+        let res = data[0];        
         let id = res.code.concat(res.pre.toString());
         res.pre = res.pre + 1;
         this.db.updateDocument<IDCONFIG>(res,'IDCONFIG').subscribe(data =>{

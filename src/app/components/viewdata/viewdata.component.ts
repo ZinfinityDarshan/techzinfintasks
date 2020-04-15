@@ -14,7 +14,7 @@ export class ViewdataComponent implements OnInit, OnChanges {
   displayedColumns: string[] = ['username', 'password', 'email', 'role'];
   dataSource :any;
   ngOnInit() {
-    console.log('long')
+    // console.log('long')
 
     this.share.getUsersFromDatabase().subscribe(data=>{
       this.ElementData = data;

@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/httpobjects/user';
 import { VenodorService } from 'src/app/services/venodor.service';
-import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import {MatSnackBar} from '@angular/material';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
@@ -34,7 +33,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
    this.share.currentUser.subscribe(data =>{
-    data != null ? this.currentUserEvent.emit(data) : console.log('not logged in');
+    data != null ? this.currentUserEvent.emit(data) : 
+    this.snackBar.open('Please Login', 'close', {duration:2000});
     this.currentUser = data;
    });
   }
@@ -49,9 +49,8 @@ export class LoginComponent implements OnInit {
     }
     users.forEach((user: User) =>{
       if(user.token!=null){
-        localStorage.setItem('user',JSON.stringify(user));
-        console.log(user);
-        
+        user.password = '';
+        localStorage.setItem('user',JSON.stringify(user));        
         this.share.changeUser(user);
         this.share.setLoggedIn(true);
         this.loginform.reset();

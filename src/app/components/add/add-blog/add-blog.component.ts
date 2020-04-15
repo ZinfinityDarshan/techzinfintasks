@@ -35,7 +35,7 @@ export class AddBlogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AddBlogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Blog, private formHelper: FormHelperService, private db: FireService,
+    @Inject(MAT_DIALOG_DATA) public data: Blog, public formHelper: FormHelperService, private db: FireService,
     private fb: FormBuilder, private snackbar: MatSnackBar, private share: DataSharingService,
     private idgenerator: IdgeneratorService) {
           this.addBlogForm = this.fb.group({
@@ -62,11 +62,10 @@ export class AddBlogComponent implements OnInit {
     this.idgenerator.getNextId('blogs').subscribe(data =>{
 
       blog.id =data;
-      console.log('date in publish brace',blog);
+      // console.log('date in publish brace',blog);
       this.db.saveDocument<Blog>(blog,'blogs').subscribe(data =>{
         this.snackbar.open('blog added', 'close', {duration:1500});
         this.closedialog();
-        console.log(data);
       });
       
     });

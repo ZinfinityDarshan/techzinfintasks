@@ -47,7 +47,6 @@ export class AddLeaveComponent implements OnInit {
 
     
     this.db.saveDocument(form,'leaves').subscribe(data =>{
-      console.log(data);
       this.snackBar.open('Leave Submitted SuccessFully','close',{
         duration: 1500
       });

@@ -5,8 +5,11 @@
     height:85%; width: 60%; margin-top: 2%; flex-direction: column;" [class.mat-elevation-z8]="true">
     <span style="display: flex; justify-content: space-evenly; align-content: center; margin: 10px;">
         <span>  
-            <img mat-card-avatar style="height: 200px; width: 200px; border-style: solid; 
-            border-width: 4px;" [src]="trustedUrl" alt="No Profile pic added ..!!">
+            <img *ngIf="!isImgLoaded"  mat-card-avatar  style=" height: 200px; width: 200px; border-style: solid; 
+            border-width: 4px;"
+            src="../../../assets/images/profile.png" >
+            <img [hidden]="!isImgLoaded" mat-card-avatar style="height: 200px; width: 200px; border-style: solid; 
+            border-width: 4px;" [src]="trustedUrl" alt="No Profile pic added ..!!" (load)="isImgLoaded = true">
             <mat-icon #uploadicon (click)="openBottomSheet()" style="cursor: pointer" >add_a_photo</mat-icon>        
         </span>
         <span style="display: flex; justify-content: space-evenly; flex-direction: column;">

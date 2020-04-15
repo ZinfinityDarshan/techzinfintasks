@@ -21,14 +21,13 @@ export class ViewBlogComponent implements OnInit {
     this.db.getCollection<Blog>('blogs').subscribe(data =>{
       if(data.length > 0 && data != null){
         this.blogs = data;
-        console.log(data);
         
         this.snackbar.open('Blogs Available', 'close', {
           duration: 1500
         })
       }
     }, (error) =>{
-      console.log(error);
+      // console.log(error);
       this.snackbar.open('No Blogs Available', 'close', {
         duration: 1500
       })

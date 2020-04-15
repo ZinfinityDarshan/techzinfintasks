@@ -1,15 +1,16 @@
-<div matRipple [matRippleCentered]="centered">
+<div matRipple>
 
         <mat-icon class="example-icon" style="cursor: pointer;"
         [matMenuTriggerFor]="menu">add_box</mat-icon>
         <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="openAddTaskDialog()">Task</button>
                 <button mat-menu-item (click)="openAddContactDialog()">Contact</button>
                 <button mat-menu-item (click)="openAddNoteDialog()">Note</button>
                 <button mat-menu-item (click)="openAddExpenseDialog()">Expense</button>
                 <button mat-menu-item (click)="openAddBlogDialog()">Blog</button>
                 <button mat-menu-item (click)="openAddLeavegDialog()">Leave</button>
         </mat-menu>
-
+        
 </div>
 
 

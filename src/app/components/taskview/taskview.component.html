@@ -1,6 +1,7 @@
+
 <div *ngIf="spinnerFlag">
 
-    <mat-spinner></mat-spinner>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 <div *ngIf="!spinnerFlag">
 
@@ -30,11 +31,12 @@
 
             <span style="float: right; font-size: 17px; margin-top: 20px"> Owner : <strong><span
                         style="color: green">{{task.owner.name}}</span></strong></span>
+            &nbsp;
             <mat-divider></mat-divider>
             <br>
             <strong style="font-size: 17px">Descp :</strong>
             <br><br><br>
-            <p >
+            <p style="white-space: pre;">
                 {{task.descp}}
             </p>
             <br>
@@ -44,28 +46,90 @@
             <a mat-stroked-button routerLink="." color="primary">{{task.startdate.toDate() | date}}</a>
             &nbsp; &nbsp;
             End Date:
-            <a mat-stroked-button routerLink="." color="primary">{{task.enddate.toDate() | date}}</a>
+            <a mat-stroked-button routerLink="." color="primary" (click)="picker.open()">{{task.enddate.toDate() | date}}</a>
             &nbsp; &nbsp;
             Type:
             <a mat-stroked-button routerLink="." color="warn">{{task.type}}</a>
+            <mat-form-field hidden style="display: none; margin-top: 200px;">
+                <input matInput [matDatepicker]="picker" (dateInput)=endDateChanged($event)>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
         </mat-card-content>
         <mat-divider></mat-divider>
         <br>
-        <button mat-raised-button color="primary" style="float: right" (click)="save()">save</button>
+
+        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+            <div>
+                <!-- <span>Assignee:</span> &nbsp;&nbsp; -->
+                <!-- {{task.assignee.name}} -->
+
+            </div>            
+            <button mat-raised-button color="primary" style="float: right" (click)="save()">save</button>
+        </div>
+        Current Assignee &nbsp; : &nbsp;{{task.assignee.name}} &nbsp;
+        <mat-form-field>
+            <mat-label>Change Assignee</mat-label>
+            <mat-select [(value)]="task.assignee.name" (selectionChange)="assigneeChanged($event.value)" >
+                <mat-option *ngFor="let user of users" [value]="user">
+                {{user.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
         <br>
 
         <br>
     </mat-card>
 
-    <mat-card style="margin: 10px; border-top: 8px solid black; 
-    display: flex; justify-content: flex-start; flex-direction: row;">
-        <mat-card style="height: 100px; width: 100px; margin: 10px; align-items: center;
-        justify-items: center; cursor: pointer;" matRipple>
+    <mat-card class="imageplacement">
+        <mat-card style="height: 126px; width: 126px; margin: 10px; align-items: center;
+        justify-items: center; cursor: pointer;" matRipple (click)="fileAtt.click()" [class.mat-elevation-z8]="true">
                 <mat-icon style="font-size: 50px;">add</mat-icon>
         </mat-card>
-        <mat-card style="height: 100px; width: 100px; margin: 10px;" matRipple *ngFor="let attachement of task.attachments">
+        <input type="file" style="display: none;" #fileAtt (change)=addFile($event)>
+        <mat-card style="height: 200px; width: 200px; margin: 10px; padding-top: 4px; padding-bottom: 0;
+        " matRipple *ngFor="let attachement of task.attachments" [class.mat-elevation-z8]="true">
+            <div *ngIf="attachement.fileType.includes('image'); else docAttach">
+                
+                <img *ngIf="!isImgLoaded2" style="height: 120px; width: 195px;"
+                src="../../../assets//images/pci.jpg" >
 
+                <img [src]="attachement.tempForImgURL" 
+                style="height: 120px; width: 195px;"
+                alt="loading ...." (click)="openImageViever(attachement.tempForImgURL)"
+                (load)="isImgLoaded2 = true">
+
+                <br>
+                <strong style="float: inherit; font-size: xx-small;">{{attachement.file}}</strong>
+            </div>
+            <ng-template #docAttach >
+                <div #texttemplate *ngIf="attachement.file.includes('txt')" (click)="openDocument(attachement.tempForImgURL)">
+                    <img src="../../../assets/images/notepad.png" 
+                    style="height: 100px; width: 100px; align-self: center;"
+                    alt="loading ...." ><br>
+                    <strong style="float: inherit; font-size: xx-small; padding: 5%;">{{attachement.file}}</strong>    
+                </div>
+                <div #doctemplate *ngIf="attachement.file.includes('doc');" (click)="openDocument(attachement.tempForImgURL)">
+                    <img src="../../../assets/images/word-icon.png" 
+                    style="height: 100px; width: 100px;"
+                    alt="loading ...." ><br>
+                    <strong style="float: inherit; font-size: xx-small; padding: 5%;">{{attachement.file}}</strong>    
+                </div>
+                <div #doctemplate *ngIf="attachement.file.includes('pdf');" (click)="openDocument(attachement.tempForImgURL)">
+                    <img src="../../../assets/images/pdf.png" 
+                    style="height: 100px; width: 100px;"
+                    alt="loading ...." ><br>
+                    <strong style="float: inherit; font-size: xx-small; padding: 5%;">{{attachement.file}}</strong>    
+                </div>
+            </ng-template>
+            <mat-card style="background-color: rgba(220, 220, 220, 0.551); padding: 0; margin: 0;
+            display: flex; justify-content: space-evenly; flex-direction: row;">
+                <button mat-icon-button color="warn" style="font-size: 30px;" (click)="deleteDocumentAndUpdateAttachment(attachement)"><mat-icon>delete</mat-icon></button>
+                <button mat-icon-button color="primary" style="font-size: 30px;"><mat-icon>visibility</mat-icon></button>
+                <button mat-icon-button color="primary" style="font-size: 30px;"><mat-icon>cloud_download</mat-icon></button>
+            </mat-card>
         </mat-card>
+
+        
     </mat-card>
 
 
@@ -82,18 +146,30 @@
         </mat-card-content>
         <button mat-raised-button color="accent" style="float: right"
             (click)="addComment(commentForm.value)">Comment</button>
+        <button #menuTrigger mat-raised-button color="accent" style="float: right; margin-right: 2px;"
+        [matMenuTriggerFor]="menu">@</button>
+
+        <mat-menu #menu="matMenu">
+            <div *ngFor="let user of menuUsers">
+                <button mat-menu-item color="primary" (click)="addUserAsViewer($event, user)"> {{user.name}} </button>
+            </div>
+        </mat-menu>
         <br>
         <br>
     </mat-card>
 
     <mat-card style="margin: 10px">
 
-        <mat-list role="list" *ngFor="let comment of commentList">
+        <mat-list id="commentListHash" role="list" *ngFor="let comment of commentList">
             <mat-list-item role="listitem" style=" margin-top: 5px">
                 <div style="display: flex; flex-direction: row;">
                     <div style="display: flex; flex-direction: column;">
-                        <img style="float: left;" mat-card-avatar style="background-size: cover"
-                            src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+
+                        <img *ngIf="!isImgLoaded"  mat-card-avatar  style=" float: left; background-size: cover"
+                        src="../../../assets/images/blank-profile.png" >
+                        <img [hidden]="!isImgLoaded" mat-card-avatar  style=" float: left; background-size: cover" 
+                        [src]="comment.tempProfilePic" (load)="isImgLoaded = true" >
+
                         <span style="padding-top: 10px; font-size: 10px">{{comment.user.name}}</span>
 
                     </div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
+import { DataSharingService } from './data-sharing.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,15 @@ import { Observable } from 'rxjs';
 export class FireStorageService {
   
   url: any;
-  constructor(private afstorage: AngularFireStorage) { }
+  constructor(private afstorage: AngularFireStorage, private share: DataSharingService) {
+    this.currentUser.subscribe(data =>{
+      if(data !== null){
+        this.user = data.username;
+      }
+    })
+   }
+  currentUser = this.share.currentUser;
+  user: string;
 
   public getPic(path: any){
     this.afstorage.ref(path).getDownloadURL().subscribe(url1 => {
@@ -22,8 +31,12 @@ export class FireStorageService {
   }
   
   public uploadToStorage(file: any, type: string) : any{
-    let user = sessionStorage.getItem('user');
-    let newname  = `img_${user +'_'+new Date().getTime()}.jpg`
+      let newname  = `img_${this.user +'_'+new Date().getTime()}.jpg`
+      return this.afstorage.upload(type+'/'+newname, file);
+  }
+
+  public uploadRawFileToStorage(file: any, type: string, extension: string) : any{
+    let newname  = `file_${this.user +'_'+new Date().getTime()}.${extension}`
     return this.afstorage.upload(type+'/'+newname, file);
   }
 

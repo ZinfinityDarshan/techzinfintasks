@@ -7,5 +7,6 @@ export interface Project extends Document{
     name?:string,
     client: string,
     lead?: User,
-    manager?: User
+    manager?: User,
+    active?:boolean
 }

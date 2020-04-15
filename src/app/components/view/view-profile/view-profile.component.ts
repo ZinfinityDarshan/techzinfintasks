@@ -32,15 +32,16 @@ export class ViewProfileComponent implements OnInit {
   ngOnInit() {
     this.share.getCurrentUser().subscribe(data =>{
       this.currentuser = data;
-      this.storage.getPics(this.currentuser.profilepicurl).subscribe(data =>{
-        this.trustedUrl = this.sanitizer.bypassSecurityTrustUrl(data);
-      });
+      if(this.currentuser.profilepicurl !== undefined){
+        this.storage.getPics(this.currentuser.profilepicurl).subscribe(data =>{
+          this.trustedUrl = this.sanitizer.bypassSecurityTrustUrl(data);
+        });
+      }
     })
   }
 
   onFileChange(event){
     this.selectedFile = event.target.files[0];
-    console.log('filename',this.selectedFile.name);
   }
 
   task: AngularFireUploadTask;
@@ -48,7 +49,7 @@ export class ViewProfileComponent implements OnInit {
   percentage: Observable<number>;
   snapshot: Observable<any>;
   downloadURL: string;
-  
+  isImgLoaded =false;
   uploadFile(){
     this.spinnerboolean= true;
     const path = `profile/v2/${this.currentuser.username}/${Date.now()}_${this.currentuser.id}`;
@@ -56,13 +57,11 @@ export class ViewProfileComponent implements OnInit {
     this.afstorage.upload(path, this.selectedFile).then(data =>{
      data.ref.getDownloadURL().then(value =>{
       this.done =  value;
-      console.log(this.done);
       this.snackbar.open('profile pic is uploaded', 'close', {duration: 1200});
       this.selectedFile= null;
 
       this.currentuser.profilepicurl = this.done;
       this.db.updateDocument(this.currentuser, "users").subscribe(data =>{
-        console.log('data from user table ----',data);
         this.snackbar.open('User Document is updated', 'close', {duration: 1200});
         this.spinnerboolean= false;
       })
@@ -82,10 +81,8 @@ export class ViewProfileComponent implements OnInit {
     this.task.snapshotChanges().subscribe(data =>{
       this.snackbar.open('profile pic is uploaded', 'close', {duration: 1200});
       this.downloadURL = data.downloadURL;
-      console.log(this.downloadURL);
       this.selectedFile= null;
       this.db.updateDocument(this.currentuser, "users").subscribe(data =>{
-        console.log('data from user table ----',data);
         this.snackbar.open('User Document is updated', 'close', {duration: 1200});
         this.spinnerboolean= false;
       })
@@ -98,11 +95,13 @@ export class ViewProfileComponent implements OnInit {
       data: this.currentuser,
     });
     ref.afterDismissed().subscribe((data:User) =>{
-      this.storage.getPics(data.profilepicurl).subscribe(data =>{
-        this.trustedUrl = data;
-      },err =>{
-        this.snackbar.open('cannot fetch profile pic from storage', 'close', {duration: 2000})
-      });      
+      if(data !== undefined){
+        this.storage.getPics(data.profilepicurl).subscribe(data =>{
+          this.trustedUrl = data;
+        },err =>{
+          this.snackbar.open('cannot fetch profile pic from storage', 'close', {duration: 2000})
+        }); 
+      }     
     }, err=>{
       this.snackbar.open('DataSheet is crached', 'close', {duration: 2000})
     })

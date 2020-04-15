@@ -48,6 +48,14 @@ import { ApprovalScreenComponent } from './components/approval-screen/approval-s
 import { ProjectListCardsComponent } from './components/project-list-cards/project-list-cards.component';
 import { TaskListForApprovalComponent } from './components/task-list-for-approval/task-list-for-approval.component';
 import { SpinnerComponent } from './components/common/spinner/spinner.component';
+import { ImageVieverComponent } from './components/image-viever/image-viever.component';
+import { DocumentViewerComponent } from './components/document-viewer/document-viewer.component';
+import { ViewAllTaskComponent } from './components/view-all-task/view-all-task.component';
+import { NotificationComponent } from './components/notification/notification.component';
+import { ViewAllNotificationComponent } from './components/view-all-notification/view-all-notification.component';
+import { TaskDashBoardComponent } from './components/task-dash-board/task-dash-board.component';
+import { OverDueTaskDirective } from './directives/over-due-task.directive';
+import { AddTaskComponent } from './components/add/add-task/add-task.component';
 
 // for FullCalendar!
 
@@ -86,6 +94,14 @@ import { SpinnerComponent } from './components/common/spinner/spinner.component'
     ProjectListCardsComponent,
     TaskListForApprovalComponent,
     SpinnerComponent,
+    ImageVieverComponent,
+    DocumentViewerComponent,
+    ViewAllTaskComponent,
+    NotificationComponent,
+    ViewAllNotificationComponent,
+    TaskDashBoardComponent,
+    OverDueTaskDirective,
+    AddTaskComponent,
     ],
   imports: [
     BrowserModule,
@@ -94,7 +110,7 @@ import { SpinnerComponent } from './components/common/spinner/spinner.component'
     BrowserAnimationsModule,
     MaterialModule,FormsModule, ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule.enablePersistence(),
+    AngularFirestoreModule,
     HighlightModule.forRoot({
       languages: hljsLanguages
     }),
@@ -141,7 +157,11 @@ import { SpinnerComponent } from './components/common/spinner/spinner.component'
     AddBlogComponent,
     AddLeaveComponent,
     SpinnerComponent,
-    UpdateprofilepicbottomsheetComponent
+    UpdateprofilepicbottomsheetComponent,
+    ImageVieverComponent,
+    DocumentViewerComponent,
+    NotificationComponent,
+    AddTaskComponent
   ],
   bootstrap: [AppComponent]
 })

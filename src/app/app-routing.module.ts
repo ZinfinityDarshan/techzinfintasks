@@ -8,18 +8,22 @@ import { AuthGuard } from './auth.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MytaskComponent } from './components/mytask/mytask.component';
-import { TimesheetComponent } from './components/timesheet/timesheet.component';
 import { TaskviewComponent } from './components/taskview/taskview.component';
 import { ViewdataComponent } from './components/viewdata/viewdata.component';
-import { BlogsComponent } from './components/dashboard/blogs/blogs.component';
+
 import { MeetingsComponent } from './components/meetings/meetings.component';
 import { ViewBlogComponent } from './components/view/view-blog/view-blog.component';
 import { TaskboardComponent } from './components/taskboard/taskboard.component';
 import { ProjectViewComponent } from './components/view/project-view/project-view.component';
 import { ViewProfileComponent } from './components/view/view-profile/view-profile.component';
+import { ViewAllTaskComponent } from './components/view-all-task/view-all-task.component';
+import { ViewNotesComponent } from './components/view/view-notes/view-notes.component';
+import { LoginGuard } from './guards/login.guard';
+import { ViewAllNotificationComponent } from './components/view-all-notification/view-all-notification.component';
+import { TaskDashBoardComponent } from './components/task-dash-board/task-dash-board.component';
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
+  {path: '', component: LoginComponent, canActivate:[LoginGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent, canActivate:[AuthGuard]},
   {path: 'admin', component: AdminComponent, pathMatch:'prefix', canActivate:[AuthGuard, AdminGuard],
@@ -35,10 +39,24 @@ const routes: Routes = [
       {
         path:"mytask",
         component:MytaskComponent,
+
         children: [
+          {
+            path:'',
+            redirectTo:'tasks',
+            pathMatch: 'full'
+          },
           {
             path:"task/:id",
             component: TaskviewComponent
+          },
+          {
+            path: 'tasks',
+            component: ViewAllTaskComponent
+          },
+          {
+            path: 'notes',
+            component: ViewNotesComponent
           }
         ]
       },
@@ -53,18 +71,28 @@ const routes: Routes = [
       {
         path:"projects",
         component: ProjectViewComponent
+      },
+      {
+        path:'notification',
+        component: ViewAllNotificationComponent,
+      },
+      {
+        path: 'everything',
+        component: TaskDashBoardComponent
       }
     ]
   },
   {path: 'board/:project', component: TaskboardComponent, canActivate:[AuthGuard]},
   {
     path:"task/:id",
-    component: TaskviewComponent
+    component: TaskviewComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'profile',
-    component: ViewProfileComponent
-  }
+    component: ViewProfileComponent,
+    canActivate:[AuthGuard]
+  },
 
 ];
 

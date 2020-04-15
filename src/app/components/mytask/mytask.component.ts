@@ -1,3 +1,7 @@
+import { NotificationComponent } from './../notification/notification.component';
+import { Notification } from './../../httpobjects/notification';
+import { Comment } from 'src/app/httpobjects/comment';
+import { DBTableNames } from 'src/app/constants/constants';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { FireService, FBWhere } from 'src/app/services/fire.service';
@@ -8,6 +12,9 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
+import { FireStorageService } from 'src/app/services/fire-storage.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 
 @Component({
@@ -25,23 +32,33 @@ export class MytaskComponent implements OnInit {
   completedTaskLabel: string;
   taskId = new FormControl();
   taskBool: boolean = true;
-  displayedColumns = ['id', 'title', 'assignee', 'owner', 'status', 'enddate', 'edit', 'delete'];
-  dataSource = new MatTableDataSource<Task>([{id:'TASK-01',title:'some', assignee:{name:'darshan'}, owner:{name:'redkar'},status:'prog',enddate:moment(), priority:'HIGH' }]);
+  displayedColumns = ['id', 'title', 'owner', 'status', 'enddate', 'edit', 'delete'];
+  dataSource = new MatTableDataSource<Task>();
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  // @ViewChild(MatSort, {static: false}) set content(sort: MatSort) {
-  //   this.dataSource.sort = sort;
-  // }
+
   constructor(private share: DataSharingService, private db: FireService, 
-    private snackBar: MatSnackBar, private route: Router) { 
+    private snackBar: MatSnackBar, private route: Router,
+    private storage: FireStorageService,
+    private spin: SpinnerService,
+    private notification: NotificationService) { 
     this.completedTaskLabel = 'commpleted'
   }
 
   ngOnInit() {
     this.share.getCurrentUser().subscribe(data =>{
       this.currentuser = data;
+      this.getTasks();
     });
-    this.getTasks();
+  }
+
+  notify(){
+    // this.snackBar.openFromComponent(NotificationComponent,{
+    //   data:'Hi All ...!!!',
+    //   verticalPosition: 'bottom',
+    //   horizontalPosition: 'right',
+    // });
+    // this.notification.notify(this.snackBar,'good going onn');
   }
 
   getTasks(){
@@ -107,11 +124,41 @@ export class MytaskComponent implements OnInit {
   changeStatus(){
     this.statusFlag = !this.statusFlag;
     if(this.statusFlag == true){this.completedTaskLabel ==='Revert'}else{this.completedTaskLabel === 'completed'}
-    console.log(this.statusFlag);
+    // console.log(this.statusFlag);
     
   }
 
   changeTaskBool(value: boolean){
     this.taskBool = value
   }
+
+  deleteTask(task: Task){
+    let ref = this.spin.open();    
+    task.attachments.forEach(attachement =>{
+      this.storage.deletePic(attachement.url).subscribe(data =>{        
+        this.snackBar.open('Document ** '+attachement.file+' ** deleted successfully', 'close', {duration:500})        
+      }, err =>{
+        console.error(err);
+      })
+    });
+    this.db.deleteDocument(task,DBTableNames.tasks).subscribe(tata =>{
+      this.snackBar.open('task deleted successfully', 'close', {duration:1100})
+    }, err =>{
+      console.error(err);
+    });
+    this.db.getCollectionWithCondition<Comment>
+    (DBTableNames.comments,'taskid','==',task.taskid )
+    .subscribe((data: Comment[]) =>{
+      data.forEach(comment =>{
+        this.db.deleteDocument(comment, DBTableNames.comments).subscribe(data =>{
+          this.snackBar.open('Comment deleted Successfully','close',{duration:500})
+        }, err =>{
+          console.error(err);
+        });
+      }, err =>{
+        console.error(err);
+      })
+    });
+    ref.close();
+    }
 }

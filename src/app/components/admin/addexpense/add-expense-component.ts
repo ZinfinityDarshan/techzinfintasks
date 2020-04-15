@@ -27,7 +27,7 @@ import * as firebase from 'firebase/app';
 
     constructor(
       public dialogRef: MatDialogRef<AddExpenseComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: Expense, private fb: FormBuilder, private formhelper: FormHelperService, private db: FireService,
+      @Inject(MAT_DIALOG_DATA) public data: Expense, private fb: FormBuilder, public formhelper: FormHelperService, private db: FireService,
       private route: Router, private share: DataSharingService, private snackbar: MatSnackBar) {
 
 

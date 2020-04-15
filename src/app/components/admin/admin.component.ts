@@ -22,6 +22,9 @@ import * as firebase from 'firebase/app';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Contact } from 'src/app/httpobjects/contact';
 import { AddContactComponent } from './addcontact/add-contact-component';
+import { SpinnerService } from 'src/app/services/spinner.service';
+import { NotificationService } from 'src/app/services/notification.service';
+import { Notification } from 'src/app/httpobjects/notification';
 
 // tslint:disable-next-line:no-duplicate-imports
 // import {default as _rollupMoment} from 'moment';
@@ -75,12 +78,13 @@ export class AdminComponent implements OnInit {
       }
     })
     this.fireservice.getCollection<Project>('projects').subscribe(res => this.projects = res);
-    //this.share.getCurrentUser().subscribe(data => this.currentUser = data);
   }
 
   constructor(public vservice: VenodorService, private fb: FormBuilder,  private snackBar: MatSnackBar, private share: DataSharingService,
     private fireservice: FireService, private formhelper: FormHelperService, private router: Router, private idgen: IdgeneratorService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog, private route: Router,
+    private spin: SpinnerService,
+    private notificationservice: NotificationService) {
 
 
     this.userform = fb.group({
@@ -123,10 +127,20 @@ export class AdminComponent implements OnInit {
   }
 
   register(form: User, formDirective: FormGroupDirective){
-
+    let ref = this.spin.open();
     this.spinner = true;
-    this.fireservice.saveDocument<User>(form, 'users').subscribe(res =>{
+    this.fireservice.saveDocument<User>(form, 'users').subscribe((res:User) =>{
       this.spinner=false;
+      let notif: Notification = {
+        message:'You have beed added to Znfinity Space, Welcome ! please update your '+
+        'profile picture ',
+        receiverId: [res.id],
+        sendingDate: new Date(),
+        redirectionURL: '/profile'
+      }
+      this.notificationservice.openAndNotify(notif).subscribe(data =>{}, err=>{console.log(err);
+      });
+      ref.close();
       for(const key in this.userform.controls){
         this.userform.get(key).clearValidators();
         this.userform.get(key).updateValueAndValidity();
@@ -140,9 +154,11 @@ export class AdminComponent implements OnInit {
   }
 
   addProject(form: Project){
+    let ref = this.spin.open();
     this.spinner =false;
     this.fireservice.saveDocument<Project>(form,'projects').subscribe(data=>{
       this.spinner = true;
+      ref.close();
       for(const key in this.projectForm.controls){
         this.projectForm.get(key).clearValidators();
         this.projectForm.get(key).updateValueAndValidity();
@@ -161,17 +177,28 @@ export class AdminComponent implements OnInit {
   }
 
   addTask(form: Task){
-    
+    let ref = this.spin.open();
     form.startdate = firebase.firestore.Timestamp.fromDate(form.startdate.toDate());
     form.enddate = firebase.firestore.Timestamp.fromDate(form.enddate.toDate());
     form.descp = this.description;
+    form.attachments = [];
     this.spinner = true;
     this.idgen.getNextId('tasks').subscribe(data =>{
       form.taskid = data;
       this.fireservice.saveDocument(form, 'tasks').subscribe(data =>{
         this.spinner = false;
+        ref.close();
+        let notif: Notification = {
+          message:'New '+form.taskid+' is assigned to you ! ',
+          receiverId: [form.assignee.id],
+          sendingDate: new Date(),
+          redirectionURL: '/profile'
+        }
+        this.notificationservice.openAndNotify(notif).subscribe(data =>{}, err=>{console.log(err);
+        });
         this.formhelper.removeValidators(this.taskFrom);
-        this.snackBar.open('Task Added', data.title);
+        this.snackBar.open('Task Added', data.taskid);
+        this.route.navigate(['/task/', data.taskid]);
       },(error: any) =>{
         this.taskFrom.reset();
         this.snackBar.open('Exception Occured', error);
