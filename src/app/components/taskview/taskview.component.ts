@@ -136,10 +136,16 @@ export class TaskviewComponent implements OnInit, OnChanges {
             });
           });
         });
-        this.commentList.reverse();
+        this.commentList = this.sortByDate(this.commentList);
       })
       this.spinnerFlag = false;
 
+    });
+  }
+
+  public sortByDate(myArray: Comment[]): Comment[] {    
+    return myArray.sort((a: Comment, b: Comment) => {
+        return a.ondate.toDate() - b.ondate.toDate();
     });
   }
 

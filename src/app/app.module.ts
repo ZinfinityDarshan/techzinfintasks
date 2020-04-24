@@ -56,6 +56,8 @@ import { ViewAllNotificationComponent } from './components/view-all-notification
 import { TaskDashBoardComponent } from './components/task-dash-board/task-dash-board.component';
 import { OverDueTaskDirective } from './directives/over-due-task.directive';
 import { AddTaskComponent } from './components/add/add-task/add-task.component';
+import { ChatboxComponent } from './components/chatbox/chatbox.component';
+import { HighlightMyInstanceDirective } from './directives/highlight-my-instance.directive';
 
 // for FullCalendar!
 
@@ -102,6 +104,8 @@ import { AddTaskComponent } from './components/add/add-task/add-task.component';
     TaskDashBoardComponent,
     OverDueTaskDirective,
     AddTaskComponent,
+    ChatboxComponent,
+    HighlightMyInstanceDirective,
     ],
   imports: [
     BrowserModule,

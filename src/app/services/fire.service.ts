@@ -53,6 +53,28 @@ export class FireService {
     });
   }
 
+  deleteAllDocumentsInCollection <T extends Document> (collection: string){
+    return new Observable((observer)=>{
+      let collectionref = this.db.collection<T>(collection);
+      collectionref.valueChanges().subscribe(documents =>{
+        documents.forEach(document=>{
+          collectionref.doc(document.id).delete().then(res =>{
+            // observer.next(true);
+            // observer.complete();
+          }).catch(error =>{
+            console.log(error)
+          })
+        });
+        observer.next(true);
+        observer.complete();
+      }, err=>{
+        console.log(err)
+        observer.error(false);
+        observer.complete()
+      });
+    });
+  }
+  
   getSingleDocumentById <T extends Document> (id: string, collection: string) : Observable<T>{
     
     return new Observable((observer) =>{

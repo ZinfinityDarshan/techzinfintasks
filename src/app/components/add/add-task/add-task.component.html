@@ -1,7 +1,4 @@
 <mat-card >
-    <!-- <mat-card-title style="margin-bottom: 4%"> User Task
-            <button mat-raised-button color="warn" (click)="this.formhelper.removeValidators(this.taskFrom);" style="float: right">Reset</button>
-    </mat-card-title> -->
     <mat-card-content>
 
         <form [formGroup]="taskFrom" > 
@@ -82,8 +79,10 @@
             </mat-form-field>
             &nbsp;
             
-            <button mat-raised-button color="primary" (click)="addTask(taskFrom.value)" style="margin-right: 8px;">Add Task</button>
-            <button mat-raised-button color="warn" (click)="this.formhelper.removeValidators(this.taskFrom);" style="float: right">Reset</button>
+            <button mat-raised-button color="primary"
+             (click)="addTask(taskFrom.value)" 
+             style="margin-right: 8px;">Add Task</button>
+            <button mat-raised-button color="warn" [disabled]="taskFrom.invalid" (click)="this.formhelper.removeValidators(this.taskFrom);" style="float: right">Reset</button>
         </form>
     </mat-card-content>
 

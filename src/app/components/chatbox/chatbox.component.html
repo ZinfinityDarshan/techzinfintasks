@@ -1,0 +1,61 @@
+<div style="display: flex; flex-direction: column; 
+justify-content: start; width: 100%; height: 100%">
+
+    <div id="content-desktop" style="height: 80%;" class="main" #target style="overflow: scroll; height: 100%;">
+        <div *ngFor="let chat of chats | async" style=" display:flex; justify-content:center;">
+            <div style="display:flex; justify-content:space-between;padding: 0%;
+             flex-direction: row; width:60%; margin:10px">
+                <div style="width:20%;" *ngIf="(this.currentUser | async).id !== chat.user.id">
+                    <mat-toolbar style="font-size: 15px; border-radius: 15px;" color="primary">
+                        <strong>{{chat.user.name}}</strong>
+                    </mat-toolbar>
+                </div>
+                <div style="width:75%; word-wrap: break-word;">
+                    <mat-toolbar style="font-size: 15px; border-radius: 15px; " [appHighlightMyInstance]="chat.user">
+                        {{chat.message}}
+                        <span class="example-spacer"></span>
+                        <span style="font-size: 12px;" id="content-desktop">{{chat.sentdate.toDate() | date}}</span>
+
+                    </mat-toolbar>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="content-mobile" style="height: 80%;" class="main" #targett style="overflow: scroll; height: 100%;">
+        <div *ngFor="let chat of chats | async" style=" display:flex; justify-content:start;">
+                <mat-card style="width:100% ;padding: 5px; margin-top:25px; display: flex; flex-direction: column;" [appHighlightMyInstance]="chat.user">
+                        <span style="float: left; font-size: small;">{{chat.user.name}} <span style="float: right;">{{chat.sentdate.toDate() | date}}</span></span>
+                        <span style=" word-wrap: break-word; 
+                        font-size: larger; margin-top: 28px; margin-left: 5px;"><strong>{{chat.message}}</strong></span>
+                </mat-card>
+                <br><br>
+        </div>
+
+    </div>
+
+    <div style="height:20%; position: relative; z-index: 10;" class="chatinput">
+        <mat-card style="display:flex; flex-direction: row; width: 100%;
+         justify-content:space-evenly; align-content: center; padding:0%;">
+
+            <form style="width: 80%">
+                <mat-form-field appearance="outline" style="width: 100%; padding: 0%;">
+                    <textarea #myText matInput rows="3" cols="12" placeholder="type text"
+                        (input)="onPaste(myText.value)" [formControl]="text"></textarea>
+                </mat-form-field>
+            </form>
+
+            <div style="width: 10%; align-content: center; display: flex; justify-content: space-evenly; flex-direction: column;">
+                <button mat-icon-button color="primary" style="float: right" (click)="addMesage()">
+                    <mat-icon style="font-size: 300%;">send</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" style="float: right" 
+                *ngIf="(this.currentUser | async).role.includes('DIRECTOR')" (click)="deleteAllChat()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+
+        </mat-card>
+    </div>
+</div>

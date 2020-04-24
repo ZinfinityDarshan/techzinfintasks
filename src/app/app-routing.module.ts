@@ -21,6 +21,7 @@ import { ViewNotesComponent } from './components/view/view-notes/view-notes.comp
 import { LoginGuard } from './guards/login.guard';
 import { ViewAllNotificationComponent } from './components/view-all-notification/view-all-notification.component';
 import { TaskDashBoardComponent } from './components/task-dash-board/task-dash-board.component';
+import { ChatboxComponent } from './components/chatbox/chatbox.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent, canActivate:[LoginGuard]},
@@ -79,6 +80,10 @@ const routes: Routes = [
       {
         path: 'everything',
         component: TaskDashBoardComponent
+      },
+      {
+        path: 'chat',
+        component: ChatboxComponent
       }
     ]
   },

@@ -7,9 +7,12 @@
       <!-- <span style="font-size: 10px; color: gray">Current User : {{currentuser.name}}</span> -->
     </div>
     <ul class="nav" *ngIf="(userObservable | async)!==null">
-      <li style="font-size: large;"> <a [routerLink]="['admin']"><strong>Admin</strong> </a></li>
+      <!-- <li style="font-size: large;"> <a [routerLink]="['admin']"><strong>Admin</strong> </a></li> -->
       <!-- <li> <a [routerLink]="['register']">Tasks</a></li> -->
+      <li style="font-size: large;"> <a [routerLink]="['dash/mytask/']"><strong>EFL</strong> </a></li>
+      <li style="font-size: large;"> <a [routerLink]="['dash/mytask/']"><strong>GFL</strong> </a></li>
       <li style="font-size: large;"> <a [routerLink]="['dash/mytask/']"><strong>Dashboard</strong> </a></li>
+
       <li *ngIf="loggedin">
           <mat-icon [matMenuTriggerFor]="menu" style="cursor: pointer; font-size: 30px; color: rgb(82, 255, 47)">portrait</mat-icon>
           <!-- {{(userObservable | async).name}} -->
@@ -19,6 +22,9 @@
              profile </button>
           <button mat-menu-item [routerLink]="['/dash/notification']" style="align-content: center">
               <mat-icon color="accent">notification_important</mat-icon>&nbsp;Notification
+          </button>
+          <button mat-menu-item [routerLink]="['/admin']" style="align-content: center">
+            <mat-icon style="color: blue;">group_work</mat-icon>&nbsp;Admin
           </button>
           <button mat-menu-item (click)="logout()" style="align-content: center">
              <mat-icon color="warn">power_settings_new</mat-icon>&nbsp;Logout

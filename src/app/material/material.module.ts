@@ -16,11 +16,10 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
   imports: [
     CommonModule,
     MatCardModule,
-    MatButtonModule, MatFormFieldModule, MatInputModule,MatMenuModule,MatAutocompleteModule,OverlayModule,MatButtonToggleModule,
-    MatSelectModule, MatRadioModule, MatTabsModule, MatTableModule, MatSnackBarModule, MatToolbarModule, MatIconModule,MatChipsModule,
-    MatDatepickerModule, MatMomentDateModule, MatSidenavModule, MatListModule, MatProgressSpinnerModule, MatProgressBarModule,MatGridListModule,
+    MatButtonModule,MatFormFieldModule, MatInputModule,MatMenuModule,MatAutocompleteModule,OverlayModule,MatButtonToggleModule,
+    MatSelectModule, MatRadioModule, MatTabsModule, MatTableModule, MatSnackBarModule, MatToolbarModule, MatIconModule, MatChipsModule
+    ,MatDatepickerModule, MatMomentDateModule, MatSidenavModule, MatListModule, MatProgressSpinnerModule, MatProgressBarModule, MatGridListModule,
     MatStepperModule, MatTooltipModule, MatExpansionModule, MatRippleModule, DragDropModule, MatBadgeModule, MatBottomSheetModule
-
   ],
   exports: [
     MatCardModule,

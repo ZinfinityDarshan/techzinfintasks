@@ -38,7 +38,7 @@ export class AddTaskComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddTaskComponent>,
     public vservice: VenodorService, private fb: FormBuilder,  private snackBar: MatSnackBar, private share: DataSharingService,
-    private fireservice: FireService, private formhelper: FormHelperService, private router: Router, private idgen: IdgeneratorService,
+    private fireservice: FireService, public formhelper: FormHelperService, private router: Router, private idgen: IdgeneratorService,
     public dialog: MatDialog, private route: Router,
     private spin: SpinnerService,
     private notificationservice: NotificationService
@@ -86,7 +86,8 @@ export class AddTaskComponent implements OnInit {
   }
 
   addTask(form: Task){
-    let ref = this.spin.open();
+    if(!this.taskFrom.invalid){
+      let ref = this.spin.open();
     form.startdate = firebase.firestore.Timestamp.fromDate(form.startdate.toDate());
     form.enddate = firebase.firestore.Timestamp.fromDate(form.enddate.toDate());
     form.descp = this.description;
@@ -118,6 +119,10 @@ export class AddTaskComponent implements OnInit {
       console.log('error generating id', error);
     }
     );
+    }else{
+      this.snackBar.open('please fill up form correctly', 'close', {duration:2000});
+    }
+    
   }
 
 
