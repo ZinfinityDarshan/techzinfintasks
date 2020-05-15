@@ -28,8 +28,8 @@ export class ChatboxComponent implements OnInit, AfterViewInit, OnChanges, After
   chatSource = new BehaviorSubject(null);
   chats: Observable<ChatMessage[]> = this.chatSource.asObservable();
   @ViewChildren("commentDiv") commentDivs: QueryList<ElementRef>;
-  @ViewChild('target', {static: false}) target: ElementRef;
-  @ViewChild('targett', {static: false}) targett: ElementRef;
+  @ViewChild('target') target: ElementRef;
+  @ViewChild('targett') targett: ElementRef;
 
   constructor(
     private db: FireService,
