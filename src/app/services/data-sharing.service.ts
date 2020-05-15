@@ -134,10 +134,10 @@ export class DataSharingService implements OnInit{
 
           if (data != null || data != undefined){
             observer.next(data);
-            observer.complete();
+            //observer.complete();
           }else{
             observer.error('No Documents found');
-            observer.complete();
+            //observer.complete();
           }
 
       },(error)=>{

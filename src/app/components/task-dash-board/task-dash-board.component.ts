@@ -1,3 +1,4 @@
+import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from './../../httpobjects/user';
 import { Comment } from 'src/app/httpobjects/comment';
 import { Project } from './../../httpobjects/project';
@@ -27,24 +28,27 @@ export class TaskDashBoardComponent implements OnInit {
     private snackBar: MatSnackBar, private route: Router,
     private storage: FireStorageService,
     private spin: SpinnerService,
-    private location: Location) {
-      this.getTasks().subscribe(data =>{
-        this.spiner = this.spin.open();
-        this.allTasks = data;
-        this.getAllProjects().subscribe((test:Project[]) =>{
-          test.forEach(project =>{        
-            let tabledata = this.allTasks.filter(task => task.project.id === project.id);          
-            this.tableInstancesMap.set(project.name,new MatTableDataSource<Task>(tabledata));
-          });
-          this.tableInstancesMapSource.next(this.tableInstancesMap);
-          // this.tableInstances = this.tableInstances.filter(instance =>instance.data.length > 0); 
-          this.spiner.close(); 
-        }, err =>{
-          console.log(err); 
+    private location: Location, 
+    private database: AngularFirestore) {
+      this.database.collection('tasks').valueChanges().subscribe((data : Task[])=>{
+      this.spiner = this.spin.open();       
+      let tab = data.filter(t => t.status != TaskStatusEnum.CLOSED);
+      this.allTasks = tab;
+      console.log(tab.length);
+      this.getAllProjects().subscribe((test:Project[]) =>{
+
+        test.forEach(project =>{        
+          let tabledata = this.allTasks.filter(task => task.project.id === project.id);          
+          this.tableInstancesMap.set(project.name,new MatTableDataSource<Task>(tabledata));
         });
+        this.tableInstancesMapSource.next(this.tableInstancesMap);
+        // this.tableInstances = this.tableInstances.filter(instance =>instance.data.length > 0); 
+        this.spiner.close(); 
       }, err =>{
         console.log(err); 
       });
+      });
+        
   }
 
   displayedColumns = ['id', 'title','assignee', 'owner', 'status', 'enddate', 'edit', 'delete'];
@@ -63,7 +67,7 @@ export class TaskDashBoardComponent implements OnInit {
       this.db.getCollection(DBTableNames.tasks).subscribe((data:Task[]) =>{
         let tab = data.filter(t => t.status != TaskStatusEnum.CLOSED);
         obs.next(tab);
-        obs.complete();
+        //obs.complete();
       }, err =>{
         console.log(err);
       });
@@ -85,17 +89,17 @@ export class TaskDashBoardComponent implements OnInit {
   [key:string]:any;
   tableInstances: MatTableDataSource<Task>[] = [];
 
-  tableInstancesMap = new Map();
+  tableInstancesMap: Map<string, MatTableDataSource<Task>> = new Map();
 
   tableInstancesMapSource = new BehaviorSubject(new Map());
   tableInstancesMapObs= this.tableInstancesMapSource.asObservable();
 
-  createTableInstance(projectID: string, data: any[]){
-      this.tableInstancesMap.set(projectID,this['datasource-'+projectID] 
-      = new MatTableDataSource<Task>(data));
+  // createTableInstance(projectID: string, data: any[]){
+  //     this.tableInstancesMap.set(projectID,this['datasource-'+projectID] 
+  //     = new MatTableDataSource<Task>(data));
 
-      // this.tableInstances.forEach(dd => {dd.data})
-  }
+  //     // this.tableInstances.forEach(dd => {dd.data})
+  // }
 
   deleteTask(task: Task){
     let ref = this.spin.open();    
