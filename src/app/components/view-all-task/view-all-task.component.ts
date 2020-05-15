@@ -53,11 +53,17 @@ export class ViewAllTaskComponent implements OnInit, AfterViewInit {
 
   getTasks(){
     this.db.getCollectionWithCondition<Task>('tasks','assignee.id','==',this.currentuser.id ).subscribe(data =>{
-      this.dataSource = new MatTableDataSource(data);
+      data.forEach(x =>{
+        //console.log(x.status);
+      })
+      
+      //this.completedTasks = data.filter(res => res.status == 'COMPLETED');
+      this.mytasks = data.filter(res => res.status != 'COMPLETED' && res. status != 'CLOSED');
+      this.filtertasks = this.mytasks;
+      //console.log(this.mytasks);
+      this.dataSource = new MatTableDataSource(this.mytasks);
       this.dataSource.sort = this.sort;
-      this.completedTasks = data.filter(res => res.status == 'COMPLETED');
-      this.mytasks = data.filter(res => res.status !== 'COMPLETED').filter(res => res. status !== 'CLOSED');
-      this.filtertasks = this.mytasks;      
+
     });
   }
 

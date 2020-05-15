@@ -11,7 +11,7 @@ justify-content: start; width: 100%; height: 100%">
                     </mat-toolbar>
                 </div>
                 <div style="width:75%; word-wrap: break-word;">
-                    <mat-toolbar style="font-size: 15px; border-radius: 15px; " [appHighlightMyInstance]="chat.user">
+                    <mat-toolbar style="font-size: 15px; border-radius: 15px" [appHighlightMyInstance]="chat.user">
                         {{chat.message}}
                         <span class="example-spacer"></span>
                         <span style="font-size: 12px;" id="content-desktop">{{chat.sentdate.toDate() | date}}</span>

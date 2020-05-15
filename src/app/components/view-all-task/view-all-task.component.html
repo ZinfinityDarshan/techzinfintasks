@@ -1,65 +1,83 @@
-<div class="example-container mat-elevation-z8" style="">
-    <mat-form-field appearance="outline" style="width: 100%" >
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" style="font-size: 12px;">
-    </mat-form-field>
-    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-  
-      <!-- Position Column -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-        <td mat-cell *matCellDef="let element">         
-                <mat-chip style="font-size: 8;" color="primary" 
-            selected [routerLink]="['/task/',element.taskid]">{{element.taskid}}</mat-chip> 
-         </td>
-      </ng-container>
-  
-      <!-- Name Column -->
-      <ng-container matColumnDef="title" >
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
-        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
-      </ng-container>
-  
-      Weight Column
-      <ng-container matColumnDef="assignee" mat-sort-header>
-        <th mat-header-cell *matHeaderCellDef>Assignee</th>
-        <td mat-cell *matCellDef="let element"> {{element.assignee.name}} </td>
-      </ng-container>
-  
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="owner" mat-sort-header>
-        <th mat-header-cell *matHeaderCellDef>Reporter</th>
-        <td mat-cell *matCellDef="let element"> {{element.owner.name}} </td>
-      </ng-container>
+<div class="example-container mat-elevation-z8">
+    <div id="content-desktop">
+        <mat-form-field appearance="outline" style="width: 100%" >
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" style="font-size: 12px;">
+        </mat-form-field>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+      
+          <!-- Position Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let element">         
+                    <mat-chip style="font-size: 8;" color="primary" 
+                selected [routerLink]="['/task/',element.taskid]">{{element.taskid}}</mat-chip> 
+             </td>
+          </ng-container>
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="title" >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+            <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+          </ng-container>
+      
+          Weight Column
+          <ng-container matColumnDef="assignee" mat-sort-header>
+            <th mat-header-cell *matHeaderCellDef>Assignee</th>
+            <td mat-cell *matCellDef="let element"> {{element.assignee.name}} </td>
+          </ng-container>
+      
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="owner" mat-sort-header>
+            <th mat-header-cell *matHeaderCellDef>Reporter</th>
+            <td mat-cell *matCellDef="let element"> {{element.owner.name}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="status" mat-sort-header>
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+          </ng-container>
+          <ng-container matColumnDef="enddate" mat-sort-header>
+                <th mat-header-cell *matHeaderCellDef>Due Date</th>
+                <td mat-cell *matCellDef="let element"> {{element.enddate.toDate() | date :'medium'}} </td>
+         </ng-container>
+    
+         <ng-container matColumnDef="edit" mat-sort-header>
+                <th mat-header-cell *matHeaderCellDef>Edit</th>
+                <td mat-cell *matCellDef="let element"> 
+                        <button mat-icon-button>
+                                <mat-icon style="color: black;">edit</mat-icon>
+                        </button>
+                </td>   
+         </ng-container>          
+    
+         <ng-container matColumnDef="delete" mat-sort-header>
+                <th mat-header-cell *matHeaderCellDef>Delete</th>
+                <td mat-cell *matCellDef="let element"> 
+                        <button mat-icon-button (click)="deleteTask(element)">
+                                <mat-icon style="color: red;">delete</mat-icon>
+                        </button>
+                </td>
+         </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+    <div *ngFor="let task of dataSource.data" id="content-mobile">
+        <mat-card class="shorttaskcard" style="margin-bottom: 20px;">
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                <mat-chip style="font-size: 8; width: 40%" color="{{color}}" 
+                selected [routerLink]="['/task/',task.taskid]">{{task.taskid}}</mat-chip>
+                <button mat-raised-button [appOverDueTask]="task.enddate" completion="{{task.status}}">
+                    <mat-icon style="color: black;">check_circle</mat-icon>
+                </button>
+            </div>
+            <span style="margin-top: 10%">{{task.title}}</span>
+            <button mat-stroked-button style="margin-top: 10%" color="accent">Assignee: {{task.assignee.name}}</button>
 
-      <ng-container matColumnDef="status" mat-sort-header>
-            <th mat-header-cell *matHeaderCellDef>Status</th>
-            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-      </ng-container>
-      <ng-container matColumnDef="enddate" mat-sort-header>
-            <th mat-header-cell *matHeaderCellDef>Due Date</th>
-            <td mat-cell *matCellDef="let element"> {{element.enddate.toDate() | date :'medium'}} </td>
-     </ng-container>
-
-     <ng-container matColumnDef="edit" mat-sort-header>
-            <th mat-header-cell *matHeaderCellDef>Edit</th>
-            <td mat-cell *matCellDef="let element"> 
-                    <button mat-icon-button>
-                            <mat-icon style="color: black;">edit</mat-icon>
-                    </button>
-            </td>   
-     </ng-container>          
-
-     <ng-container matColumnDef="delete" mat-sort-header>
-            <th mat-header-cell *matHeaderCellDef>Delete</th>
-            <td mat-cell *matCellDef="let element"> 
-                    <button mat-icon-button (click)="deleteTask(element)">
-                            <mat-icon style="color: red;">delete</mat-icon>
-                    </button>
-            </td>
-     </ng-container>
-  
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+    </mat-card>
+    
+    <mat-chip-list></mat-chip-list>
+    </div>
 </div>
 <mat-chip-list></mat-chip-list>

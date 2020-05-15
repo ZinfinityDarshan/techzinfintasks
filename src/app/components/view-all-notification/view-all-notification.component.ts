@@ -69,4 +69,14 @@ export class ViewAllNotificationComponent implements OnInit {
     });
   }
 
+  deleteAll(){
+    this.myNotifications.forEach(data =>{
+      this.db.deleteDocument(data, DBTableNames.notifications).subscribe(tata =>{
+        this.myNotifications.splice(this.myNotifications.findIndex(x=>x.id === data.id),1);
+      }, err=>{
+        this.notificationService.open({message:'Some Problem in Deleting Notification'});
+      });
+    });
+    this.notificationService.open({message:'All Notifications Deleted Successfully'});
+  }
 }

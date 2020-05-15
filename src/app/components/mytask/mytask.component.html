@@ -38,9 +38,9 @@ flex-direction: row; width: 100%; background-color: white;">
         <div style="margin-top: 20px;">
                 <mat-form-field appearance="outline" style="font-size: 12px;">
                         <input matInput placeholder="search : e.g. TASK-10" [formControl]="taskId">
-                        <mat-icon matSuffix style="cursor: pointer" matRipple (click)="navigateToTask(taskId.value)">
-                                search
-                        </mat-icon>
+                                <mat-icon matSuffix style="cursor: pointer" matRipple (click)="navigateToTask(taskId.value)">
+                                        search
+                                </mat-icon>
                 </mat-form-field>
         </div>
 

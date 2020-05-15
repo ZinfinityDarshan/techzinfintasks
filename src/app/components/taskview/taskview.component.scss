@@ -4,7 +4,7 @@
 @media (min-width: 480px) {
     .imageplacement{
         display: grid;
-        grid-template-columns: repeat(7, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         margin: 10px; border-top: 8px solid black; 
         justify-content: start; cursor: pointer;
     }
@@ -12,7 +12,7 @@
 @media (min-width: 320px) and (max-width: 480px) {
     .imageplacement{
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
         margin: 10px; border-top: 8px solid black; 
         justify-content: start; cursor: pointer;
     }
@@ -23,5 +23,62 @@
         grid-template-columns: repeat(2, 1fr);
         margin: 10px; border-top: 8px solid black; 
         justify-content: start; cursor: pointer;
+    }
+}
+@media (min-width: 480px) {
+    .cardflex{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+    .cardflex{
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
+}
+@media (min-width: 481px) and (max-width: 767px) {
+    .cardflex{
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
+}
+@media (min-width: 480px) {
+    .viewer{
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: row;
+    }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+    .viewer{
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
+}
+@media (min-width: 481px) and (max-width: 767px) {
+    .viewer{
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
+}
+@media (min-width: 480px) {
+    .viewerelement{
+        width: 80%; display: flex; flex-direction: column;
+    }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+    .viewerelement{
+        width: 80%; display: flex; flex-direction: column;
+    }
+}
+@media (min-width: 481px) and (max-width: 767px) {
+    .viewerelement{
+        width: 40%; display: flex; flex-direction: column;
     }
 }

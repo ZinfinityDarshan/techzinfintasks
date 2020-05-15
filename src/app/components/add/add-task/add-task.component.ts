@@ -46,15 +46,15 @@ export class AddTaskComponent implements OnInit {
     this.taskFrom = fb.group({
       'title':[null, Validators.required],
       'assignee':[null, Validators.required],
-      'completed':[null, Validators.required],
+      'completed':[null],
       'descp':[null, Validators.required],
       'owner':[null, Validators.required],
       'project':[null, Validators.required],
-      'references':[null, Validators.required],
+      'references':[null],
       'startdate':[null, Validators.required],
       'enddate':[null, Validators.required],
-      'extensionDate':[null, Validators.required],
-      'commets':[null, Validators.required],
+      'extensionDate':[null],
+      'commets':[null],
       'priority':[null, Validators.required],
       'type':[null, Validators.required],
       'status':[null, Validators.required]
@@ -86,6 +86,8 @@ export class AddTaskComponent implements OnInit {
   }
 
   addTask(form: Task){
+    console.log(this.taskFrom.invalid);
+    
     if(!this.taskFrom.invalid){
       let ref = this.spin.open();
     form.startdate = firebase.firestore.Timestamp.fromDate(form.startdate.toDate());

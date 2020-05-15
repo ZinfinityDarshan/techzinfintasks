@@ -10,4 +10,10 @@
 .effect{
     background-color:black;
     color:white;
-  }
+}
+
+.shorttaskcard{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}

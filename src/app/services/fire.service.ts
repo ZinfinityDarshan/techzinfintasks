@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, QueryFn } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -120,6 +120,18 @@ export class FireService {
       res.ref.where(data.match,data.operator, data.matcher);
     });
     res.valueChanges().subscribe(data => console.log(data))
+  }
+
+  getCollectionForAutocomplete(collection:string, orderBy: string, 
+    limit: number, startat: string, endat: string){
+    
+    return this.db.collection(collection, ref => 
+        ref
+        .orderBy(orderBy)
+        .startAt(startat)
+        .endAt(endat)
+        .limit(limit)
+      ).valueChanges()
   }
 }
 

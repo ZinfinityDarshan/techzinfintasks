@@ -1,4 +1,8 @@
-<div class="notification-container" *ngFor="let notification of myNotifications">
+<button mat-icon-button style="z-index: 10; position: fixed; background-color: black; bottom: 0; margin-bottom: 20px;"
+matTooltip="Delete All Notifications" (click)="deleteAll()">
+    <mat-icon style="color: red;font-size: 27px;">delete_sweep</mat-icon>
+</button>
+<div class="notification-container" *ngFor="let notification of myNotifications" style="z-index: 5;">
     <mat-card style="display: flex; flex-direction: column;
      justify-content: center; padding: 0%; margin: 2px;">
         <mat-card class="notification-card">
@@ -32,7 +36,7 @@
 
 </div>
 
-<div class="notification-container">
+<div class="notification-container" style="z-index: 5;">
     <mat-card class="notification-card" *ngIf="noNotificationbool">
         <div >
             <mat-icon style="color: blue;

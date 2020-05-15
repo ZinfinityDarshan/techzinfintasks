@@ -1,6 +1,7 @@
+import { User } from './../../httpobjects/user';
 import { Comment } from 'src/app/httpobjects/comment';
 import { Project } from './../../httpobjects/project';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { DBTableNames, TaskStatusEnum } from './../../constants/constants';
 import { SpinnerService } from './../../services/spinner.service';
 import { FireStorageService } from './../../services/fire-storage.service';
@@ -12,6 +13,7 @@ import { Task } from 'src/app/httpobjects/task';
 import { SpinnerComponent } from '../common/spinner/spinner.component';
 import {Location} from '@angular/common';
 import { buildIsoString } from '@fullcalendar/core/datelib/formatting';
+import { DataSource } from '@angular/cdk/table';
 
 @Component({
   selector: 'app-task-dash-board',
@@ -25,33 +27,32 @@ export class TaskDashBoardComponent implements OnInit {
     private snackBar: MatSnackBar, private route: Router,
     private storage: FireStorageService,
     private spin: SpinnerService,
-    private location: Location) { }
+    private location: Location) {
+      this.getTasks().subscribe(data =>{
+        this.spiner = this.spin.open();
+        this.allTasks = data;
+        this.getAllProjects().subscribe((test:Project[]) =>{
+          test.forEach(project =>{        
+            let tabledata = this.allTasks.filter(task => task.project.id === project.id);          
+            this.tableInstancesMap.set(project.name,new MatTableDataSource<Task>(tabledata));
+          });
+          this.tableInstancesMapSource.next(this.tableInstancesMap);
+          // this.tableInstances = this.tableInstances.filter(instance =>instance.data.length > 0); 
+          this.spiner.close(); 
+        }, err =>{
+          console.log(err); 
+        });
+      }, err =>{
+        console.log(err); 
+      });
+  }
 
   displayedColumns = ['id', 'title','assignee', 'owner', 'status', 'enddate', 'edit', 'delete'];
   allTasks: Task[] = [];
   spiner: MatDialogRef<SpinnerComponent>;
+
   ngOnInit() {
-    this.getTasks().subscribe(data =>{
-      this.spiner = this.spin.open();
-      this.allTasks = data;
-      this.getAllProjects().subscribe((test:Project[]) =>{
-        test.forEach(project =>{        
-          let tabledata = this.allTasks.filter(task => task.project.id === project.id);          
-          // this.createTableInstance(project.name, tabledata);
-          let obsData = new Observable((obs) =>{
-              obs.next(new MatTableDataSource<Task>(tabledata));
-              obs.complete();
-          });
-          this.tableInstancesMap.set(project.name,obsData);
-        });
-        // this.tableInstances = this.tableInstances.filter(instance =>instance.data.length > 0); 
-        this.spiner.close(); 
-      }, err =>{
-        console.log(err); 
-      });
-    }, err =>{
-      console.log(err); 
-    });
+
 
   }
 
@@ -86,9 +87,14 @@ export class TaskDashBoardComponent implements OnInit {
 
   tableInstancesMap = new Map();
 
+  tableInstancesMapSource = new BehaviorSubject(new Map());
+  tableInstancesMapObs= this.tableInstancesMapSource.asObservable();
+
   createTableInstance(projectID: string, data: any[]){
       this.tableInstancesMap.set(projectID,this['datasource-'+projectID] 
       = new MatTableDataSource<Task>(data));
+
+      // this.tableInstances.forEach(dd => {dd.data})
   }
 
   deleteTask(task: Task){
@@ -122,4 +128,13 @@ export class TaskDashBoardComponent implements OnInit {
     ref.close();
     }
 
+}
+export class TaskDataSource extends DataSource<any> {
+  constructor(private db: FireService) {
+    super();
+  }
+  connect(): Observable<Task[]> {
+    return;
+  }
+  disconnect() {}
 }

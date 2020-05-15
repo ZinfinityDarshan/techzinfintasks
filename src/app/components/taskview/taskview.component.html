@@ -1,9 +1,13 @@
 
-<div *ngIf="spinnerFlag">
+<mat-toolbar (click)="back()" style="position: fixed; z-index: 10;">
+    <button mat-icon-button ><mat-icon>arrow_back_ios</mat-icon>
+    </button>
+</mat-toolbar>
+<div *ngIf="spinnerFlag" style="margin-top: 70px;">
 
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
-<div *ngIf="!spinnerFlag">
+<div *ngIf="!spinnerFlag" style="margin-top: 80px;">
 
     <mat-card style="border-left: 8px solid green; margin: 10px">
 
@@ -36,24 +40,10 @@
             <br>
             <strong style="font-size: 17px">Descp :</strong>
             <br><br><br>
-            <p style="white-space: pre;">
+            <p style="white-space: pre; word-break: break-all; overflow: scroll;">
                 {{task.descp}}
             </p>
             <br>
-            <mat-divider></mat-divider>
-            <br>
-            Start Date:
-            <a mat-stroked-button routerLink="." color="primary">{{task.startdate.toDate() | date}}</a>
-            &nbsp; &nbsp;
-            End Date:
-            <a mat-stroked-button routerLink="." color="primary" (click)="picker.open()">{{task.enddate.toDate() | date}}</a>
-            &nbsp; &nbsp;
-            Type:
-            <a mat-stroked-button routerLink="." color="warn">{{task.type}}</a>
-            <mat-form-field hidden style="display: none; margin-top: 200px;">
-                <input matInput [matDatepicker]="picker" (dateInput)=endDateChanged($event)>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
         </mat-card-content>
         <mat-divider></mat-divider>
         <br>
@@ -80,8 +70,103 @@
         <br>
     </mat-card>
 
+    <mat-card style="margin: 10px" class="cardflex">
+        <div>Task : &nbsp; <button mat-stroked-button>{{task.type}}</button></div>
+        <div>Start Date : &nbsp; <button mat-raised-button>
+            {{task.startdate.toDate() | date}}
+        </button></div>
+        <div>End Date : &nbsp;<button mat-raised-button (click)="picker.open()">
+             {{task.enddate.toDate() | date}}
+        </button></div>
+        <mat-form-field hidden style="display: none; margin-top: 200px;">
+            <input matInput [matDatepicker]="picker" (dateInput)=endDateChanged($event)>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+        </mat-form-field>
+
+    </mat-card>
+
+    <mat-card style="margin: 10px; width: 96%;" class="viewer">
+        <mat-card class="viewerelement">
+            <mat-card-title>References</mat-card-title>
+
+            <div style="width: 100%;display: flex; flex-direction: row; 
+            justify-content: space-evenly;">
+                
+                <mat-form-field appearance="outline" style="width: 90%;">
+
+                    <input matInput
+                    [formControl]="autoCtrl"
+                    [matAutocomplete]="auto" style="text-transform: uppercase;" placeholder="Search for Task to refer">
+                    <mat-autocomplete #auto="matAutocomplete"
+                    
+                    (optionSelected)="addReference($event.option.value)" [displayWith]="displayWith"
+                    >
+                    <mat-option *ngFor="let task of taskListForSearch" [value]="task"
+                    matTooltip="{{task.title}}">
+                        <span style="font-size: 10px;">{{task.taskid}}</span> |
+                        <small style="font-size: 10px;">{{task.title}}</small>
+                    </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <mat-icon style="color: red; cursor: pointer;" (click)="save()">save</mat-icon>
+
+            </div>
+            <div>
+                <mat-list style="width: 100%; " role="list" *ngFor="let refer of task.references">
+                    <mat-list-item role="listitem">
+                        <span>
+                            <mat-chip color="primary" selected [routerLink]="['/task/',task.taskid]">{{refer.taskid}}</mat-chip><strong> &nbsp; :
+                                &nbsp; {{refer.title}}</strong>
+                        </span>
+                        <button mat-icon-button (click)="deleteReference(refer)">
+                            <mat-icon style="color: red; cursor: pointer;">delete</mat-icon>
+                        </button>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                </mat-list>
+            </div>
+        </mat-card>
+        <mat-card class="viewerelement">
+            <mat-card-title>Viewers</mat-card-title>
+            <div style="width: 100%;display: flex; flex-direction: row; 
+            justify-content: space-evenly;">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-select #selectViewer placeholder="Search for Viewer" [formControl]="viewerForm"
+                     multiple>
+                    <mat-option *ngFor="let user of nonViewerList" [value]="user" >
+                            {{user.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-icon-button>
+                    <mat-icon matTooltip="Add Viewers" style="color: red; cursor: pointer;"(click) ="addviewer()">save</mat-icon>
+
+                </button>
+            </div>
+            <div>                
+                <div>
+                    <mat-list style="width: 100%; " role="list" *ngFor="let user of viewwerList">
+                        <mat-list-item role="listitem">
+                            {{user.name}} 
+                            <button mat-icon-button (click)="deleteViewerFromTask(user)">
+                                <mat-icon style="color: red; cursor: pointer;">delete</mat-icon>
+                            </button>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                    </mat-list>
+                </div>
+            </div>
+        </mat-card>
+        
+    </mat-card>
+
     <mat-card class="imageplacement">
-        <mat-card style="height: 126px; width: 126px; margin: 10px; align-items: center;
+         
+        <mat-card id="content-desktop" style="height: 100px; width: 100px; margin: 10px; align-items: center;
+        justify-items: center; cursor: pointer;" matRipple (click)="fileAtt.click()" [class.mat-elevation-z8]="true">
+                <mat-icon style="font-size: 50px;">add</mat-icon>
+        </mat-card>
+        <mat-card id="content-mobile" style="height: 50px; width: 50px; margin: 10px; align-items: center;
         justify-items: center; cursor: pointer;" matRipple (click)="fileAtt.click()" [class.mat-elevation-z8]="true">
                 <mat-icon style="font-size: 50px;">add</mat-icon>
         </mat-card>
@@ -158,7 +243,7 @@
         <br>
     </mat-card>
 
-    <mat-card style="margin: 10px">
+    <mat-card style="margin: 10px" id="content-desktop">
 
         <mat-list id="commentListHash" role="list" *ngFor="let comment of commentList">
             <mat-list-item role="listitem" style=" margin-top: 5px">
@@ -178,10 +263,41 @@
 
                         <span
                             style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 4">{{comment.ondate.toDate() | date}}</span>
-                        <span>{{comment.comment}}</span>
+                        <span class="wrapword">{{comment.comment}}</span>
 
                     </div>
                     <div style="float: right">
+                    </div>
+                </div>
+            </mat-list-item>
+            <br>
+            <mat-divider></mat-divider>
+        </mat-list>
+
+
+    </mat-card>
+    <mat-card style="margin: 10px" id="content-mobile">
+
+        <mat-list id="commentListHash" role="list" *ngFor="let comment of commentList">
+            <mat-list-item role="listitem" style=" margin-top: 25px; margin-bottom: 10px; height: auto; width: 100%;">
+                <div style="display: flex; flex-direction: row; margin-top: 10px;padding-bottom: 10px;">
+                    <div style="display: flex; flex-direction: column;">
+
+                        <img *ngIf="!isImgLoaded"  mat-card-avatar  style=" float: left; background-size: cover"
+                        src="../../../assets/images/blank-profile.png" >
+                        <img [hidden]="!isImgLoaded" mat-card-avatar  style=" float: left; background-size: cover" 
+                        [src]="comment.tempProfilePic" (load)="isImgLoaded = true" >
+
+                        <span style="padding-top: 10px; font-size: 10px">{{comment.user.name}}</span>
+
+                    </div>
+                    <div
+                        style="margin-left: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+
+                        <span
+                            style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 4; float: right; margin-bottom: 10px;">{{comment.ondate.toDate() | date}}</span>
+                        <span class="wrapword" style="line-height: 1.6">{{comment.comment}}</span>
+
                     </div>
                 </div>
             </mat-list-item>
