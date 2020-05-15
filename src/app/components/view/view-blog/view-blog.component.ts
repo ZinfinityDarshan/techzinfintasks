@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FireService } from 'src/app/services/fire.service';
 import { Blog } from 'src/app/httpobjects/blog';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-view-blog',

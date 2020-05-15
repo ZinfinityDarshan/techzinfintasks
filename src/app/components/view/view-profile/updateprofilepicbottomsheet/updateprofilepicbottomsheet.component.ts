@@ -6,7 +6,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { FireStorageService } from 'src/app/services/fire-storage.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { FireService } from 'src/app/services/fire.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-updateprofilepicbottomsheet',
   templateUrl: './updateprofilepicbottomsheet.component.html',

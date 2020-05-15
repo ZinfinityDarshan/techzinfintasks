@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Expense } from 'src/app/httpobjects/expense';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormHelperService } from 'src/app/utilities/form-helper.service';

@@ -1,4 +1,4 @@
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Injectable } from '@angular/core';
 import { SpinnerComponent } from '../components/common/spinner/spinner.component';
 

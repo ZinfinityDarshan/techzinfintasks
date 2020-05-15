@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { FireService } from 'src/app/services/fire.service';
 import { FormHelperService } from 'src/app/utilities/form-helper.service';

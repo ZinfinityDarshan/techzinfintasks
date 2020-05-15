@@ -1,7 +1,9 @@
 import { Contact } from 'src/app/httpobjects/contact';
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatFormFieldDefaultOptions, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatFormFieldDefaultOptions } from '@angular/material/form-field';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormHelperService } from 'src/app/utilities/form-helper.service';
 import { FireService } from 'src/app/services/fire.service';
 

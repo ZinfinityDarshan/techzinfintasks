@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { FireService } from 'src/app/services/fire.service';
 import { User } from 'src/app/httpobjects/user';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';

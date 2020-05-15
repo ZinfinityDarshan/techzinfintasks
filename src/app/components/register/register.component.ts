@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Vendor } from '../../httpobjects/vendor';
 import { VenodorService } from 'src/app/services/venodor.service';
 import { Router } from '@angular/router';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({

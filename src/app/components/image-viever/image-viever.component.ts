@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FireStorageService } from 'src/app/services/fire-storage.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-image-viever',

@@ -1,4 +1,4 @@
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationService } from './../../services/notification.service';
 import { SpinnerService } from './../../services/spinner.service';
 import { Notification } from './../../httpobjects/notification';

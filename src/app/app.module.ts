@@ -19,7 +19,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MytaskComponent } from './components/mytask/mytask.component';
 import { TimesheetComponent } from './components/timesheet/timesheet.component';
 import { TaskviewComponent } from './components/taskview/taskview.component';
-import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material';
+import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { ViewdataComponent } from './components/viewdata/viewdata.component';
 import { AddEntityMenuComponent } from './components/add-entity-menu/add-entity-menu.component';

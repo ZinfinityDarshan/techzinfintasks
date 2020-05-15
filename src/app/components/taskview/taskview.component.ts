@@ -10,7 +10,9 @@ import { Component, OnInit, OnChanges, DoCheck, IterableDiffers, KeyValueDiffers
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 import { FireService } from 'src/app/services/fire.service';
-import { MatSnackBar, MatDialog, MatMenuContent, MatMenuTrigger } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatMenuContent, MatMenuTrigger } from '@angular/material/menu';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/httpobjects/user';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import * as firebase from 'firebase/app';

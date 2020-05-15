@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Note } from 'src/app/httpobjects/note';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FireService } from 'src/app/services/fire.service';

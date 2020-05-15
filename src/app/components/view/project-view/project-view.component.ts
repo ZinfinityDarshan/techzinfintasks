@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FireService } from 'src/app/services/fire.service';
 import { Project } from 'src/app/httpobjects/project';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-project-view',

@@ -1,4 +1,4 @@
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Notification } from './../../httpobjects/notification';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { ChatMessage } from './../../httpobjects/chat-message';
