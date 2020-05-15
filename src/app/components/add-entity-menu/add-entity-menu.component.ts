@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddContactComponent } from '../admin/addcontact/add-contact-component';
 import { AddExpenseComponent } from '../admin/addexpense/add-expense-component';
 import { AddNoteComponent } from '../admin/addnote/add-note-component';

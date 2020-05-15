@@ -2,7 +2,7 @@ import { Notification } from './../../httpobjects/notification';
 import { User } from 'src/app/httpobjects/user';
 import { DBTableNames } from 'src/app/constants/constants';
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material';
+import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { FireService } from 'src/app/services/fire.service';
 import { DataSharingService } from 'src/app/services/data-sharing.service';

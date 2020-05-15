@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { FireService } from './fire.service';
 import { Notification } from './../httpobjects/notification';
 import { NotificationComponent } from './../components/notification/notification.component';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Injectable } from '@angular/core';
 import { DBTableNames } from '../constants/constants';
 

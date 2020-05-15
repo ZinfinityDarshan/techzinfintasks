@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { FireService } from 'src/app/services/fire.service';
 import { FormHelperService } from 'src/app/utilities/form-helper.service';
 import { DataSharingService } from 'src/app/services/data-sharing.service';

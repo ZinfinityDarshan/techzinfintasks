@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/httpobjects/user';
 import { VenodorService } from 'src/app/services/venodor.service';
 import { Observable } from 'rxjs';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataSharingService } from 'src/app/services/data-sharing.service';
 
 
