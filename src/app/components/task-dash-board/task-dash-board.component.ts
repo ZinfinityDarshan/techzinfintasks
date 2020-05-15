@@ -51,7 +51,7 @@ export class TaskDashBoardComponent implements OnInit {
         
   }
 
-  displayedColumns = ['id', 'title','assignee', 'owner', 'status', 'enddate', 'edit', 'delete'];
+  displayedColumns = ['id', 'title','assignee', 'enddate', 'edit', 'delete'];
   allTasks: Task[] = [];
   spiner: MatDialogRef<SpinnerComponent>;
 

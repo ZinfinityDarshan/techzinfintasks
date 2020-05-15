@@ -58,6 +58,7 @@ import { OverDueTaskDirective } from './directives/over-due-task.directive';
 import { AddTaskComponent } from './components/add/add-task/add-task.component';
 import { ChatboxComponent } from './components/chatbox/chatbox.component';
 import { HighlightMyInstanceDirective } from './directives/highlight-my-instance.directive';
+import { ViewTaskProgressReportComponent } from './components/report/view-task-progress-report/view-task-progress-report.component';
 
 // for FullCalendar!
 
@@ -106,6 +107,7 @@ import { HighlightMyInstanceDirective } from './directives/highlight-my-instance
     AddTaskComponent,
     ChatboxComponent,
     HighlightMyInstanceDirective,
+    ViewTaskProgressReportComponent,
     ],
   imports: [
     BrowserModule,
